@@ -10,7 +10,7 @@
     "license": {
       "name": "MIT"
     },
-    "version": "0.1.0"
+    "version": "0.1.2"
   },
   "paths": {
     "/health": {
@@ -1371,13 +1371,13 @@
         }
       }
     },
-    "/api/v1/invoices": {
+    "/api/v1/documents": {
       "get": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "List Invoices",
-        "operationId": "list_invoices_api_v1_invoices_get",
+        "summary": "List Documents",
+        "operationId": "list_documents_api_v1_documents_get",
         "security": [
           {
             "HTTPBearer": []
@@ -1413,6 +1413,22 @@
             }
           },
           {
+            "name": "document_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Document Type"
+            }
+          },
+          {
             "name": "status",
             "in": "query",
             "required": false,
@@ -1435,7 +1451,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoicesListResponse"
+                  "$ref": "#/components/schemas/DocumentsListResponse"
                 }
               }
             }
@@ -1454,10 +1470,10 @@
       },
       "post": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Create Invoice",
-        "operationId": "create_invoice_api_v1_invoices_post",
+        "summary": "Create Document",
+        "operationId": "create_document_api_v1_documents_post",
         "security": [
           {
             "HTTPBearer": []
@@ -1486,7 +1502,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InvoiceCreateRequest"
+                "$ref": "#/components/schemas/DocumentCreateRequest"
               }
             }
           }
@@ -1497,7 +1513,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
+                  "$ref": "#/components/schemas/DocumentResponse"
                 }
               }
             }
@@ -1515,13 +1531,13 @@
         }
       }
     },
-    "/api/v1/invoices/{invoice_id}": {
+    "/api/v1/documents/{document_id}": {
       "get": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Get Invoice",
-        "operationId": "get_invoice_api_v1_invoices__invoice_id__get",
+        "summary": "Get Document",
+        "operationId": "get_document_api_v1_documents__document_id__get",
         "security": [
           {
             "HTTPBearer": []
@@ -1529,12 +1545,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -1544,78 +1560,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Replace Invoice",
-        "operationId": "replace_invoice_api_v1_invoices__invoice_id__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Idempotency-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceCreateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
+                  "$ref": "#/components/schemas/DocumentResponse"
                 }
               }
             }
@@ -1634,10 +1579,10 @@
       },
       "patch": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Patch Invoice",
-        "operationId": "patch_invoice_api_v1_invoices__invoice_id__patch",
+        "summary": "Patch Document",
+        "operationId": "patch_document_api_v1_documents__document_id__patch",
         "security": [
           {
             "HTTPBearer": []
@@ -1645,28 +1590,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Idempotency-Key"
+              "title": "Document Id"
             }
           }
         ],
@@ -1675,7 +1604,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InvoicePatchRequest"
+                "$ref": "#/components/schemas/DocumentPatchRequest"
               }
             }
           }
@@ -1686,7 +1615,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
+                  "$ref": "#/components/schemas/DocumentResponse"
                 }
               }
             }
@@ -1705,10 +1634,10 @@
       },
       "delete": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Delete Invoice",
-        "operationId": "delete_invoice_api_v1_invoices__invoice_id__delete",
+        "summary": "Delete Document",
+        "operationId": "delete_document_api_v1_documents__document_id__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -1716,12 +1645,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -1749,13 +1678,13 @@
         }
       }
     },
-    "/api/v1/invoices/{invoice_id}/duplicate": {
+    "/api/v1/documents/{document_id}/finalize": {
       "post": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Duplicate Invoice",
-        "operationId": "duplicate_invoice_api_v1_invoices__invoice_id__duplicate_post",
+        "summary": "Finalize Document",
+        "operationId": "finalize_document_api_v1_documents__document_id__finalize_post",
         "security": [
           {
             "HTTPBearer": []
@@ -1763,12 +1692,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -1778,7 +1707,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
+                  "$ref": "#/components/schemas/DocumentResponse"
                 }
               }
             }
@@ -1796,32 +1725,36 @@
         }
       }
     },
-    "/api/v1/invoices/validate": {
+    "/api/v1/documents/{document_id}/void": {
       "post": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Validate Invoice",
-        "operationId": "validate_invoice_api_v1_invoices_validate_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceDraftRequest"
-              }
+        "summary": "Void Document",
+        "operationId": "void_document_api_v1_documents__document_id__void_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response Validate Invoice Api V1 Invoices Validate Post"
+                  "$ref": "#/components/schemas/DocumentResponse"
                 }
               }
             }
@@ -1836,40 +1769,39 @@
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/mark-sent": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Mark Sent",
+        "operationId": "mark_sent_api_v1_documents__document_id__mark_sent_post",
         "security": [
           {
             "HTTPBearer": []
           }
-        ]
-      }
-    },
-    "/api/v1/invoices/calculate": {
-      "post": {
-        "tags": [
-          "invoices"
         ],
-        "summary": "Calculate Invoice",
-        "operationId": "calculate_invoice_api_v1_invoices_calculate_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceDraftRequest"
-              }
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response Calculate Invoice Api V1 Invoices Calculate Post"
+                  "$ref": "#/components/schemas/DocumentResponse"
                 }
               }
             }
@@ -1884,30 +1816,245 @@
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/mark-paid": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Mark Paid",
+        "operationId": "mark_paid_api_v1_documents__document_id__mark_paid_post",
         "security": [
           {
             "HTTPBearer": []
           }
-        ]
-      }
-    },
-    "/api/v1/invoices/preview": {
-      "post": {
-        "tags": [
-          "invoices"
         ],
-        "summary": "Preview Invoice",
-        "operationId": "preview_invoice_api_v1_invoices_preview_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoicePreviewRequest"
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResponse"
+                }
               }
             }
           },
-          "required": true
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/mark-unpaid": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Mark Unpaid",
+        "operationId": "mark_unpaid_api_v1_documents__document_id__mark_unpaid_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/archive": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Archive Document",
+        "operationId": "archive_document_api_v1_documents__document_id__archive_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/restore": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Restore Document",
+        "operationId": "restore_document_api_v1_documents__document_id__restore_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/renders": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Render Document",
+        "operationId": "render_document_api_v1_documents__document_id__renders_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app__documents__schemas__DocumentRenderRequest"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -1928,86 +2075,16 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/finalize": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Finalize Invoice",
-        "operationId": "finalize_invoice_api_v1_invoices__invoice_id__finalize_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Idempotency-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Finalize Invoice Api V1 Invoices  Invoice Id  Finalize Post"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
         }
       }
     },
-    "/api/v1/invoices/{invoice_id}/void": {
+    "/api/v1/documents/{document_id}/send": {
       "post": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "Void Invoice",
-        "operationId": "void_invoice_api_v1_invoices__invoice_id__void_post",
+        "summary": "Send Document",
+        "operationId": "send_document_api_v1_documents__document_id__send_post",
         "security": [
           {
             "HTTPBearer": []
@@ -2015,294 +2092,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/mark-sent": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Mark Sent",
-        "operationId": "mark_sent_api_v1_invoices__invoice_id__mark_sent_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/mark-paid": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Mark Paid",
-        "operationId": "mark_paid_api_v1_invoices__invoice_id__mark_paid_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/mark-unpaid": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Mark Unpaid",
-        "operationId": "mark_unpaid_api_v1_invoices__invoice_id__mark_unpaid_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/archive": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Archive Invoice",
-        "operationId": "archive_invoice_api_v1_invoices__invoice_id__archive_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/restore": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Restore Invoice",
-        "operationId": "restore_invoice_api_v1_invoices__invoice_id__restore_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/send": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Send Invoice",
-        "operationId": "send_invoice_api_v1_invoices__invoice_id__send_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -2340,13 +2135,13 @@
         }
       }
     },
-    "/api/v1/invoices/{invoice_id}/deliveries": {
+    "/api/v1/documents/{document_id}/deliveries": {
       "get": {
         "tags": [
-          "invoices"
+          "documents"
         ],
-        "summary": "List Invoice Deliveries",
-        "operationId": "list_invoice_deliveries_api_v1_invoices__invoice_id__deliveries_get",
+        "summary": "List Document Deliveries",
+        "operationId": "list_document_deliveries_api_v1_documents__document_id__deliveries_get",
         "security": [
           {
             "HTTPBearer": []
@@ -2354,12 +2149,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           },
           {
@@ -2399,497 +2194,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/DeliveriesListResponse"
                 }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/renders": {
-      "post": {
-        "tags": [
-          "invoices"
-        ],
-        "summary": "Render Invoice",
-        "operationId": "render_invoice_api_v1_invoices__invoice_id__renders_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Idempotency-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceRenderRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/attachments": {
-      "get": {
-        "tags": [
-          "invoice-attachments"
-        ],
-        "summary": "List Attachments",
-        "operationId": "list_attachments_api_v1_invoices__invoice_id__attachments_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceAttachmentsListResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "invoice-attachments"
-        ],
-        "summary": "Create Attachment",
-        "operationId": "create_attachment_api_v1_invoices__invoice_id__attachments_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceAttachmentCreateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvoiceAttachmentResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoice_id}/attachments/{attachment_id}": {
-      "delete": {
-        "tags": [
-          "invoice-attachments"
-        ],
-        "summary": "Delete Attachment",
-        "operationId": "delete_attachment_api_v1_invoices__invoice_id__attachments__attachment_id__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Invoice Id"
-            }
-          },
-          {
-            "name": "attachment_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Attachment Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleBoolResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/credit-notes": {
-      "get": {
-        "tags": [
-          "credit-notes"
-        ],
-        "summary": "List Credit Notes",
-        "operationId": "list_credit_notes_api_v1_credit_notes_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 50,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreditNotesListResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "credit-notes"
-        ],
-        "summary": "Create Credit Note",
-        "operationId": "create_credit_note_api_v1_credit_notes_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreditNoteCreateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreditNoteResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/credit-notes/{credit_note_id}": {
-      "get": {
-        "tags": [
-          "credit-notes"
-        ],
-        "summary": "Get Credit Note",
-        "operationId": "get_credit_note_api_v1_credit_notes__credit_note_id__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "credit_note_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Credit Note Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreditNoteResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/credit-notes/{credit_note_id}/finalize": {
-      "post": {
-        "tags": [
-          "credit-notes"
-        ],
-        "summary": "Finalize Credit Note",
-        "operationId": "finalize_credit_note_api_v1_credit_notes__credit_note_id__finalize_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "credit_note_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Credit Note Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreditNoteResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/credit-notes/{credit_note_id}/renders": {
-      "post": {
-        "tags": [
-          "credit-notes"
-        ],
-        "summary": "Render Credit Note",
-        "operationId": "render_credit_note_api_v1_credit_notes__credit_note_id__renders_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "credit_note_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Credit Note Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreditNoteRenderRequest",
-                "default": {
-                  "template_id": "tpl_modern",
-                  "page_size": "LETTER"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
               }
             }
           },
@@ -3033,7 +2337,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DocumentRenderRequest"
+                "$ref": "#/components/schemas/app__schemas__v1__DocumentRenderRequest"
               }
             }
           }
@@ -3044,6 +2348,164 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{invoice_id}/attachments": {
+      "get": {
+        "tags": [
+          "invoice-attachments"
+        ],
+        "summary": "List Attachments",
+        "operationId": "list_attachments_api_v1_documents__invoice_id__attachments_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "invoice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Invoice Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceAttachmentsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "invoice-attachments"
+        ],
+        "summary": "Create Attachment",
+        "operationId": "create_attachment_api_v1_documents__invoice_id__attachments_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "invoice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Invoice Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceAttachmentCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceAttachmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{invoice_id}/attachments/{attachment_id}": {
+      "delete": {
+        "tags": [
+          "invoice-attachments"
+        ],
+        "summary": "Delete Attachment",
+        "operationId": "delete_attachment_api_v1_documents__invoice_id__attachments__attachment_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "invoice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Invoice Id"
+            }
+          },
+          {
+            "name": "attachment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Attachment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleBoolResponse"
+                }
               }
             }
           },
@@ -3568,7 +3030,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DocumentRenderRequest"
+                "$ref": "#/components/schemas/app__schemas__v1__DocumentRenderRequest"
               }
             }
           }
@@ -3850,13 +3312,13 @@
         }
       }
     },
-    "/api/v1/invoices/{invoice_id}/payments": {
+    "/api/v1/documents/{invoice_id}/payments": {
       "get": {
         "tags": [
           "payments"
         ],
         "summary": "List Invoice Payments",
-        "operationId": "list_invoice_payments_api_v1_invoices__invoice_id__payments_get",
+        "operationId": "list_invoice_payments_api_v1_documents__invoice_id__payments_get",
         "security": [
           {
             "HTTPBearer": []
@@ -3929,7 +3391,7 @@
           "payments"
         ],
         "summary": "Create Payment",
-        "operationId": "create_payment_api_v1_invoices__invoice_id__payments_post",
+        "operationId": "create_payment_api_v1_documents__invoice_id__payments_post",
         "security": [
           {
             "HTTPBearer": []
@@ -9434,228 +8896,6 @@
         ],
         "title": "CalculationBreakdown"
       },
-      "CreditNoteCreateRequest": {
-        "properties": {
-          "invoice_id": {
-            "type": "string",
-            "title": "Invoice Id",
-            "example": "inv_01ABC"
-          },
-          "credit_note_number": {
-            "type": "string",
-            "title": "Credit Note Number",
-            "example": "CN-2026-001"
-          },
-          "issue_date": {
-            "type": "string",
-            "format": "date",
-            "title": "Issue Date",
-            "example": "2026-07-20"
-          },
-          "reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reason",
-            "example": "Partial refund for overpayment"
-          },
-          "line_items": {
-            "items": {
-              "$ref": "#/components/schemas/CreditNoteLineItemInput"
-            },
-            "type": "array",
-            "title": "Line Items"
-          }
-        },
-        "type": "object",
-        "required": [
-          "invoice_id",
-          "credit_note_number",
-          "issue_date",
-          "line_items"
-        ],
-        "title": "CreditNoteCreateRequest"
-      },
-      "CreditNoteLineItemInput": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name",
-            "example": "Web Development"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description",
-            "example": "Partial refund"
-          },
-          "quantity": {
-            "type": "string",
-            "title": "Quantity",
-            "example": "1"
-          },
-          "unit_price": {
-            "type": "string",
-            "title": "Unit Price",
-            "example": "150.00"
-          },
-          "taxes": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceLineItemTaxInput"
-            },
-            "type": "array",
-            "title": "Taxes"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name",
-          "quantity",
-          "unit_price"
-        ],
-        "title": "CreditNoteLineItemInput"
-      },
-      "CreditNoteOut": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "invoice_id": {
-            "type": "string",
-            "title": "Invoice Id"
-          },
-          "credit_note_number": {
-            "type": "string",
-            "title": "Credit Note Number"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "draft",
-              "finalized"
-            ],
-            "title": "Status"
-          },
-          "reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reason"
-          },
-          "currency": {
-            "type": "string",
-            "title": "Currency"
-          },
-          "totals": {
-            "$ref": "#/components/schemas/InvoiceTotalsOut"
-          },
-          "issue_date": {
-            "type": "string",
-            "format": "date",
-            "title": "Issue Date"
-          },
-          "created_at": {
-            "type": "string",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "string",
-            "title": "Updated At"
-          },
-          "finalized_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Finalized At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "invoice_id",
-          "credit_note_number",
-          "status",
-          "currency",
-          "totals",
-          "issue_date",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "CreditNoteOut"
-      },
-      "CreditNoteRenderRequest": {
-        "properties": {
-          "template_id": {
-            "type": "string",
-            "title": "Template Id",
-            "default": "tpl_modern"
-          },
-          "page_size": {
-            "type": "string",
-            "enum": [
-              "LETTER",
-              "A4"
-            ],
-            "title": "Page Size",
-            "default": "LETTER"
-          }
-        },
-        "type": "object",
-        "title": "CreditNoteRenderRequest"
-      },
-      "CreditNoteResponse": {
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/CreditNoteOut"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "CreditNoteResponse"
-      },
-      "CreditNotesListResponse": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/CreditNoteOut"
-            },
-            "type": "array",
-            "title": "Data"
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/CursorPagination"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "CreditNotesListResponse"
-      },
       "CursorPagination": {
         "properties": {
           "has_more": {
@@ -10336,6 +9576,187 @@
         ],
         "title": "DocumentCalculateResponse"
       },
+      "DocumentCreateRequest": {
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type",
+            "default": "invoice"
+          },
+          "number": {
+            "type": "string",
+            "title": "Number",
+            "example": "INV-2026-001"
+          },
+          "issue_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Issue Date",
+            "example": "2026-07-20"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due Date",
+            "example": "2026-08-19"
+          },
+          "currency": {
+            "type": "string",
+            "maxLength": 3,
+            "minLength": 3,
+            "title": "Currency",
+            "example": "USD"
+          },
+          "locale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale",
+            "default": "en-US",
+            "example": "en-US"
+          },
+          "business_profile_id": {
+            "type": "string",
+            "title": "Business Profile Id",
+            "example": "bp_01ABC"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id",
+            "example": "cus_01XYZ"
+          },
+          "source_document_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Document Id",
+            "example": "inv_01ABC"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "example": "Order cancelled"
+          },
+          "ship_to": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PostalAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "line_items": {
+            "items": {
+              "$ref": "#/components/schemas/StandardLineItemInput"
+            },
+            "type": "array",
+            "title": "Line Items"
+          },
+          "discounts": {
+            "items": {
+              "$ref": "#/components/schemas/LineItemDiscountInput"
+            },
+            "type": "array",
+            "title": "Discounts"
+          },
+          "shipping": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceShippingInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notes": {
+            "items": {
+              "$ref": "#/components/schemas/InvoiceNoteInput"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "terms": {
+            "items": {
+              "$ref": "#/components/schemas/InvoiceTermInput"
+            },
+            "type": "array",
+            "title": "Terms"
+          },
+          "custom_fields": {
+            "items": {
+              "$ref": "#/components/schemas/InvoiceCustomFieldInput"
+            },
+            "type": "array",
+            "title": "Custom Fields"
+          },
+          "payment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoicePaymentInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "branding": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceBrandingInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "number",
+          "issue_date",
+          "currency",
+          "business_profile_id",
+          "customer_id",
+          "line_items"
+        ],
+        "title": "DocumentCreateRequest"
+      },
       "DocumentCustomFieldInput": {
         "properties": {
           "label": {
@@ -10606,6 +10027,140 @@
         ],
         "title": "DocumentLineItemTaxInput"
       },
+      "DocumentOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type"
+          },
+          "number": {
+            "type": "string",
+            "title": "Number"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "issue_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Issue Date"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due Date"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "locale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale"
+          },
+          "business_profile_id": {
+            "type": "string",
+            "title": "Business Profile Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id"
+          },
+          "source_document_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Document Id"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Data"
+          },
+          "totals": {
+            "$ref": "#/components/schemas/InvoiceTotalsOut"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "title": "Updated At"
+          },
+          "finalized_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finalized At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "document_type",
+          "number",
+          "status",
+          "issue_date",
+          "currency",
+          "business_profile_id",
+          "customer_id",
+          "data",
+          "totals",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "DocumentOut"
+      },
       "DocumentOutputOptions": {
         "properties": {
           "format": {
@@ -10740,6 +10295,245 @@
         ],
         "title": "DocumentPartyInput"
       },
+      "DocumentPatchRequest": {
+        "properties": {
+          "number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number"
+          },
+          "document_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "invoice",
+                  "credit_note",
+                  "quote",
+                  "receipt",
+                  "proforma",
+                  "purchase_order",
+                  "delivery_note"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Type"
+          },
+          "issue_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Issue Date"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due Date"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 3,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "locale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale"
+          },
+          "business_profile_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Profile Id"
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id"
+          },
+          "source_document_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Document Id"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "ship_to": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PostalAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "line_items": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/StandardLineItemInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line Items"
+          },
+          "discounts": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/LineItemDiscountInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discounts"
+          },
+          "shipping": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceShippingInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceNoteInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "terms": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceTermInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Terms"
+          },
+          "custom_fields": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceCustomFieldInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Custom Fields"
+          },
+          "payment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoicePaymentInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "branding": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceBrandingInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "DocumentPatchRequest"
+      },
       "DocumentPaymentInput": {
         "properties": {
           "bank_account": {
@@ -10791,32 +10585,17 @@
         "type": "object",
         "title": "DocumentPaymentInput"
       },
-      "DocumentRenderRequest": {
+      "DocumentResponse": {
         "properties": {
-          "document_type": {
-            "type": "string",
-            "title": "Document Type",
-            "default": "invoice",
-            "enum": [
-              "invoice"
-            ]
-          },
           "data": {
-            "$ref": "#/components/schemas/DocumentInvoiceDataInput"
-          },
-          "template": {
-            "$ref": "#/components/schemas/DocumentTemplateRef"
-          },
-          "output": {
-            "$ref": "#/components/schemas/DocumentOutputOptions"
+            "$ref": "#/components/schemas/DocumentOut"
           }
         },
         "type": "object",
         "required": [
-          "data",
-          "template"
+          "data"
         ],
-        "title": "DocumentRenderRequest"
+        "title": "DocumentResponse"
       },
       "DocumentShippingInput": {
         "properties": {
@@ -10885,6 +10664,25 @@
           "data"
         ],
         "title": "DocumentValidateResponse"
+      },
+      "DocumentsListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/CursorPagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "DocumentsListResponse"
       },
       "FileOut": {
         "properties": {
@@ -11304,161 +11102,6 @@
         },
         "type": "object",
         "title": "InvoiceBrandingInput"
-      },
-      "InvoiceCreateRequest": {
-        "properties": {
-          "invoice_number": {
-            "type": "string",
-            "title": "Invoice Number",
-            "example": "INV-2026-001"
-          },
-          "document_type": {
-            "type": "string",
-            "enum": [
-              "invoice",
-              "credit_note",
-              "quote",
-              "receipt",
-              "proforma",
-              "purchase_order",
-              "delivery_note"
-            ],
-            "title": "Document Type",
-            "default": "invoice"
-          },
-          "issue_date": {
-            "type": "string",
-            "format": "date",
-            "title": "Issue Date",
-            "example": "2026-07-20"
-          },
-          "due_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Due Date",
-            "example": "2026-08-19"
-          },
-          "currency": {
-            "type": "string",
-            "title": "Currency",
-            "example": "USD"
-          },
-          "locale": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Locale",
-            "default": "en-US",
-            "example": "en-US"
-          },
-          "business_profile_id": {
-            "type": "string",
-            "title": "Business Profile Id",
-            "example": "bp_01ABC"
-          },
-          "customer_id": {
-            "type": "string",
-            "title": "Customer Id",
-            "example": "cus_01XYZ"
-          },
-          "ship_to": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PostalAddress"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "line_items": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceLineItemInput"
-            },
-            "type": "array",
-            "title": "Line Items"
-          },
-          "discounts": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceDiscountInput"
-            },
-            "type": "array",
-            "title": "Discounts"
-          },
-          "shipping": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceShippingInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "notes": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceNoteInput"
-            },
-            "type": "array",
-            "title": "Notes"
-          },
-          "terms": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceTermInput"
-            },
-            "type": "array",
-            "title": "Terms"
-          },
-          "custom_fields": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceCustomFieldInput"
-            },
-            "type": "array",
-            "title": "Custom Fields"
-          },
-          "payment": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoicePaymentInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "branding": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceBrandingInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "invoice_number",
-          "issue_date",
-          "currency",
-          "business_profile_id",
-          "customer_id",
-          "line_items"
-        ],
-        "title": "InvoiceCreateRequest"
       },
       "InvoiceCustomFieldInput": {
         "properties": {
@@ -11938,221 +11581,6 @@
         ],
         "title": "InvoiceOut"
       },
-      "InvoicePatchRequest": {
-        "properties": {
-          "invoice_number": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Invoice Number"
-          },
-          "document_type": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "invoice",
-                  "credit_note",
-                  "quote",
-                  "receipt",
-                  "proforma",
-                  "purchase_order",
-                  "delivery_note"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Document Type"
-          },
-          "issue_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Issue Date"
-          },
-          "due_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Due Date"
-          },
-          "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency"
-          },
-          "locale": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Locale"
-          },
-          "business_profile_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Business Profile Id"
-          },
-          "customer_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Id"
-          },
-          "ship_to": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PostalAddress"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "line_items": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InvoiceLineItemInput"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Line Items"
-          },
-          "discounts": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InvoiceDiscountInput"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Discounts"
-          },
-          "shipping": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceShippingInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "notes": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InvoiceNoteInput"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Notes"
-          },
-          "terms": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InvoiceTermInput"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Terms"
-          },
-          "custom_fields": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InvoiceCustomFieldInput"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Custom Fields"
-          },
-          "payment": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoicePaymentInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "branding": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceBrandingInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "title": "InvoicePatchRequest"
-      },
       "InvoicePaymentInput": {
         "properties": {
           "bank_account": {
@@ -12203,212 +11631,6 @@
         },
         "type": "object",
         "title": "InvoicePaymentInput"
-      },
-      "InvoicePreviewRequest": {
-        "properties": {
-          "invoice_number": {
-            "type": "string",
-            "title": "Invoice Number",
-            "example": "INV-2026-001"
-          },
-          "document_type": {
-            "type": "string",
-            "enum": [
-              "invoice",
-              "credit_note",
-              "quote",
-              "receipt",
-              "proforma",
-              "purchase_order",
-              "delivery_note"
-            ],
-            "title": "Document Type",
-            "default": "invoice"
-          },
-          "issue_date": {
-            "type": "string",
-            "format": "date",
-            "title": "Issue Date",
-            "example": "2026-07-20"
-          },
-          "due_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Due Date",
-            "example": "2026-08-19"
-          },
-          "currency": {
-            "type": "string",
-            "title": "Currency",
-            "example": "USD"
-          },
-          "locale": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Locale",
-            "default": "en-US",
-            "example": "en-US"
-          },
-          "business_profile_id": {
-            "type": "string",
-            "title": "Business Profile Id",
-            "example": "bp_01ABC"
-          },
-          "customer_id": {
-            "type": "string",
-            "title": "Customer Id",
-            "example": "cus_01XYZ"
-          },
-          "ship_to": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PostalAddress"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "line_items": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceLineItemInput"
-            },
-            "type": "array",
-            "title": "Line Items"
-          },
-          "discounts": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceDiscountInput"
-            },
-            "type": "array",
-            "title": "Discounts"
-          },
-          "shipping": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceShippingInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "notes": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceNoteInput"
-            },
-            "type": "array",
-            "title": "Notes"
-          },
-          "terms": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceTermInput"
-            },
-            "type": "array",
-            "title": "Terms"
-          },
-          "custom_fields": {
-            "items": {
-              "$ref": "#/components/schemas/InvoiceCustomFieldInput"
-            },
-            "type": "array",
-            "title": "Custom Fields"
-          },
-          "payment": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoicePaymentInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "branding": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceBrandingInput"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "template_id": {
-            "type": "string",
-            "title": "Template Id",
-            "default": "tpl_modern"
-          },
-          "page_size": {
-            "type": "string",
-            "enum": [
-              "LETTER",
-              "A4"
-            ],
-            "title": "Page Size",
-            "default": "LETTER"
-          }
-        },
-        "type": "object",
-        "required": [
-          "invoice_number",
-          "issue_date",
-          "currency",
-          "business_profile_id",
-          "customer_id",
-          "line_items"
-        ],
-        "title": "InvoicePreviewRequest"
-      },
-      "InvoiceRenderRequest": {
-        "properties": {
-          "template_id": {
-            "type": "string",
-            "title": "Template Id",
-            "default": "tpl_modern"
-          },
-          "page_size": {
-            "type": "string",
-            "enum": [
-              "LETTER",
-              "A4"
-            ],
-            "title": "Page Size",
-            "default": "LETTER"
-          },
-          "expires_in": {
-            "type": "integer",
-            "title": "Expires In",
-            "default": 3600
-          }
-        },
-        "type": "object",
-        "title": "InvoiceRenderRequest"
-      },
-      "InvoiceResponse": {
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/InvoiceOut"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "InvoiceResponse"
       },
       "InvoiceShippingInput": {
         "properties": {
@@ -12614,6 +11836,88 @@
           "data"
         ],
         "title": "JobResponse"
+      },
+      "LineItemDiscountInput": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "percentage",
+              "fixed"
+            ],
+            "title": "Type",
+            "default": "percentage"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value",
+            "example": "10"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "example": "Loyalty discount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "title": "LineItemDiscountInput"
+      },
+      "LineItemTaxInput": {
+        "properties": {
+          "tax_rate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Rate Id",
+            "example": "txr_01ABC"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "example": "Sales Tax"
+          },
+          "rate": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate",
+            "example": "8.875"
+          },
+          "inclusive": {
+            "type": "boolean",
+            "title": "Inclusive",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "LineItemTaxInput"
       },
       "Money": {
         "properties": {
@@ -13544,6 +12848,88 @@
         ],
         "title": "SimpleBoolResponse",
         "description": "Generic boolean response envelope.\n\nExample:\n{\"data\": {\"deleted\": true}}"
+      },
+      "StandardLineItemInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "example": "Web Development"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "example": "Frontend redesign"
+          },
+          "quantity": {
+            "type": "string",
+            "title": "Quantity",
+            "description": "Decimal string",
+            "example": "2"
+          },
+          "unit_price": {
+            "type": "string",
+            "title": "Unit Price",
+            "description": "Decimal string, major units",
+            "default": "0.00",
+            "example": "150.00"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit",
+            "example": "hours"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sku",
+            "example": "SVC-WEB-001"
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LineItemDiscountInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "taxes": {
+            "items": {
+              "$ref": "#/components/schemas/LineItemTaxInput"
+            },
+            "type": "array",
+            "title": "Taxes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "quantity"
+        ],
+        "title": "StandardLineItemInput",
+        "description": "A fully priced line: unit, price, tax, discount and SKU."
       },
       "StatsCounts": {
         "properties": {
@@ -14722,6 +14108,54 @@
           "data"
         ],
         "title": "WorkspacesListResponse"
+      },
+      "app__documents__schemas__DocumentRenderRequest": {
+        "properties": {
+          "template_id": {
+            "type": "string",
+            "title": "Template Id",
+            "default": "tpl_modern"
+          },
+          "page_size": {
+            "type": "string",
+            "title": "Page Size",
+            "default": "LETTER"
+          },
+          "expires_in": {
+            "type": "integer",
+            "title": "Expires In",
+            "default": 3600
+          }
+        },
+        "type": "object",
+        "title": "DocumentRenderRequest"
+      },
+      "app__schemas__v1__DocumentRenderRequest": {
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "title": "Document Type",
+            "default": "invoice",
+            "enum": [
+              "invoice"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/DocumentInvoiceDataInput"
+          },
+          "template": {
+            "$ref": "#/components/schemas/DocumentTemplateRef"
+          },
+          "output": {
+            "$ref": "#/components/schemas/DocumentOutputOptions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "template"
+        ],
+        "title": "DocumentRenderRequest"
       }
     },
     "securitySchemes": {
