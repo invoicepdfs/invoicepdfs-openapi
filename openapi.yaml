@@ -1,6 +1,23 @@
 openapi: 3.1.0
 info:
   title: InvoicePDFs
+  summary: JSON in, professional invoice PDF out.
+  description: 'InvoicePDFs turns a JSON document into a polished PDF — invoices,
+    credit notes, quotes, receipts, proformas, purchase orders and delivery notes.
+    The API validates your data, computes totals correctly (tax, discounts, shipping),
+    and returns a downloadable, professional PDF.
+
+
+    This package is the official client for the InvoicePDFs API, generated from the
+    OpenAPI specification.
+
+
+    Documentation: https://invoicepdfs.com'
+  contact:
+    name: InvoicePDFs
+    url: https://invoicepdfs.com/
+  license:
+    name: MIT
   version: 0.1.0
 paths:
   /health:
