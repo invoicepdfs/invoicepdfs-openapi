@@ -5265,6 +5265,93 @@
         ]
       }
     },
+    "/api/v1/stats": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Get Stats",
+        "operationId": "get_stats_api_v1_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/logs": {
+      "get": {
+        "tags": [
+          "logs"
+        ],
+        "summary": "List Logs",
+        "operationId": "list_logs_api_v1_logs_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(success|error)?$",
+              "default": "",
+              "title": "Status"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiRequestLogsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/numbering-sequences": {
       "get": {
         "tags": [
@@ -7814,6 +7901,99 @@
           "data"
         ],
         "title": "ApiKeyRotateResponse"
+      },
+      "ApiRequestLogOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Ms"
+          },
+          "request_body": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Request Body"
+          },
+          "response_body": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response Body"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "method",
+          "path",
+          "status_code",
+          "created_at"
+        ],
+        "title": "ApiRequestLogOut"
+      },
+      "ApiRequestLogsListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ApiRequestLogOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "ApiRequestLogsListResponse"
       },
       "AuditEventOut": {
         "properties": {
@@ -13364,6 +13544,112 @@
         ],
         "title": "SimpleBoolResponse",
         "description": "Generic boolean response envelope.\n\nExample:\n{\"data\": {\"deleted\": true}}"
+      },
+      "StatsCounts": {
+        "properties": {
+          "invoices": {
+            "type": "integer",
+            "title": "Invoices"
+          },
+          "customers": {
+            "type": "integer",
+            "title": "Customers"
+          },
+          "business_profiles": {
+            "type": "integer",
+            "title": "Business Profiles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "invoices",
+          "customers",
+          "business_profiles"
+        ],
+        "title": "StatsCounts"
+      },
+      "StatsOverview": {
+        "properties": {
+          "counts": {
+            "$ref": "#/components/schemas/StatsCounts"
+          },
+          "invoice_status_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Invoice Status Counts"
+          },
+          "recent_invoices": {
+            "items": {
+              "$ref": "#/components/schemas/StatsRecentInvoice"
+            },
+            "type": "array",
+            "title": "Recent Invoices"
+          }
+        },
+        "type": "object",
+        "required": [
+          "counts",
+          "invoice_status_counts",
+          "recent_invoices"
+        ],
+        "title": "StatsOverview"
+      },
+      "StatsRecentInvoice": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "invoice_number": {
+            "type": "string",
+            "title": "Invoice Number"
+          },
+          "document_type": {
+            "type": "string",
+            "title": "Document Type"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "total_amount": {
+            "type": "string",
+            "title": "Total Amount"
+          },
+          "issue_date": {
+            "type": "string",
+            "title": "Issue Date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "invoice_number",
+          "document_type",
+          "status",
+          "currency",
+          "total_amount",
+          "issue_date"
+        ],
+        "title": "StatsRecentInvoice"
+      },
+      "StatsResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/StatsOverview"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "StatsResponse"
       },
       "TaxRateCreateRequest": {
         "properties": {
