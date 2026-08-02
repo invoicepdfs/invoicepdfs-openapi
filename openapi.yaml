@@ -586,31 +586,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /api/v1/branding:
+  /api/v1/branding-profiles:
     get:
       tags:
-      - branding
-      summary: Get Branding
-      operationId: get_branding_api_v1_branding_get
+      - branding-profiles
+      summary: List Profiles
+      operationId: list_profiles_api_v1_branding_profiles_get
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BrandingResponse'
+                $ref: '#/components/schemas/BrandingProfilesListResponse'
       security:
       - HTTPBearer: []
-    put:
+    post:
       tags:
-      - branding
-      summary: Update Branding
-      operationId: update_branding_api_v1_branding_put
+      - branding-profiles
+      summary: Create Profile
+      operationId: create_profile_api_v1_branding_profiles_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BrandingUpdateRequest'
+              $ref: '#/components/schemas/BrandingProfileCreateRequest'
         required: true
       responses:
         '200':
@@ -618,7 +618,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BrandingResponse'
+                $ref: '#/components/schemas/BrandingProfileResponse'
         '422':
           description: Validation Error
           content:
@@ -627,38 +627,81 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - HTTPBearer: []
-  /api/v1/branding/logo:
-    post:
+  /api/v1/branding-profiles/{profile_id}:
+    get:
       tags:
-      - branding
-      summary: Upload Logo
-      operationId: upload_logo_api_v1_branding_logo_post
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Body_upload_logo_api_v1_branding_logo_post'
+      - branding-profiles
+      summary: Get Profile
+      operationId: get_profile_api_v1_branding_profiles__profile_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: profile_id
+        in: path
         required: true
+        schema:
+          type: string
+          title: Profile Id
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BrandingResponse'
+                $ref: '#/components/schemas/BrandingProfileResponse'
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - branding-profiles
+      summary: Update Profile
+      operationId: update_profile_api_v1_branding_profiles__profile_id__patch
       security:
       - HTTPBearer: []
+      parameters:
+      - name: profile_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Profile Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandingProfilePatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandingProfileResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - branding
-      summary: Delete Logo
-      operationId: delete_logo_api_v1_branding_logo_delete
+      - branding-profiles
+      summary: Delete Profile
+      operationId: delete_profile_api_v1_branding_profiles__profile_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: profile_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Profile Id
       responses:
         '200':
           description: Successful Response
@@ -666,8 +709,101 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleBoolResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/branding-profiles/{profile_id}/default:
+    post:
+      tags:
+      - branding-profiles
+      summary: Set Default
+      operationId: set_default_api_v1_branding_profiles__profile_id__default_post
       security:
       - HTTPBearer: []
+      parameters:
+      - name: profile_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Profile Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandingProfileResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/branding-profiles/{profile_id}/logo:
+    post:
+      tags:
+      - branding-profiles
+      summary: Upload Logo
+      operationId: upload_logo_api_v1_branding_profiles__profile_id__logo_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: profile_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Profile Id
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandingProfileResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - branding-profiles
+      summary: Delete Logo
+      operationId: delete_logo_api_v1_branding_profiles__profile_id__logo_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: profile_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Profile Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleBoolResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/customers:
     get:
       tags:
@@ -5050,7 +5186,7 @@ components:
       required:
       - file
       title: Body_upload_file_api_v1_files_post
-    Body_upload_logo_api_v1_branding_logo_post:
+    Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post:
       properties:
         file:
           type: string
@@ -5059,9 +5195,67 @@ components:
       type: object
       required:
       - file
-      title: Body_upload_logo_api_v1_branding_logo_post
-    BrandingOut:
+      title: Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post
+    BrandingProfileCreateRequest:
       properties:
+        name:
+          type: string
+          title: Name
+          examples:
+          - Acme Corp
+        primary_color:
+          type: string
+          title: Primary Color
+          default: '#111827'
+          examples:
+          - '#111827'
+        accent_color:
+          type: string
+          title: Accent Color
+          default: '#111827'
+          examples:
+          - '#06B6D4'
+        font_family:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Font Family
+          examples:
+          - Inter
+        header_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Header Text
+          examples:
+          - Acme Corp — Invoices
+        footer_text:
+          type: string
+          title: Footer Text
+          default: Generated by InvoicePDFs
+        hide_invoicepdfs_branding:
+          type: boolean
+          title: Hide Invoicepdfs Branding
+          default: false
+        is_default:
+          type: boolean
+          title: Is Default
+          default: false
+      type: object
+      required:
+      - name
+      title: BrandingProfileCreateRequest
+    BrandingProfileOut:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        is_default:
+          type: boolean
+          title: Is Default
         logo_file_id:
           anyOf:
           - type: string
@@ -5078,6 +5272,11 @@ components:
           - type: string
           - type: 'null'
           title: Font Family
+        header_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Header Text
         footer_text:
           type: string
           title: Footer Text
@@ -5092,58 +5291,79 @@ components:
           title: Updated At
       type: object
       required:
+      - id
+      - name
+      - is_default
       - primary_color
       - accent_color
       - footer_text
       - hide_invoicepdfs_branding
       - created_at
       - updated_at
-      title: BrandingOut
-    BrandingResponse:
+      title: BrandingProfileOut
+    BrandingProfilePatchRequest:
       properties:
-        data:
-          $ref: '#/components/schemas/BrandingOut'
-      type: object
-      required:
-      - data
-      title: BrandingResponse
-    BrandingUpdateRequest:
-      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
         primary_color:
           anyOf:
           - type: string
           - type: 'null'
           title: Primary Color
-          examples:
-          - '#111827'
         accent_color:
           anyOf:
           - type: string
           - type: 'null'
           title: Accent Color
-          examples:
-          - '#06B6D4'
         font_family:
           anyOf:
           - type: string
           - type: 'null'
           title: Font Family
-          examples:
-          - Inter
+        header_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Header Text
         footer_text:
           anyOf:
           - type: string
           - type: 'null'
           title: Footer Text
-          examples:
-          - Generated by InvoicePDFs
         hide_invoicepdfs_branding:
           anyOf:
           - type: boolean
           - type: 'null'
           title: Hide Invoicepdfs Branding
+        is_default:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Default
       type: object
-      title: BrandingUpdateRequest
+      title: BrandingProfilePatchRequest
+    BrandingProfileResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/BrandingProfileOut'
+      type: object
+      required:
+      - data
+      title: BrandingProfileResponse
+    BrandingProfilesListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BrandingProfileOut'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: BrandingProfilesListResponse
     BusinessProfileCreate:
       properties:
         legal_name:
@@ -5947,6 +6167,13 @@ components:
           anyOf:
           - $ref: '#/components/schemas/InvoiceBrandingInput'
           - type: 'null'
+        branding_profile_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Branding Profile Id
+          examples:
+          - brnd_01ABC
       type: object
       required:
       - number
@@ -6803,6 +7030,11 @@ components:
           - type: string
           - type: 'null'
           title: Font Family
+        header_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Header Text
         footer_text:
           type: string
           title: Footer Text
