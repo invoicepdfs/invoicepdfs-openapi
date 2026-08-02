@@ -7229,6 +7229,33 @@
         ]
       }
     },
+    "/api/v1/billing/plans": {
+      "get": {
+        "tags": [
+          "billing"
+        ],
+        "summary": "List Plans",
+        "description": "Purchasable plans \u2014 the ones wired to a Stripe price.",
+        "operationId": "list_plans_api_v1_billing_plans_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingPlansListResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/billing/checkout-session": {
       "post": {
         "tags": [
@@ -8459,6 +8486,50 @@
         ],
         "title": "BillingCheckoutResponse"
       },
+      "BillingPlan": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "price_id": {
+            "type": "string",
+            "title": "Price Id"
+          },
+          "monthly_render_quota": {
+            "type": "integer",
+            "title": "Monthly Render Quota"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "price_id",
+          "monthly_render_quota"
+        ],
+        "title": "BillingPlan"
+      },
+      "BillingPlansListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BillingPlan"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "BillingPlansListResponse"
+      },
       "BillingPortalData": {
         "properties": {
           "url": {
@@ -8515,6 +8586,16 @@
           "plan_name": {
             "type": "string",
             "title": "Plan Name"
+          },
+          "stripe_configured": {
+            "type": "boolean",
+            "title": "Stripe Configured",
+            "default": false
+          },
+          "has_billing_account": {
+            "type": "boolean",
+            "title": "Has Billing Account",
+            "default": false
           }
         },
         "type": "object",
