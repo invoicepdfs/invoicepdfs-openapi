@@ -6145,6 +6145,7 @@
           "reference"
         ],
         "summary": "List Document Types",
+        "description": "List every supported document type with the metadata a client needs to\nbuild a type-aware create form: the number prefix, whether it is payable /\ntakes a source document / supports a reason, which line-item shape it uses\n(``standard`` = priced, ``shipped`` = quantities only), and the lifecycle\nactions available to it.",
         "operationId": "list_document_types_api_v1_reference_document_types_get",
         "responses": {
           "200": {
