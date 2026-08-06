@@ -31,7 +31,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/version": {
@@ -52,7 +53,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/ready": {
@@ -73,7 +75,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/auth/me": {
@@ -99,7 +102,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "internal"
       },
       "patch": {
         "tags": [
@@ -144,7 +148,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "internal"
       }
     },
     "/api/v1/auth/register": {
@@ -186,7 +191,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/auth/token": {
@@ -228,7 +234,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/auth/logout": {
@@ -255,7 +262,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "internal"
       }
     },
     "/api/v1/auth/refresh": {
@@ -297,7 +305,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/auth/forgot-password": {
@@ -339,7 +348,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/auth/reset-password": {
@@ -381,7 +391,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/api-keys": {
@@ -407,7 +418,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -451,7 +463,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/api-keys/{api_key_id}": {
@@ -498,7 +511,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "get": {
         "tags": [
@@ -543,7 +557,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -598,7 +613,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/api-keys/{api_key_id}/rotate": {
@@ -646,7 +662,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/business-profiles": {
@@ -712,7 +729,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -774,7 +792,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/business-profiles/{business_profile_id}": {
@@ -821,7 +840,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -892,7 +912,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -937,7 +958,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/branding-profiles": {
@@ -963,7 +985,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -1007,7 +1030,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/branding-profiles/{profile_id}": {
@@ -1054,7 +1078,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -1109,7 +1134,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -1154,7 +1180,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/branding-profiles/{profile_id}/default": {
@@ -1201,7 +1228,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/branding-profiles/{profile_id}/logo": {
@@ -1258,7 +1286,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -1303,7 +1332,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/customers": {
@@ -1369,7 +1399,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -1431,7 +1462,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/customers/{customer_id}": {
@@ -1478,7 +1510,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -1549,7 +1582,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -1594,7 +1628,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents": {
@@ -1692,7 +1727,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -1754,7 +1790,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}": {
@@ -1801,7 +1838,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -1856,7 +1894,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -1901,7 +1940,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/duplicate": {
@@ -1948,7 +1988,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/finalize": {
@@ -1995,7 +2036,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/void": {
@@ -2042,7 +2084,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/mark-sent": {
@@ -2089,7 +2132,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/mark-paid": {
@@ -2136,7 +2180,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/mark-unpaid": {
@@ -2183,7 +2228,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/archive": {
@@ -2230,7 +2276,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/restore": {
@@ -2277,7 +2324,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/renders": {
@@ -2348,7 +2396,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/send": {
@@ -2405,7 +2454,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{document_id}/deliveries": {
@@ -2480,7 +2530,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/validate": {
@@ -2526,7 +2577,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/calculate": {
@@ -2572,7 +2624,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/render": {
@@ -2634,7 +2687,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{invoice_id}/attachments": {
@@ -2681,7 +2735,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -2736,7 +2791,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{invoice_id}/attachments/{attachment_id}": {
@@ -2792,7 +2848,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates": {
@@ -2818,7 +2875,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/builtin/{template_id}": {
@@ -2865,7 +2923,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/custom": {
@@ -2911,7 +2970,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "get": {
         "tags": [
@@ -2975,7 +3035,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/custom/{template_id}": {
@@ -3022,7 +3083,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -3077,7 +3139,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -3115,7 +3178,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/custom/{template_id}/duplicate": {
@@ -3162,7 +3226,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/custom/{template_id}/publish": {
@@ -3209,7 +3274,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/{template_id}": {
@@ -3256,7 +3322,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/{template_id}/preview": {
@@ -3327,7 +3394,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/{template_id}/versions": {
@@ -3374,7 +3442,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -3429,7 +3498,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/templates/{template_id}/versions/{version}": {
@@ -3485,7 +3555,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/renders/{render_id}": {
@@ -3534,7 +3605,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/renders/{render_id}/download": {
@@ -3582,7 +3654,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/documents/{invoice_id}/payments": {
@@ -3657,7 +3730,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -3712,7 +3786,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/payments/{payment_id}": {
@@ -3759,7 +3834,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -3814,7 +3890,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -3859,7 +3936,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/batches": {
@@ -3925,7 +4003,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -3969,7 +4048,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/batches/{batch_id}": {
@@ -4016,7 +4096,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/batches/{batch_id}/items": {
@@ -4091,7 +4172,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/batches/{batch_id}/cancel": {
@@ -4138,7 +4220,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/batches/{batch_id}/download": {
@@ -4183,7 +4266,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/deliveries/{delivery_id}": {
@@ -4230,7 +4314,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/deliveries/{delivery_id}/retry": {
@@ -4277,7 +4362,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/recurring-invoices": {
@@ -4323,7 +4409,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "get": {
         "tags": [
@@ -4403,7 +4490,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/recurring-invoices/{recurring_id}": {
@@ -4450,7 +4538,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -4505,7 +4594,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -4550,7 +4640,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/recurring-invoices/{recurring_id}/pause": {
@@ -4597,7 +4688,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/recurring-invoices/{recurring_id}/resume": {
@@ -4644,7 +4736,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/recurring-invoices/{recurring_id}/invoices": {
@@ -4719,7 +4812,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/files": {
@@ -4783,7 +4877,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/files/{file_id}": {
@@ -4830,7 +4925,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -4875,7 +4971,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/usage": {
@@ -4901,7 +4998,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/usage/events": {
@@ -4969,7 +5067,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/usage/limits": {
@@ -4997,7 +5096,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/stats": {
@@ -5023,7 +5123,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/logs": {
@@ -5084,7 +5185,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/numbering-sequences": {
@@ -5150,7 +5252,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -5194,7 +5297,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/numbering-sequences/{sequence_id}": {
@@ -5241,7 +5345,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -5296,7 +5401,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -5341,7 +5447,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/numbering-sequences/{sequence_id}/preview": {
@@ -5388,7 +5495,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/numbering-sequences/{sequence_id}/next": {
@@ -5436,7 +5544,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/tax-rates": {
@@ -5502,7 +5611,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -5546,7 +5656,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/tax-rates/{tax_rate_id}": {
@@ -5593,7 +5704,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -5648,7 +5760,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -5693,7 +5806,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/jobs/{job_id}": {
@@ -5740,7 +5854,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/jobs/{job_id}/cancel": {
@@ -5787,7 +5902,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/jobs/{job_id}/retry": {
@@ -5834,7 +5950,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "internal"
       }
     },
     "/api/v1/imports": {
@@ -5880,7 +5997,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/imports/{import_id}": {
@@ -5927,7 +6045,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/imports/{import_id}/confirm": {
@@ -5974,7 +6093,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/imports/{import_id}/cancel": {
@@ -6021,7 +6141,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/reference/currencies": {
@@ -6044,7 +6165,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/reference/countries": {
@@ -6067,7 +6189,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/reference/locales": {
@@ -6090,7 +6213,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/reference/timezones": {
@@ -6113,7 +6237,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/reference/page-sizes": {
@@ -6136,7 +6261,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/reference/document-types": {
@@ -6160,7 +6286,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/workspaces": {
@@ -6226,7 +6353,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -6288,7 +6416,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/workspaces/{workspace_id}": {
@@ -6335,7 +6464,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -6406,7 +6536,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -6451,7 +6582,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/workspaces/{workspace_id}/members": {
@@ -6498,7 +6630,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -6569,7 +6702,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/workspaces/{workspace_id}/members/{member_id}": {
@@ -6635,7 +6769,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -6689,7 +6824,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-endpoints": {
@@ -6755,7 +6891,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "post": {
         "tags": [
@@ -6799,7 +6936,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-endpoints/{endpoint_id}": {
@@ -6846,7 +6984,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "patch": {
         "tags": [
@@ -6901,7 +7040,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       },
       "delete": {
         "tags": [
@@ -6946,7 +7086,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-endpoints/{endpoint_id}/rotate-secret": {
@@ -6993,7 +7134,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-endpoints/{endpoint_id}/test": {
@@ -7040,7 +7182,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-deliveries": {
@@ -7106,7 +7249,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-deliveries/{delivery_id}": {
@@ -7153,7 +7297,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/webhook-deliveries/{delivery_id}/retry": {
@@ -7200,7 +7345,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/billing/subscription": {
@@ -7227,7 +7373,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/billing/plans": {
@@ -7254,7 +7401,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/billing/checkout-session": {
@@ -7301,7 +7449,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/billing/portal-session": {
@@ -7328,7 +7477,8 @@
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "x-visibility": "public"
       }
     },
     "/api/v1/audit-events": {
@@ -7442,7 +7592,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     },
     "/api/v1/audit-events/{audit_event_id}": {
@@ -7489,7 +7640,8 @@
               }
             }
           }
-        }
+        },
+        "x-visibility": "public"
       }
     }
   },
@@ -14678,5 +14830,10 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "x-internal-tags": [
+    "auth",
+    "jobs",
+    "logs"
+  ]
 }
