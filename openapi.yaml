@@ -23,8 +23,8 @@ paths:
     get:
       tags:
       - health
-      summary: Health
-      operationId: health_health_get
+      summary: Get Health
+      operationId: get_health
       responses:
         '200':
           description: Successful Response
@@ -37,8 +37,8 @@ paths:
     get:
       tags:
       - health
-      summary: Version
-      operationId: version_version_get
+      summary: Get Version
+      operationId: get_version
       responses:
         '200':
           description: Successful Response
@@ -51,8 +51,8 @@ paths:
     get:
       tags:
       - health
-      summary: Ready
-      operationId: ready_ready_get
+      summary: Get Readiness
+      operationId: get_readiness
       responses:
         '200':
           description: Successful Response
@@ -65,8 +65,8 @@ paths:
     get:
       tags:
       - auth
-      summary: Me
-      operationId: me_api_v1_auth_me_get
+      summary: Get Current User
+      operationId: get_current_user
       responses:
         '200':
           description: Successful Response
@@ -80,9 +80,9 @@ paths:
     patch:
       tags:
       - auth
-      summary: Patch Me
+      summary: Update Current User
       description: Update the authenticated account's name or email.
-      operationId: patch_me_api_v1_auth_me_patch
+      operationId: update_current_user
       requestBody:
         content:
           application/json:
@@ -116,7 +116,7 @@ paths:
         The client authenticates with Firebase (email/password, Google, etc.)
 
         and sends the resulting ID token here to create an InvoicePDFs account.'
-      operationId: register_api_v1_auth_register_post
+      operationId: register
       requestBody:
         content:
           application/json:
@@ -141,7 +141,7 @@ paths:
     post:
       tags:
       - auth
-      summary: Token Exchange
+      summary: Exchange Auth Token
       description: 'Exchange a Firebase ID token for account info.
 
 
@@ -150,7 +150,7 @@ paths:
         token here, and receives the InvoicePDFs account details. The Firebase
 
         token itself is used as the Bearer token for subsequent API calls.'
-      operationId: token_exchange_api_v1_auth_token_post
+      operationId: exchange_auth_token
       requestBody:
         content:
           application/json:
@@ -177,7 +177,7 @@ paths:
       - auth
       summary: Logout
       description: Revoke all Firebase refresh tokens for the authenticated user.
-      operationId: logout_api_v1_auth_logout_post
+      operationId: logout
       responses:
         '200':
           description: Successful Response
@@ -192,9 +192,9 @@ paths:
     post:
       tags:
       - auth
-      summary: Refresh
+      summary: Refresh Access Token
       description: Exchange a Firebase refresh token for a new ID token.
-      operationId: refresh_api_v1_auth_refresh_post
+      operationId: refresh_access_token
       requestBody:
         content:
           application/json:
@@ -219,9 +219,9 @@ paths:
     post:
       tags:
       - auth
-      summary: Forgot Password
+      summary: Request Password Reset
       description: Send a password reset email via Firebase.
-      operationId: forgot_password_api_v1_auth_forgot_password_post
+      operationId: request_password_reset
       requestBody:
         content:
           application/json:
@@ -248,7 +248,7 @@ paths:
       - auth
       summary: Reset Password
       description: Confirm a password reset using the code from the reset email.
-      operationId: reset_password_api_v1_auth_reset_password_post
+      operationId: reset_password
       requestBody:
         content:
           application/json:
@@ -274,7 +274,7 @@ paths:
       tags:
       - api-keys
       summary: List Api Keys
-      operationId: list_api_keys_api_v1_api_keys_get
+      operationId: list_api_keys
       responses:
         '200':
           description: Successful Response
@@ -289,7 +289,7 @@ paths:
       tags:
       - api-keys
       summary: Create Api Key
-      operationId: create_api_key_api_v1_api_keys_post
+      operationId: create_api_key
       requestBody:
         content:
           application/json:
@@ -317,7 +317,7 @@ paths:
       tags:
       - api-keys
       summary: Revoke Api Key
-      operationId: revoke_api_key_api_v1_api_keys__api_key_id__delete
+      operationId: revoke_api_key
       security:
       - HTTPBearer: []
       parameters:
@@ -345,7 +345,7 @@ paths:
       tags:
       - api-keys
       summary: Get Api Key
-      operationId: get_api_key_api_v1_api_keys__api_key_id__get
+      operationId: get_api_key
       security:
       - HTTPBearer: []
       parameters:
@@ -372,8 +372,8 @@ paths:
     patch:
       tags:
       - api-keys
-      summary: Patch Api Key
-      operationId: patch_api_key_api_v1_api_keys__api_key_id__patch
+      summary: Update Api Key
+      operationId: update_api_key
       security:
       - HTTPBearer: []
       parameters:
@@ -409,7 +409,7 @@ paths:
       - api-keys
       summary: Rotate Api Key
       description: Revoke the existing key and create a new one with the same name.
-      operationId: rotate_api_key_api_v1_api_keys__api_key_id__rotate_post
+      operationId: rotate_api_key
       security:
       - HTTPBearer: []
       parameters:
@@ -438,7 +438,7 @@ paths:
       tags:
       - business-profiles
       summary: List Business Profiles
-      operationId: list_business_profiles_api_v1_business_profiles_get
+      operationId: list_business_profiles
       security:
       - HTTPBearer: []
       parameters:
@@ -477,7 +477,7 @@ paths:
       tags:
       - business-profiles
       summary: Create Business Profile
-      operationId: create_business_profile_api_v1_business_profiles_post
+      operationId: create_business_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -514,7 +514,7 @@ paths:
       tags:
       - business-profiles
       summary: Get Business Profile
-      operationId: get_business_profile_api_v1_business_profiles__business_profile_id__get
+      operationId: get_business_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -541,8 +541,8 @@ paths:
     patch:
       tags:
       - business-profiles
-      summary: Patch Business Profile
-      operationId: patch_business_profile_api_v1_business_profiles__business_profile_id__patch
+      summary: Update Business Profile
+      operationId: update_business_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -584,7 +584,7 @@ paths:
       tags:
       - business-profiles
       summary: Delete Business Profile
-      operationId: delete_business_profile_api_v1_business_profiles__business_profile_id__delete
+      operationId: delete_business_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -612,8 +612,8 @@ paths:
     get:
       tags:
       - branding-profiles
-      summary: List Profiles
-      operationId: list_profiles_api_v1_branding_profiles_get
+      summary: List Branding Profiles
+      operationId: list_branding_profiles
       responses:
         '200':
           description: Successful Response
@@ -627,8 +627,8 @@ paths:
     post:
       tags:
       - branding-profiles
-      summary: Create Profile
-      operationId: create_profile_api_v1_branding_profiles_post
+      summary: Create Branding Profile
+      operationId: create_branding_profile
       requestBody:
         content:
           application/json:
@@ -655,8 +655,8 @@ paths:
     get:
       tags:
       - branding-profiles
-      summary: Get Profile
-      operationId: get_profile_api_v1_branding_profiles__profile_id__get
+      summary: Get Branding Profile
+      operationId: get_branding_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -683,8 +683,8 @@ paths:
     patch:
       tags:
       - branding-profiles
-      summary: Update Profile
-      operationId: update_profile_api_v1_branding_profiles__profile_id__patch
+      summary: Update Branding Profile
+      operationId: update_branding_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -717,8 +717,8 @@ paths:
     delete:
       tags:
       - branding-profiles
-      summary: Delete Profile
-      operationId: delete_profile_api_v1_branding_profiles__profile_id__delete
+      summary: Delete Branding Profile
+      operationId: delete_branding_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -746,8 +746,8 @@ paths:
     post:
       tags:
       - branding-profiles
-      summary: Set Default
-      operationId: set_default_api_v1_branding_profiles__profile_id__default_post
+      summary: Set Default Branding Profile
+      operationId: set_default_branding_profile
       security:
       - HTTPBearer: []
       parameters:
@@ -775,8 +775,8 @@ paths:
     post:
       tags:
       - branding-profiles
-      summary: Upload Logo
-      operationId: upload_logo_api_v1_branding_profiles__profile_id__logo_post
+      summary: Upload Branding Logo
+      operationId: upload_branding_logo
       security:
       - HTTPBearer: []
       parameters:
@@ -791,7 +791,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post'
+              $ref: '#/components/schemas/Body_upload_branding_logo'
       responses:
         '200':
           description: Successful Response
@@ -809,8 +809,8 @@ paths:
     delete:
       tags:
       - branding-profiles
-      summary: Delete Logo
-      operationId: delete_logo_api_v1_branding_profiles__profile_id__logo_delete
+      summary: Delete Branding Logo
+      operationId: delete_branding_logo
       security:
       - HTTPBearer: []
       parameters:
@@ -839,7 +839,7 @@ paths:
       tags:
       - customers
       summary: List Customers
-      operationId: list_customers_api_v1_customers_get
+      operationId: list_customers
       security:
       - HTTPBearer: []
       parameters:
@@ -878,7 +878,7 @@ paths:
       tags:
       - customers
       summary: Create Customer
-      operationId: create_customer_api_v1_customers_post
+      operationId: create_customer
       security:
       - HTTPBearer: []
       parameters:
@@ -915,7 +915,7 @@ paths:
       tags:
       - customers
       summary: Get Customer
-      operationId: get_customer_api_v1_customers__customer_id__get
+      operationId: get_customer
       security:
       - HTTPBearer: []
       parameters:
@@ -942,8 +942,8 @@ paths:
     patch:
       tags:
       - customers
-      summary: Patch Customer
-      operationId: patch_customer_api_v1_customers__customer_id__patch
+      summary: Update Customer
+      operationId: update_customer
       security:
       - HTTPBearer: []
       parameters:
@@ -985,7 +985,7 @@ paths:
       tags:
       - customers
       summary: Delete Customer
-      operationId: delete_customer_api_v1_customers__customer_id__delete
+      operationId: delete_customer
       security:
       - HTTPBearer: []
       parameters:
@@ -1014,7 +1014,7 @@ paths:
       tags:
       - documents
       summary: List Documents
-      operationId: list_documents_api_v1_documents_get
+      operationId: list_documents
       security:
       - HTTPBearer: []
       parameters:
@@ -1069,7 +1069,7 @@ paths:
       tags:
       - documents
       summary: Create Document
-      operationId: create_document_api_v1_documents_post
+      operationId: create_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1106,7 +1106,7 @@ paths:
       tags:
       - documents
       summary: Get Document
-      operationId: get_document_api_v1_documents__document_id__get
+      operationId: get_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1133,8 +1133,8 @@ paths:
     patch:
       tags:
       - documents
-      summary: Patch Document
-      operationId: patch_document_api_v1_documents__document_id__patch
+      summary: Update Document
+      operationId: update_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1168,7 +1168,7 @@ paths:
       tags:
       - documents
       summary: Delete Document
-      operationId: delete_document_api_v1_documents__document_id__delete
+      operationId: delete_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1197,7 +1197,7 @@ paths:
       tags:
       - documents
       summary: Duplicate Document
-      operationId: duplicate_document_api_v1_documents__document_id__duplicate_post
+      operationId: duplicate_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1226,7 +1226,7 @@ paths:
       tags:
       - documents
       summary: Finalize Document
-      operationId: finalize_document_api_v1_documents__document_id__finalize_post
+      operationId: finalize_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1255,7 +1255,7 @@ paths:
       tags:
       - documents
       summary: Void Document
-      operationId: void_document_api_v1_documents__document_id__void_post
+      operationId: void_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1284,7 +1284,7 @@ paths:
       tags:
       - documents
       summary: Mark Sent
-      operationId: mark_sent_api_v1_documents__document_id__mark_sent_post
+      operationId: mark_sent
       security:
       - HTTPBearer: []
       parameters:
@@ -1313,7 +1313,7 @@ paths:
       tags:
       - documents
       summary: Mark Paid
-      operationId: mark_paid_api_v1_documents__document_id__mark_paid_post
+      operationId: mark_paid
       security:
       - HTTPBearer: []
       parameters:
@@ -1342,7 +1342,7 @@ paths:
       tags:
       - documents
       summary: Mark Unpaid
-      operationId: mark_unpaid_api_v1_documents__document_id__mark_unpaid_post
+      operationId: mark_unpaid
       security:
       - HTTPBearer: []
       parameters:
@@ -1371,7 +1371,7 @@ paths:
       tags:
       - documents
       summary: Archive Document
-      operationId: archive_document_api_v1_documents__document_id__archive_post
+      operationId: archive_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1400,7 +1400,7 @@ paths:
       tags:
       - documents
       summary: Restore Document
-      operationId: restore_document_api_v1_documents__document_id__restore_post
+      operationId: restore_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1428,8 +1428,8 @@ paths:
     post:
       tags:
       - documents
-      summary: Render Document
-      operationId: render_document_api_v1_documents__document_id__renders_post
+      summary: Create Document Render
+      operationId: create_document_render
       security:
       - HTTPBearer: []
       parameters:
@@ -1452,7 +1452,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/app__documents__schemas__DocumentRenderRequest'
+              $ref: '#/components/schemas/DocumentRenderOptions'
       responses:
         '200':
           description: Successful Response
@@ -1471,7 +1471,7 @@ paths:
       tags:
       - documents
       summary: Send Document
-      operationId: send_document_api_v1_documents__document_id__send_post
+      operationId: send_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1506,7 +1506,7 @@ paths:
       tags:
       - documents
       summary: List Document Deliveries
-      operationId: list_document_deliveries_api_v1_documents__document_id__deliveries_get
+      operationId: list_document_deliveries
       security:
       - HTTPBearer: []
       parameters:
@@ -1552,7 +1552,7 @@ paths:
       tags:
       - documents
       summary: Validate Document
-      operationId: validate_document_api_v1_documents_validate_post
+      operationId: validate_document
       requestBody:
         content:
           application/json:
@@ -1580,7 +1580,7 @@ paths:
       tags:
       - documents
       summary: Calculate Document
-      operationId: calculate_document_api_v1_documents_calculate_post
+      operationId: calculate_document
       requestBody:
         content:
           application/json:
@@ -1608,7 +1608,7 @@ paths:
       tags:
       - documents
       summary: Render Document
-      operationId: render_document_api_v1_documents_render_post
+      operationId: render_document
       security:
       - HTTPBearer: []
       parameters:
@@ -1625,7 +1625,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/app__schemas__v1__DocumentRenderRequest'
+              $ref: '#/components/schemas/DocumentRenderRequest'
       responses:
         '200':
           description: Successful Response
@@ -1639,21 +1639,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
-  /api/v1/documents/{invoice_id}/attachments:
+  /api/v1/documents/{document_id}/attachments:
     get:
       tags:
-      - invoice-attachments
-      summary: List Attachments
-      operationId: list_attachments_api_v1_documents__invoice_id__attachments_get
+      - document-attachments
+      summary: List Document Attachments
+      operationId: list_document_attachments
       security:
       - HTTPBearer: []
       parameters:
-      - name: invoice_id
+      - name: document_id
         in: path
         required: true
         schema:
           type: string
-          title: Invoice Id
+          title: Document Id
       responses:
         '200':
           description: Successful Response
@@ -1670,18 +1670,18 @@ paths:
       x-visibility: public
     post:
       tags:
-      - invoice-attachments
-      summary: Create Attachment
-      operationId: create_attachment_api_v1_documents__invoice_id__attachments_post
+      - document-attachments
+      summary: Create Document Attachment
+      operationId: create_document_attachment
       security:
       - HTTPBearer: []
       parameters:
-      - name: invoice_id
+      - name: document_id
         in: path
         required: true
         schema:
           type: string
-          title: Invoice Id
+          title: Document Id
       requestBody:
         required: true
         content:
@@ -1702,21 +1702,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
-  /api/v1/documents/{invoice_id}/attachments/{attachment_id}:
+  /api/v1/documents/{document_id}/attachments/{attachment_id}:
     delete:
       tags:
-      - invoice-attachments
-      summary: Delete Attachment
-      operationId: delete_attachment_api_v1_documents__invoice_id__attachments__attachment_id__delete
+      - document-attachments
+      summary: Delete Document Attachment
+      operationId: delete_document_attachment
       security:
       - HTTPBearer: []
       parameters:
-      - name: invoice_id
+      - name: document_id
         in: path
         required: true
         schema:
           type: string
-          title: Invoice Id
+          title: Document Id
       - name: attachment_id
         in: path
         required: true
@@ -1741,8 +1741,8 @@ paths:
     get:
       tags:
       - templates
-      summary: Templates
-      operationId: templates_api_v1_templates_get
+      summary: List Templates
+      operationId: list_templates
       responses:
         '200':
           description: Successful Response
@@ -1758,7 +1758,7 @@ paths:
       tags:
       - templates
       summary: Get Builtin Template
-      operationId: get_builtin_template_api_v1_templates_builtin__template_id__get
+      operationId: get_builtin_template
       security:
       - HTTPBearer: []
       parameters:
@@ -1787,7 +1787,7 @@ paths:
       tags:
       - templates
       summary: Create Template
-      operationId: create_template_api_v1_templates_custom_post
+      operationId: create_template
       security:
       - HTTPBearer: []
       requestBody:
@@ -1814,7 +1814,7 @@ paths:
       tags:
       - templates
       summary: List Custom Templates
-      operationId: list_custom_templates_api_v1_templates_custom_get
+      operationId: list_custom_templates
       security:
       - HTTPBearer: []
       parameters:
@@ -1854,7 +1854,7 @@ paths:
       tags:
       - templates
       summary: Get Custom Template
-      operationId: get_custom_template_api_v1_templates_custom__template_id__get
+      operationId: get_custom_template
       security:
       - HTTPBearer: []
       parameters:
@@ -1881,8 +1881,8 @@ paths:
     patch:
       tags:
       - templates
-      summary: Patch Template
-      operationId: patch_template_api_v1_templates_custom__template_id__patch
+      summary: Update Template
+      operationId: update_template
       security:
       - HTTPBearer: []
       parameters:
@@ -1916,7 +1916,7 @@ paths:
       tags:
       - templates
       summary: Delete Template
-      operationId: delete_template_api_v1_templates_custom__template_id__delete
+      operationId: delete_template
       security:
       - HTTPBearer: []
       parameters:
@@ -1941,7 +1941,7 @@ paths:
       tags:
       - templates
       summary: Duplicate Template
-      operationId: duplicate_template_api_v1_templates_custom__template_id__duplicate_post
+      operationId: duplicate_template
       security:
       - HTTPBearer: []
       parameters:
@@ -1970,7 +1970,7 @@ paths:
       tags:
       - templates
       summary: Publish Template
-      operationId: publish_template_api_v1_templates_custom__template_id__publish_post
+      operationId: publish_template
       security:
       - HTTPBearer: []
       parameters:
@@ -1999,7 +1999,7 @@ paths:
       tags:
       - templates
       summary: Get Template
-      operationId: get_template_api_v1_templates__template_id__get
+      operationId: get_template
       security:
       - HTTPBearer: []
       parameters:
@@ -2028,7 +2028,7 @@ paths:
       tags:
       - templates
       summary: Preview Template
-      operationId: preview_template_api_v1_templates__template_id__preview_post
+      operationId: preview_template
       security:
       - HTTPBearer: []
       parameters:
@@ -2051,7 +2051,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/app__schemas__v1__DocumentRenderRequest'
+              $ref: '#/components/schemas/DocumentRenderRequest'
       responses:
         '200':
           description: Successful Response
@@ -2070,7 +2070,7 @@ paths:
       tags:
       - template-versions
       summary: List Template Versions
-      operationId: list_template_versions_api_v1_templates__template_id__versions_get
+      operationId: list_template_versions
       security:
       - HTTPBearer: []
       parameters:
@@ -2098,7 +2098,7 @@ paths:
       tags:
       - template-versions
       summary: Create Template Version
-      operationId: create_template_version_api_v1_templates__template_id__versions_post
+      operationId: create_template_version
       security:
       - HTTPBearer: []
       parameters:
@@ -2133,7 +2133,7 @@ paths:
       tags:
       - template-versions
       summary: Get Template Version
-      operationId: get_template_version_api_v1_templates__template_id__versions__version__get
+      operationId: get_template_version
       security:
       - HTTPBearer: []
       parameters:
@@ -2168,7 +2168,7 @@ paths:
       tags:
       - renders
       summary: Get Render
-      operationId: get_render_api_v1_renders__render_id__get
+      operationId: get_render
       security:
       - HTTPBearer: []
       parameters:
@@ -2186,7 +2186,7 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
-                title: Response Get Render Api V1 Renders  Render Id  Get
+                title: Response Get Render
         '422':
           description: Validation Error
           content:
@@ -2199,7 +2199,7 @@ paths:
       tags:
       - renders
       summary: Download Render
-      operationId: download_render_api_v1_renders__render_id__download_get
+      operationId: download_render
       security:
       - HTTPBearer: []
       parameters:
@@ -2224,21 +2224,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
-  /api/v1/documents/{invoice_id}/payments:
+  /api/v1/documents/{document_id}/payments:
     get:
       tags:
       - payments
-      summary: List Invoice Payments
-      operationId: list_invoice_payments_api_v1_documents__invoice_id__payments_get
+      summary: List Document Payments
+      operationId: list_document_payments
       security:
       - HTTPBearer: []
       parameters:
-      - name: invoice_id
+      - name: document_id
         in: path
         required: true
         schema:
           type: string
-          title: Invoice Id
+          title: Document Id
       - name: limit
         in: query
         required: false
@@ -2273,17 +2273,17 @@ paths:
     post:
       tags:
       - payments
-      summary: Create Payment
-      operationId: create_payment_api_v1_documents__invoice_id__payments_post
+      summary: Create Document Payment
+      operationId: create_document_payment
       security:
       - HTTPBearer: []
       parameters:
-      - name: invoice_id
+      - name: document_id
         in: path
         required: true
         schema:
           type: string
-          title: Invoice Id
+          title: Document Id
       requestBody:
         required: true
         content:
@@ -2309,7 +2309,7 @@ paths:
       tags:
       - payments
       summary: Get Payment
-      operationId: get_payment_api_v1_payments__payment_id__get
+      operationId: get_payment
       security:
       - HTTPBearer: []
       parameters:
@@ -2337,7 +2337,7 @@ paths:
       tags:
       - payments
       summary: Update Payment
-      operationId: update_payment_api_v1_payments__payment_id__patch
+      operationId: update_payment
       security:
       - HTTPBearer: []
       parameters:
@@ -2371,7 +2371,7 @@ paths:
       tags:
       - payments
       summary: Delete Payment
-      operationId: delete_payment_api_v1_payments__payment_id__delete
+      operationId: delete_payment
       security:
       - HTTPBearer: []
       parameters:
@@ -2400,7 +2400,7 @@ paths:
       tags:
       - batches
       summary: List Batches
-      operationId: list_batches_api_v1_batches_get
+      operationId: list_batches
       security:
       - HTTPBearer: []
       parameters:
@@ -2439,7 +2439,7 @@ paths:
       tags:
       - batches
       summary: Create Batch
-      operationId: create_batch_api_v1_batches_post
+      operationId: create_batch
       security:
       - HTTPBearer: []
       requestBody:
@@ -2467,7 +2467,7 @@ paths:
       tags:
       - batches
       summary: Get Batch
-      operationId: get_batch_api_v1_batches__batch_id__get
+      operationId: get_batch
       security:
       - HTTPBearer: []
       parameters:
@@ -2496,7 +2496,7 @@ paths:
       tags:
       - batches
       summary: List Batch Items
-      operationId: list_batch_items_api_v1_batches__batch_id__items_get
+      operationId: list_batch_items
       security:
       - HTTPBearer: []
       parameters:
@@ -2542,7 +2542,7 @@ paths:
       tags:
       - batches
       summary: Cancel Batch
-      operationId: cancel_batch_api_v1_batches__batch_id__cancel_post
+      operationId: cancel_batch
       security:
       - HTTPBearer: []
       parameters:
@@ -2571,7 +2571,7 @@ paths:
       tags:
       - batches
       summary: Download Batch
-      operationId: download_batch_api_v1_batches__batch_id__download_get
+      operationId: download_batch
       security:
       - HTTPBearer: []
       parameters:
@@ -2599,7 +2599,7 @@ paths:
       tags:
       - deliveries
       summary: Get Delivery
-      operationId: get_delivery_api_v1_deliveries__delivery_id__get
+      operationId: get_delivery
       security:
       - HTTPBearer: []
       parameters:
@@ -2628,7 +2628,7 @@ paths:
       tags:
       - deliveries
       summary: Retry Delivery
-      operationId: retry_delivery_api_v1_deliveries__delivery_id__retry_post
+      operationId: retry_delivery
       security:
       - HTTPBearer: []
       parameters:
@@ -2657,7 +2657,7 @@ paths:
       tags:
       - recurring-invoices
       summary: Create Recurring Invoice
-      operationId: create_recurring_invoice_api_v1_recurring_invoices_post
+      operationId: create_recurring_invoice
       security:
       - HTTPBearer: []
       requestBody:
@@ -2684,7 +2684,7 @@ paths:
       tags:
       - recurring-invoices
       summary: List Recurring Invoices
-      operationId: list_recurring_invoices_api_v1_recurring_invoices_get
+      operationId: list_recurring_invoices
       security:
       - HTTPBearer: []
       parameters:
@@ -2732,7 +2732,7 @@ paths:
       tags:
       - recurring-invoices
       summary: Get Recurring Invoice
-      operationId: get_recurring_invoice_api_v1_recurring_invoices__recurring_id__get
+      operationId: get_recurring_invoice
       security:
       - HTTPBearer: []
       parameters:
@@ -2759,8 +2759,8 @@ paths:
     patch:
       tags:
       - recurring-invoices
-      summary: Patch Recurring Invoice
-      operationId: patch_recurring_invoice_api_v1_recurring_invoices__recurring_id__patch
+      summary: Update Recurring Invoice
+      operationId: update_recurring_invoice
       security:
       - HTTPBearer: []
       parameters:
@@ -2794,7 +2794,7 @@ paths:
       tags:
       - recurring-invoices
       summary: Cancel Recurring Invoice
-      operationId: cancel_recurring_invoice_api_v1_recurring_invoices__recurring_id__delete
+      operationId: cancel_recurring_invoice
       security:
       - HTTPBearer: []
       parameters:
@@ -2823,7 +2823,7 @@ paths:
       tags:
       - recurring-invoices
       summary: Pause Recurring Invoice
-      operationId: pause_recurring_invoice_api_v1_recurring_invoices__recurring_id__pause_post
+      operationId: pause_recurring_invoice
       security:
       - HTTPBearer: []
       parameters:
@@ -2852,7 +2852,7 @@ paths:
       tags:
       - recurring-invoices
       summary: Resume Recurring Invoice
-      operationId: resume_recurring_invoice_api_v1_recurring_invoices__recurring_id__resume_post
+      operationId: resume_recurring_invoice
       security:
       - HTTPBearer: []
       parameters:
@@ -2881,7 +2881,7 @@ paths:
       tags:
       - recurring-invoices
       summary: List Generated Invoices
-      operationId: list_generated_invoices_api_v1_recurring_invoices__recurring_id__invoices_get
+      operationId: list_generated_invoices
       security:
       - HTTPBearer: []
       parameters:
@@ -2927,7 +2927,7 @@ paths:
       tags:
       - files
       summary: Upload File
-      operationId: upload_file_api_v1_files_post
+      operationId: upload_file
       security:
       - HTTPBearer: []
       parameters:
@@ -2944,7 +2944,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Body_upload_file_api_v1_files_post'
+              $ref: '#/components/schemas/Body_upload_file'
       responses:
         '200':
           description: Successful Response
@@ -2964,7 +2964,7 @@ paths:
       tags:
       - files
       summary: Get File
-      operationId: get_file_api_v1_files__file_id__get
+      operationId: get_file
       security:
       - HTTPBearer: []
       parameters:
@@ -2992,7 +2992,7 @@ paths:
       tags:
       - files
       summary: Delete File
-      operationId: delete_file_api_v1_files__file_id__delete
+      operationId: delete_file
       security:
       - HTTPBearer: []
       parameters:
@@ -3020,8 +3020,8 @@ paths:
     get:
       tags:
       - usage
-      summary: Usage
-      operationId: usage_api_v1_usage_get
+      summary: Get Usage
+      operationId: get_usage
       responses:
         '200':
           description: Successful Response
@@ -3037,7 +3037,7 @@ paths:
       tags:
       - usage
       summary: List Usage Events
-      operationId: list_usage_events_api_v1_usage_events_get
+      operationId: list_usage_events
       security:
       - HTTPBearer: []
       parameters:
@@ -3066,7 +3066,7 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
-                title: Response List Usage Events Api V1 Usage Events Get
+                title: Response List Usage Events
         '422':
           description: Validation Error
           content:
@@ -3078,8 +3078,8 @@ paths:
     get:
       tags:
       - usage
-      summary: Get Limits
-      operationId: get_limits_api_v1_usage_limits_get
+      summary: Get Usage Limits
+      operationId: get_usage_limits
       responses:
         '200':
           description: Successful Response
@@ -3088,7 +3088,7 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response Get Limits Api V1 Usage Limits Get
+                title: Response Get Usage Limits
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -3097,7 +3097,7 @@ paths:
       tags:
       - stats
       summary: Get Stats
-      operationId: get_stats_api_v1_stats_get
+      operationId: get_stats
       responses:
         '200':
           description: Successful Response
@@ -3113,7 +3113,7 @@ paths:
       tags:
       - logs
       summary: List Logs
-      operationId: list_logs_api_v1_logs_get
+      operationId: list_logs
       security:
       - HTTPBearer: []
       parameters:
@@ -3153,7 +3153,7 @@ paths:
       tags:
       - numbering-sequences
       summary: List Sequences
-      operationId: list_sequences_api_v1_numbering_sequences_get
+      operationId: list_sequences
       security:
       - HTTPBearer: []
       parameters:
@@ -3192,7 +3192,7 @@ paths:
       tags:
       - numbering-sequences
       summary: Create Sequence
-      operationId: create_sequence_api_v1_numbering_sequences_post
+      operationId: create_sequence
       security:
       - HTTPBearer: []
       requestBody:
@@ -3220,7 +3220,7 @@ paths:
       tags:
       - numbering-sequences
       summary: Get Sequence
-      operationId: get_sequence_api_v1_numbering_sequences__sequence_id__get
+      operationId: get_sequence
       security:
       - HTTPBearer: []
       parameters:
@@ -3248,7 +3248,7 @@ paths:
       tags:
       - numbering-sequences
       summary: Update Sequence
-      operationId: update_sequence_api_v1_numbering_sequences__sequence_id__patch
+      operationId: update_sequence
       security:
       - HTTPBearer: []
       parameters:
@@ -3282,7 +3282,7 @@ paths:
       tags:
       - numbering-sequences
       summary: Delete Sequence
-      operationId: delete_sequence_api_v1_numbering_sequences__sequence_id__delete
+      operationId: delete_sequence
       security:
       - HTTPBearer: []
       parameters:
@@ -3311,7 +3311,7 @@ paths:
       tags:
       - numbering-sequences
       summary: Preview Sequence
-      operationId: preview_sequence_api_v1_numbering_sequences__sequence_id__preview_post
+      operationId: preview_sequence
       security:
       - HTTPBearer: []
       parameters:
@@ -3339,9 +3339,9 @@ paths:
     post:
       tags:
       - numbering-sequences
-      summary: Consume Next
+      summary: Consume Sequence Number
       description: Consume and return the next number, incrementing the counter.
-      operationId: consume_next_api_v1_numbering_sequences__sequence_id__next_post
+      operationId: consume_sequence_number
       security:
       - HTTPBearer: []
       parameters:
@@ -3370,7 +3370,7 @@ paths:
       tags:
       - tax-rates
       summary: List Tax Rates
-      operationId: list_tax_rates_api_v1_tax_rates_get
+      operationId: list_tax_rates
       security:
       - HTTPBearer: []
       parameters:
@@ -3409,7 +3409,7 @@ paths:
       tags:
       - tax-rates
       summary: Create Tax Rate
-      operationId: create_tax_rate_api_v1_tax_rates_post
+      operationId: create_tax_rate
       security:
       - HTTPBearer: []
       requestBody:
@@ -3437,7 +3437,7 @@ paths:
       tags:
       - tax-rates
       summary: Get Tax Rate
-      operationId: get_tax_rate_api_v1_tax_rates__tax_rate_id__get
+      operationId: get_tax_rate
       security:
       - HTTPBearer: []
       parameters:
@@ -3465,7 +3465,7 @@ paths:
       tags:
       - tax-rates
       summary: Update Tax Rate
-      operationId: update_tax_rate_api_v1_tax_rates__tax_rate_id__patch
+      operationId: update_tax_rate
       security:
       - HTTPBearer: []
       parameters:
@@ -3499,7 +3499,7 @@ paths:
       tags:
       - tax-rates
       summary: Delete Tax Rate
-      operationId: delete_tax_rate_api_v1_tax_rates__tax_rate_id__delete
+      operationId: delete_tax_rate
       security:
       - HTTPBearer: []
       parameters:
@@ -3528,7 +3528,7 @@ paths:
       tags:
       - jobs
       summary: Get Job
-      operationId: get_job_api_v1_jobs__job_id__get
+      operationId: get_job
       security:
       - HTTPBearer: []
       parameters:
@@ -3557,7 +3557,7 @@ paths:
       tags:
       - jobs
       summary: Cancel Job
-      operationId: cancel_job_api_v1_jobs__job_id__cancel_post
+      operationId: cancel_job
       security:
       - HTTPBearer: []
       parameters:
@@ -3586,7 +3586,7 @@ paths:
       tags:
       - jobs
       summary: Retry Job
-      operationId: retry_job_api_v1_jobs__job_id__retry_post
+      operationId: retry_job
       security:
       - HTTPBearer: []
       parameters:
@@ -3615,7 +3615,7 @@ paths:
       tags:
       - imports
       summary: Create Import
-      operationId: create_import_api_v1_imports_post
+      operationId: create_import
       requestBody:
         content:
           application/json:
@@ -3643,7 +3643,7 @@ paths:
       tags:
       - imports
       summary: Get Import
-      operationId: get_import_api_v1_imports__import_id__get
+      operationId: get_import
       security:
       - HTTPBearer: []
       parameters:
@@ -3672,7 +3672,7 @@ paths:
       tags:
       - imports
       summary: Confirm Import
-      operationId: confirm_import_api_v1_imports__import_id__confirm_post
+      operationId: confirm_import
       security:
       - HTTPBearer: []
       parameters:
@@ -3701,7 +3701,7 @@ paths:
       tags:
       - imports
       summary: Cancel Import
-      operationId: cancel_import_api_v1_imports__import_id__cancel_post
+      operationId: cancel_import
       security:
       - HTTPBearer: []
       parameters:
@@ -3730,7 +3730,7 @@ paths:
       tags:
       - reference
       summary: List Currencies
-      operationId: list_currencies_api_v1_reference_currencies_get
+      operationId: list_currencies
       responses:
         '200':
           description: Successful Response
@@ -3739,14 +3739,14 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response List Currencies Api V1 Reference Currencies Get
+                title: Response List Currencies
       x-visibility: public
   /api/v1/reference/countries:
     get:
       tags:
       - reference
       summary: List Countries
-      operationId: list_countries_api_v1_reference_countries_get
+      operationId: list_countries
       responses:
         '200':
           description: Successful Response
@@ -3755,14 +3755,14 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response List Countries Api V1 Reference Countries Get
+                title: Response List Countries
       x-visibility: public
   /api/v1/reference/locales:
     get:
       tags:
       - reference
       summary: List Locales
-      operationId: list_locales_api_v1_reference_locales_get
+      operationId: list_locales
       responses:
         '200':
           description: Successful Response
@@ -3771,14 +3771,14 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response List Locales Api V1 Reference Locales Get
+                title: Response List Locales
       x-visibility: public
   /api/v1/reference/timezones:
     get:
       tags:
       - reference
       summary: List Timezones
-      operationId: list_timezones_api_v1_reference_timezones_get
+      operationId: list_timezones
       responses:
         '200':
           description: Successful Response
@@ -3787,14 +3787,14 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response List Timezones Api V1 Reference Timezones Get
+                title: Response List Timezones
       x-visibility: public
   /api/v1/reference/page-sizes:
     get:
       tags:
       - reference
       summary: List Page Sizes
-      operationId: list_page_sizes_api_v1_reference_page_sizes_get
+      operationId: list_page_sizes
       responses:
         '200':
           description: Successful Response
@@ -3803,7 +3803,7 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response List Page Sizes Api V1 Reference Page Sizes Get
+                title: Response List Page Sizes
       x-visibility: public
   /api/v1/reference/document-types:
     get:
@@ -3820,7 +3820,7 @@ paths:
         (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle
 
         actions available to it.'
-      operationId: list_document_types_api_v1_reference_document_types_get
+      operationId: list_document_types
       responses:
         '200':
           description: Successful Response
@@ -3829,15 +3829,14 @@ paths:
               schema:
                 additionalProperties: true
                 type: object
-                title: Response List Document Types Api V1 Reference Document Types
-                  Get
+                title: Response List Document Types
       x-visibility: public
   /api/v1/workspaces:
     get:
       tags:
       - workspaces
       summary: List Workspaces
-      operationId: list_workspaces_api_v1_workspaces_get
+      operationId: list_workspaces
       security:
       - HTTPBearer: []
       parameters:
@@ -3876,7 +3875,7 @@ paths:
       tags:
       - workspaces
       summary: Create Workspace
-      operationId: create_workspace_api_v1_workspaces_post
+      operationId: create_workspace
       security:
       - HTTPBearer: []
       parameters:
@@ -3913,7 +3912,7 @@ paths:
       tags:
       - workspaces
       summary: Get Workspace
-      operationId: get_workspace_api_v1_workspaces__workspace_id__get
+      operationId: get_workspace
       security:
       - HTTPBearer: []
       parameters:
@@ -3940,8 +3939,8 @@ paths:
     patch:
       tags:
       - workspaces
-      summary: Patch Workspace
-      operationId: patch_workspace_api_v1_workspaces__workspace_id__patch
+      summary: Update Workspace
+      operationId: update_workspace
       security:
       - HTTPBearer: []
       parameters:
@@ -3983,7 +3982,7 @@ paths:
       tags:
       - workspaces
       summary: Delete Workspace
-      operationId: delete_workspace_api_v1_workspaces__workspace_id__delete
+      operationId: delete_workspace
       security:
       - HTTPBearer: []
       parameters:
@@ -4011,8 +4010,8 @@ paths:
     get:
       tags:
       - workspaces
-      summary: List Members
-      operationId: list_members_api_v1_workspaces__workspace_id__members_get
+      summary: List Workspace Members
+      operationId: list_workspace_members
       security:
       - HTTPBearer: []
       parameters:
@@ -4039,8 +4038,8 @@ paths:
     post:
       tags:
       - workspaces
-      summary: Create Member
-      operationId: create_member_api_v1_workspaces__workspace_id__members_post
+      summary: Add Workspace Member
+      operationId: add_workspace_member
       security:
       - HTTPBearer: []
       parameters:
@@ -4082,8 +4081,8 @@ paths:
     patch:
       tags:
       - workspaces
-      summary: Patch Member
-      operationId: patch_member_api_v1_workspaces__workspace_id__members__member_id__patch
+      summary: Update Workspace Member
+      operationId: update_workspace_member
       security:
       - HTTPBearer: []
       parameters:
@@ -4122,8 +4121,8 @@ paths:
     delete:
       tags:
       - workspaces
-      summary: Delete Member
-      operationId: delete_member_api_v1_workspaces__workspace_id__members__member_id__delete
+      summary: Remove Workspace Member
+      operationId: remove_workspace_member
       security:
       - HTTPBearer: []
       parameters:
@@ -4158,7 +4157,7 @@ paths:
       tags:
       - webhooks
       summary: List Webhook Endpoints
-      operationId: list_webhook_endpoints_api_v1_webhook_endpoints_get
+      operationId: list_webhook_endpoints
       security:
       - HTTPBearer: []
       parameters:
@@ -4197,7 +4196,7 @@ paths:
       tags:
       - webhooks
       summary: Create Webhook Endpoint
-      operationId: create_webhook_endpoint_api_v1_webhook_endpoints_post
+      operationId: create_webhook_endpoint
       security:
       - HTTPBearer: []
       requestBody:
@@ -4225,7 +4224,7 @@ paths:
       tags:
       - webhooks
       summary: Get Webhook Endpoint
-      operationId: get_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__get
+      operationId: get_webhook_endpoint
       security:
       - HTTPBearer: []
       parameters:
@@ -4253,7 +4252,7 @@ paths:
       tags:
       - webhooks
       summary: Update Webhook Endpoint
-      operationId: update_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__patch
+      operationId: update_webhook_endpoint
       security:
       - HTTPBearer: []
       parameters:
@@ -4287,7 +4286,7 @@ paths:
       tags:
       - webhooks
       summary: Delete Webhook Endpoint
-      operationId: delete_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__delete
+      operationId: delete_webhook_endpoint
       security:
       - HTTPBearer: []
       parameters:
@@ -4316,7 +4315,7 @@ paths:
       tags:
       - webhooks
       summary: Rotate Webhook Secret
-      operationId: rotate_webhook_secret_api_v1_webhook_endpoints__endpoint_id__rotate_secret_post
+      operationId: rotate_webhook_secret
       security:
       - HTTPBearer: []
       parameters:
@@ -4345,7 +4344,7 @@ paths:
       tags:
       - webhooks
       summary: Test Webhook Endpoint
-      operationId: test_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__test_post
+      operationId: test_webhook_endpoint
       security:
       - HTTPBearer: []
       parameters:
@@ -4374,7 +4373,7 @@ paths:
       tags:
       - webhooks
       summary: List Webhook Deliveries
-      operationId: list_webhook_deliveries_api_v1_webhook_deliveries_get
+      operationId: list_webhook_deliveries
       security:
       - HTTPBearer: []
       parameters:
@@ -4414,7 +4413,7 @@ paths:
       tags:
       - webhooks
       summary: Get Webhook Delivery
-      operationId: get_webhook_delivery_api_v1_webhook_deliveries__delivery_id__get
+      operationId: get_webhook_delivery
       security:
       - HTTPBearer: []
       parameters:
@@ -4443,7 +4442,7 @@ paths:
       tags:
       - webhooks
       summary: Retry Webhook Delivery
-      operationId: retry_webhook_delivery_api_v1_webhook_deliveries__delivery_id__retry_post
+      operationId: retry_webhook_delivery
       security:
       - HTTPBearer: []
       parameters:
@@ -4473,7 +4472,7 @@ paths:
       - billing
       summary: Get Subscription
       description: Get current subscription status (from DB, no Stripe API call).
-      operationId: get_subscription_api_v1_billing_subscription_get
+      operationId: get_subscription
       responses:
         '200':
           description: Successful Response
@@ -4490,7 +4489,7 @@ paths:
       - billing
       summary: List Plans
       description: Purchasable plans — the ones wired to a Stripe price.
-      operationId: list_plans_api_v1_billing_plans_get
+      operationId: list_plans
       responses:
         '200':
           description: Successful Response
@@ -4505,9 +4504,9 @@ paths:
     post:
       tags:
       - billing
-      summary: Create Checkout
+      summary: Create Checkout Session
       description: Create a Stripe Checkout session for a subscription.
-      operationId: create_checkout_api_v1_billing_checkout_session_post
+      operationId: create_checkout_session
       requestBody:
         content:
           application/json:
@@ -4534,9 +4533,9 @@ paths:
     post:
       tags:
       - billing
-      summary: Create Portal
+      summary: Create Portal Session
       description: Create a Stripe Customer Portal session for self-service management.
-      operationId: create_portal_api_v1_billing_portal_session_post
+      operationId: create_portal_session
       responses:
         '200':
           description: Successful Response
@@ -4552,7 +4551,7 @@ paths:
       tags:
       - audit-log
       summary: List Audit Events
-      operationId: list_audit_events_api_v1_audit_events_get
+      operationId: list_audit_events
       security:
       - HTTPBearer: []
       parameters:
@@ -4616,7 +4615,7 @@ paths:
       tags:
       - audit-log
       summary: Get Audit Event
-      operationId: get_audit_event_api_v1_audit_events__audit_event_id__get
+      operationId: get_audit_event
       security:
       - HTTPBearer: []
       parameters:
@@ -5394,7 +5393,7 @@ components:
       required:
       - data
       title: BillingSubscriptionResponse
-    Body_upload_file_api_v1_files_post:
+    Body_upload_branding_logo:
       properties:
         file:
           type: string
@@ -5403,8 +5402,8 @@ components:
       type: object
       required:
       - file
-      title: Body_upload_file_api_v1_files_post
-    Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post:
+      title: Body_upload_branding_logo
+    Body_upload_file:
       properties:
         file:
           type: string
@@ -5413,7 +5412,7 @@ components:
       type: object
       required:
       - file
-      title: Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post
+      title: Body_upload_file
     BrandingProfileCreateRequest:
       properties:
         name:
@@ -6904,6 +6903,55 @@ components:
           - Please pay within 30 days
       type: object
       title: DocumentPaymentInput
+    DocumentRenderOptions:
+      properties:
+        template_id:
+          type: string
+          title: Template Id
+          default: tpl_modern
+        page_size:
+          type: string
+          title: Page Size
+          default: LETTER
+        expires_in:
+          type: integer
+          title: Expires In
+          default: 3600
+      type: object
+      title: DocumentRenderOptions
+      description: 'Render options for an already-stored document (``POST /documents/{id}/renders``).
+
+
+        Distinct from ``app.schemas.v1.DocumentRenderRequest``, which carries a full
+        inline
+
+        document for the stateless ``POST /documents/render``. Two classes sharing
+        one name
+
+        made FastAPI fall back to module-qualified schema names in the spec
+
+        (``app__documents__schemas__DocumentRenderRequest``), which the SDK generators
+        turned
+
+        into ``AppDocumentsSchemasDocumentRenderRequest``.'
+    DocumentRenderRequest:
+      properties:
+        document_type:
+          type: string
+          const: invoice
+          title: Document Type
+          default: invoice
+        data:
+          $ref: '#/components/schemas/DocumentInvoiceDataInput'
+        template:
+          $ref: '#/components/schemas/DocumentTemplateRef'
+        output:
+          $ref: '#/components/schemas/DocumentOutputOptions'
+      type: object
+      required:
+      - data
+      - template
+      title: DocumentRenderRequest
     DocumentResponse:
       properties:
         data:
@@ -9226,40 +9274,6 @@ components:
       required:
       - data
       title: WorkspacesListResponse
-    app__documents__schemas__DocumentRenderRequest:
-      properties:
-        template_id:
-          type: string
-          title: Template Id
-          default: tpl_modern
-        page_size:
-          type: string
-          title: Page Size
-          default: LETTER
-        expires_in:
-          type: integer
-          title: Expires In
-          default: 3600
-      type: object
-      title: DocumentRenderRequest
-    app__schemas__v1__DocumentRenderRequest:
-      properties:
-        document_type:
-          type: string
-          const: invoice
-          title: Document Type
-          default: invoice
-        data:
-          $ref: '#/components/schemas/DocumentInvoiceDataInput'
-        template:
-          $ref: '#/components/schemas/DocumentTemplateRef'
-        output:
-          $ref: '#/components/schemas/DocumentOutputOptions'
-      type: object
-      required:
-      - data
-      - template
-      title: DocumentRenderRequest
     ApiErrorResponse:
       type: object
       title: ApiErrorResponse

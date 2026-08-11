@@ -18,8 +18,8 @@
         "tags": [
           "health"
         ],
-        "summary": "Health",
-        "operationId": "health_health_get",
+        "summary": "Get Health",
+        "operationId": "get_health",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -40,8 +40,8 @@
         "tags": [
           "health"
         ],
-        "summary": "Version",
-        "operationId": "version_version_get",
+        "summary": "Get Version",
+        "operationId": "get_version",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -62,8 +62,8 @@
         "tags": [
           "health"
         ],
-        "summary": "Ready",
-        "operationId": "ready_ready_get",
+        "summary": "Get Readiness",
+        "operationId": "get_readiness",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -84,8 +84,8 @@
         "tags": [
           "auth"
         ],
-        "summary": "Me",
-        "operationId": "me_api_v1_auth_me_get",
+        "summary": "Get Current User",
+        "operationId": "get_current_user",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -109,9 +109,9 @@
         "tags": [
           "auth"
         ],
-        "summary": "Patch Me",
+        "summary": "Update Current User",
         "description": "Update the authenticated account's name or email.",
-        "operationId": "patch_me_api_v1_auth_me_patch",
+        "operationId": "update_current_user",
         "requestBody": {
           "content": {
             "application/json": {
@@ -159,7 +159,7 @@
         ],
         "summary": "Register",
         "description": "Register a new account using a Firebase ID token.\n\nThe client authenticates with Firebase (email/password, Google, etc.)\nand sends the resulting ID token here to create an InvoicePDFs account.",
-        "operationId": "register_api_v1_auth_register_post",
+        "operationId": "register",
         "requestBody": {
           "content": {
             "application/json": {
@@ -200,9 +200,9 @@
         "tags": [
           "auth"
         ],
-        "summary": "Token Exchange",
+        "summary": "Exchange Auth Token",
         "description": "Exchange a Firebase ID token for account info.\n\nUse this on login: the client authenticates with Firebase, sends the ID\ntoken here, and receives the InvoicePDFs account details. The Firebase\ntoken itself is used as the Bearer token for subsequent API calls.",
-        "operationId": "token_exchange_api_v1_auth_token_post",
+        "operationId": "exchange_auth_token",
         "requestBody": {
           "content": {
             "application/json": {
@@ -245,7 +245,7 @@
         ],
         "summary": "Logout",
         "description": "Revoke all Firebase refresh tokens for the authenticated user.",
-        "operationId": "logout_api_v1_auth_logout_post",
+        "operationId": "logout",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -271,9 +271,9 @@
         "tags": [
           "auth"
         ],
-        "summary": "Refresh",
+        "summary": "Refresh Access Token",
         "description": "Exchange a Firebase refresh token for a new ID token.",
-        "operationId": "refresh_api_v1_auth_refresh_post",
+        "operationId": "refresh_access_token",
         "requestBody": {
           "content": {
             "application/json": {
@@ -314,9 +314,9 @@
         "tags": [
           "auth"
         ],
-        "summary": "Forgot Password",
+        "summary": "Request Password Reset",
         "description": "Send a password reset email via Firebase.",
-        "operationId": "forgot_password_api_v1_auth_forgot_password_post",
+        "operationId": "request_password_reset",
         "requestBody": {
           "content": {
             "application/json": {
@@ -359,7 +359,7 @@
         ],
         "summary": "Reset Password",
         "description": "Confirm a password reset using the code from the reset email.",
-        "operationId": "reset_password_api_v1_auth_reset_password_post",
+        "operationId": "reset_password",
         "requestBody": {
           "content": {
             "application/json": {
@@ -401,7 +401,7 @@
           "api-keys"
         ],
         "summary": "List Api Keys",
-        "operationId": "list_api_keys_api_v1_api_keys_get",
+        "operationId": "list_api_keys",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -426,7 +426,7 @@
           "api-keys"
         ],
         "summary": "Create Api Key",
-        "operationId": "create_api_key_api_v1_api_keys_post",
+        "operationId": "create_api_key",
         "requestBody": {
           "content": {
             "application/json": {
@@ -473,7 +473,7 @@
           "api-keys"
         ],
         "summary": "Revoke Api Key",
-        "operationId": "revoke_api_key_api_v1_api_keys__api_key_id__delete",
+        "operationId": "revoke_api_key",
         "security": [
           {
             "HTTPBearer": []
@@ -519,7 +519,7 @@
           "api-keys"
         ],
         "summary": "Get Api Key",
-        "operationId": "get_api_key_api_v1_api_keys__api_key_id__get",
+        "operationId": "get_api_key",
         "security": [
           {
             "HTTPBearer": []
@@ -564,8 +564,8 @@
         "tags": [
           "api-keys"
         ],
-        "summary": "Patch Api Key",
-        "operationId": "patch_api_key_api_v1_api_keys__api_key_id__patch",
+        "summary": "Update Api Key",
+        "operationId": "update_api_key",
         "security": [
           {
             "HTTPBearer": []
@@ -624,7 +624,7 @@
         ],
         "summary": "Rotate Api Key",
         "description": "Revoke the existing key and create a new one with the same name.",
-        "operationId": "rotate_api_key_api_v1_api_keys__api_key_id__rotate_post",
+        "operationId": "rotate_api_key",
         "security": [
           {
             "HTTPBearer": []
@@ -672,7 +672,7 @@
           "business-profiles"
         ],
         "summary": "List Business Profiles",
-        "operationId": "list_business_profiles_api_v1_business_profiles_get",
+        "operationId": "list_business_profiles",
         "security": [
           {
             "HTTPBearer": []
@@ -737,7 +737,7 @@
           "business-profiles"
         ],
         "summary": "Create Business Profile",
-        "operationId": "create_business_profile_api_v1_business_profiles_post",
+        "operationId": "create_business_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -802,7 +802,7 @@
           "business-profiles"
         ],
         "summary": "Get Business Profile",
-        "operationId": "get_business_profile_api_v1_business_profiles__business_profile_id__get",
+        "operationId": "get_business_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -847,8 +847,8 @@
         "tags": [
           "business-profiles"
         ],
-        "summary": "Patch Business Profile",
-        "operationId": "patch_business_profile_api_v1_business_profiles__business_profile_id__patch",
+        "summary": "Update Business Profile",
+        "operationId": "update_business_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -920,7 +920,7 @@
           "business-profiles"
         ],
         "summary": "Delete Business Profile",
-        "operationId": "delete_business_profile_api_v1_business_profiles__business_profile_id__delete",
+        "operationId": "delete_business_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -967,8 +967,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "List Profiles",
-        "operationId": "list_profiles_api_v1_branding_profiles_get",
+        "summary": "List Branding Profiles",
+        "operationId": "list_branding_profiles",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -992,8 +992,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Create Profile",
-        "operationId": "create_profile_api_v1_branding_profiles_post",
+        "summary": "Create Branding Profile",
+        "operationId": "create_branding_profile",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1039,8 +1039,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Get Profile",
-        "operationId": "get_profile_api_v1_branding_profiles__profile_id__get",
+        "summary": "Get Branding Profile",
+        "operationId": "get_branding_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -1085,8 +1085,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Update Profile",
-        "operationId": "update_profile_api_v1_branding_profiles__profile_id__patch",
+        "summary": "Update Branding Profile",
+        "operationId": "update_branding_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -1141,8 +1141,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Delete Profile",
-        "operationId": "delete_profile_api_v1_branding_profiles__profile_id__delete",
+        "summary": "Delete Branding Profile",
+        "operationId": "delete_branding_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -1189,8 +1189,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Set Default",
-        "operationId": "set_default_api_v1_branding_profiles__profile_id__default_post",
+        "summary": "Set Default Branding Profile",
+        "operationId": "set_default_branding_profile",
         "security": [
           {
             "HTTPBearer": []
@@ -1237,8 +1237,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Upload Logo",
-        "operationId": "upload_logo_api_v1_branding_profiles__profile_id__logo_post",
+        "summary": "Upload Branding Logo",
+        "operationId": "upload_branding_logo",
         "security": [
           {
             "HTTPBearer": []
@@ -1260,7 +1260,7 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post"
+                "$ref": "#/components/schemas/Body_upload_branding_logo"
               }
             }
           }
@@ -1293,8 +1293,8 @@
         "tags": [
           "branding-profiles"
         ],
-        "summary": "Delete Logo",
-        "operationId": "delete_logo_api_v1_branding_profiles__profile_id__logo_delete",
+        "summary": "Delete Branding Logo",
+        "operationId": "delete_branding_logo",
         "security": [
           {
             "HTTPBearer": []
@@ -1342,7 +1342,7 @@
           "customers"
         ],
         "summary": "List Customers",
-        "operationId": "list_customers_api_v1_customers_get",
+        "operationId": "list_customers",
         "security": [
           {
             "HTTPBearer": []
@@ -1407,7 +1407,7 @@
           "customers"
         ],
         "summary": "Create Customer",
-        "operationId": "create_customer_api_v1_customers_post",
+        "operationId": "create_customer",
         "security": [
           {
             "HTTPBearer": []
@@ -1472,7 +1472,7 @@
           "customers"
         ],
         "summary": "Get Customer",
-        "operationId": "get_customer_api_v1_customers__customer_id__get",
+        "operationId": "get_customer",
         "security": [
           {
             "HTTPBearer": []
@@ -1517,8 +1517,8 @@
         "tags": [
           "customers"
         ],
-        "summary": "Patch Customer",
-        "operationId": "patch_customer_api_v1_customers__customer_id__patch",
+        "summary": "Update Customer",
+        "operationId": "update_customer",
         "security": [
           {
             "HTTPBearer": []
@@ -1590,7 +1590,7 @@
           "customers"
         ],
         "summary": "Delete Customer",
-        "operationId": "delete_customer_api_v1_customers__customer_id__delete",
+        "operationId": "delete_customer",
         "security": [
           {
             "HTTPBearer": []
@@ -1638,7 +1638,7 @@
           "documents"
         ],
         "summary": "List Documents",
-        "operationId": "list_documents_api_v1_documents_get",
+        "operationId": "list_documents",
         "security": [
           {
             "HTTPBearer": []
@@ -1735,7 +1735,7 @@
           "documents"
         ],
         "summary": "Create Document",
-        "operationId": "create_document_api_v1_documents_post",
+        "operationId": "create_document",
         "security": [
           {
             "HTTPBearer": []
@@ -1800,7 +1800,7 @@
           "documents"
         ],
         "summary": "Get Document",
-        "operationId": "get_document_api_v1_documents__document_id__get",
+        "operationId": "get_document",
         "security": [
           {
             "HTTPBearer": []
@@ -1845,8 +1845,8 @@
         "tags": [
           "documents"
         ],
-        "summary": "Patch Document",
-        "operationId": "patch_document_api_v1_documents__document_id__patch",
+        "summary": "Update Document",
+        "operationId": "update_document",
         "security": [
           {
             "HTTPBearer": []
@@ -1902,7 +1902,7 @@
           "documents"
         ],
         "summary": "Delete Document",
-        "operationId": "delete_document_api_v1_documents__document_id__delete",
+        "operationId": "delete_document",
         "security": [
           {
             "HTTPBearer": []
@@ -1950,7 +1950,7 @@
           "documents"
         ],
         "summary": "Duplicate Document",
-        "operationId": "duplicate_document_api_v1_documents__document_id__duplicate_post",
+        "operationId": "duplicate_document",
         "security": [
           {
             "HTTPBearer": []
@@ -1998,7 +1998,7 @@
           "documents"
         ],
         "summary": "Finalize Document",
-        "operationId": "finalize_document_api_v1_documents__document_id__finalize_post",
+        "operationId": "finalize_document",
         "security": [
           {
             "HTTPBearer": []
@@ -2046,7 +2046,7 @@
           "documents"
         ],
         "summary": "Void Document",
-        "operationId": "void_document_api_v1_documents__document_id__void_post",
+        "operationId": "void_document",
         "security": [
           {
             "HTTPBearer": []
@@ -2094,7 +2094,7 @@
           "documents"
         ],
         "summary": "Mark Sent",
-        "operationId": "mark_sent_api_v1_documents__document_id__mark_sent_post",
+        "operationId": "mark_sent",
         "security": [
           {
             "HTTPBearer": []
@@ -2142,7 +2142,7 @@
           "documents"
         ],
         "summary": "Mark Paid",
-        "operationId": "mark_paid_api_v1_documents__document_id__mark_paid_post",
+        "operationId": "mark_paid",
         "security": [
           {
             "HTTPBearer": []
@@ -2190,7 +2190,7 @@
           "documents"
         ],
         "summary": "Mark Unpaid",
-        "operationId": "mark_unpaid_api_v1_documents__document_id__mark_unpaid_post",
+        "operationId": "mark_unpaid",
         "security": [
           {
             "HTTPBearer": []
@@ -2238,7 +2238,7 @@
           "documents"
         ],
         "summary": "Archive Document",
-        "operationId": "archive_document_api_v1_documents__document_id__archive_post",
+        "operationId": "archive_document",
         "security": [
           {
             "HTTPBearer": []
@@ -2286,7 +2286,7 @@
           "documents"
         ],
         "summary": "Restore Document",
-        "operationId": "restore_document_api_v1_documents__document_id__restore_post",
+        "operationId": "restore_document",
         "security": [
           {
             "HTTPBearer": []
@@ -2333,8 +2333,8 @@
         "tags": [
           "documents"
         ],
-        "summary": "Render Document",
-        "operationId": "render_document_api_v1_documents__document_id__renders_post",
+        "summary": "Create Document Render",
+        "operationId": "create_document_render",
         "security": [
           {
             "HTTPBearer": []
@@ -2372,7 +2372,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/app__documents__schemas__DocumentRenderRequest"
+                "$ref": "#/components/schemas/DocumentRenderOptions"
               }
             }
           }
@@ -2406,7 +2406,7 @@
           "documents"
         ],
         "summary": "Send Document",
-        "operationId": "send_document_api_v1_documents__document_id__send_post",
+        "operationId": "send_document",
         "security": [
           {
             "HTTPBearer": []
@@ -2464,7 +2464,7 @@
           "documents"
         ],
         "summary": "List Document Deliveries",
-        "operationId": "list_document_deliveries_api_v1_documents__document_id__deliveries_get",
+        "operationId": "list_document_deliveries",
         "security": [
           {
             "HTTPBearer": []
@@ -2540,7 +2540,7 @@
           "documents"
         ],
         "summary": "Validate Document",
-        "operationId": "validate_document_api_v1_documents_validate_post",
+        "operationId": "validate_document",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2587,7 +2587,7 @@
           "documents"
         ],
         "summary": "Calculate Document",
-        "operationId": "calculate_document_api_v1_documents_calculate_post",
+        "operationId": "calculate_document",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2634,7 +2634,7 @@
           "documents"
         ],
         "summary": "Render Document",
-        "operationId": "render_document_api_v1_documents_render_post",
+        "operationId": "render_document",
         "security": [
           {
             "HTTPBearer": []
@@ -2663,7 +2663,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/app__schemas__v1__DocumentRenderRequest"
+                "$ref": "#/components/schemas/DocumentRenderRequest"
               }
             }
           }
@@ -2691,13 +2691,13 @@
         "x-visibility": "public"
       }
     },
-    "/api/v1/documents/{invoice_id}/attachments": {
+    "/api/v1/documents/{document_id}/attachments": {
       "get": {
         "tags": [
-          "invoice-attachments"
+          "document-attachments"
         ],
-        "summary": "List Attachments",
-        "operationId": "list_attachments_api_v1_documents__invoice_id__attachments_get",
+        "summary": "List Document Attachments",
+        "operationId": "list_document_attachments",
         "security": [
           {
             "HTTPBearer": []
@@ -2705,12 +2705,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -2740,10 +2740,10 @@
       },
       "post": {
         "tags": [
-          "invoice-attachments"
+          "document-attachments"
         ],
-        "summary": "Create Attachment",
-        "operationId": "create_attachment_api_v1_documents__invoice_id__attachments_post",
+        "summary": "Create Document Attachment",
+        "operationId": "create_document_attachment",
         "security": [
           {
             "HTTPBearer": []
@@ -2751,12 +2751,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -2795,13 +2795,13 @@
         "x-visibility": "public"
       }
     },
-    "/api/v1/documents/{invoice_id}/attachments/{attachment_id}": {
+    "/api/v1/documents/{document_id}/attachments/{attachment_id}": {
       "delete": {
         "tags": [
-          "invoice-attachments"
+          "document-attachments"
         ],
-        "summary": "Delete Attachment",
-        "operationId": "delete_attachment_api_v1_documents__invoice_id__attachments__attachment_id__delete",
+        "summary": "Delete Document Attachment",
+        "operationId": "delete_document_attachment",
         "security": [
           {
             "HTTPBearer": []
@@ -2809,12 +2809,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           },
           {
@@ -2857,8 +2857,8 @@
         "tags": [
           "templates"
         ],
-        "summary": "Templates",
-        "operationId": "templates_api_v1_templates_get",
+        "summary": "List Templates",
+        "operationId": "list_templates",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2885,7 +2885,7 @@
           "templates"
         ],
         "summary": "Get Builtin Template",
-        "operationId": "get_builtin_template_api_v1_templates_builtin__template_id__get",
+        "operationId": "get_builtin_template",
         "security": [
           {
             "HTTPBearer": []
@@ -2933,7 +2933,7 @@
           "templates"
         ],
         "summary": "Create Template",
-        "operationId": "create_template_api_v1_templates_custom_post",
+        "operationId": "create_template",
         "security": [
           {
             "HTTPBearer": []
@@ -2978,7 +2978,7 @@
           "templates"
         ],
         "summary": "List Custom Templates",
-        "operationId": "list_custom_templates_api_v1_templates_custom_get",
+        "operationId": "list_custom_templates",
         "security": [
           {
             "HTTPBearer": []
@@ -3045,7 +3045,7 @@
           "templates"
         ],
         "summary": "Get Custom Template",
-        "operationId": "get_custom_template_api_v1_templates_custom__template_id__get",
+        "operationId": "get_custom_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3090,8 +3090,8 @@
         "tags": [
           "templates"
         ],
-        "summary": "Patch Template",
-        "operationId": "patch_template_api_v1_templates_custom__template_id__patch",
+        "summary": "Update Template",
+        "operationId": "update_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3147,7 +3147,7 @@
           "templates"
         ],
         "summary": "Delete Template",
-        "operationId": "delete_template_api_v1_templates_custom__template_id__delete",
+        "operationId": "delete_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3188,7 +3188,7 @@
           "templates"
         ],
         "summary": "Duplicate Template",
-        "operationId": "duplicate_template_api_v1_templates_custom__template_id__duplicate_post",
+        "operationId": "duplicate_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3236,7 +3236,7 @@
           "templates"
         ],
         "summary": "Publish Template",
-        "operationId": "publish_template_api_v1_templates_custom__template_id__publish_post",
+        "operationId": "publish_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3284,7 +3284,7 @@
           "templates"
         ],
         "summary": "Get Template",
-        "operationId": "get_template_api_v1_templates__template_id__get",
+        "operationId": "get_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3332,7 +3332,7 @@
           "templates"
         ],
         "summary": "Preview Template",
-        "operationId": "preview_template_api_v1_templates__template_id__preview_post",
+        "operationId": "preview_template",
         "security": [
           {
             "HTTPBearer": []
@@ -3370,7 +3370,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/app__schemas__v1__DocumentRenderRequest"
+                "$ref": "#/components/schemas/DocumentRenderRequest"
               }
             }
           }
@@ -3404,7 +3404,7 @@
           "template-versions"
         ],
         "summary": "List Template Versions",
-        "operationId": "list_template_versions_api_v1_templates__template_id__versions_get",
+        "operationId": "list_template_versions",
         "security": [
           {
             "HTTPBearer": []
@@ -3450,7 +3450,7 @@
           "template-versions"
         ],
         "summary": "Create Template Version",
-        "operationId": "create_template_version_api_v1_templates__template_id__versions_post",
+        "operationId": "create_template_version",
         "security": [
           {
             "HTTPBearer": []
@@ -3508,7 +3508,7 @@
           "template-versions"
         ],
         "summary": "Get Template Version",
-        "operationId": "get_template_version_api_v1_templates__template_id__versions__version__get",
+        "operationId": "get_template_version",
         "security": [
           {
             "HTTPBearer": []
@@ -3565,7 +3565,7 @@
           "renders"
         ],
         "summary": "Get Render",
-        "operationId": "get_render_api_v1_renders__render_id__get",
+        "operationId": "get_render",
         "security": [
           {
             "HTTPBearer": []
@@ -3590,7 +3590,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
-                  "title": "Response Get Render Api V1 Renders  Render Id  Get"
+                  "title": "Response Get Render"
                 }
               }
             }
@@ -3615,7 +3615,7 @@
           "renders"
         ],
         "summary": "Download Render",
-        "operationId": "download_render_api_v1_renders__render_id__download_get",
+        "operationId": "download_render",
         "security": [
           {
             "HTTPBearer": []
@@ -3658,13 +3658,13 @@
         "x-visibility": "public"
       }
     },
-    "/api/v1/documents/{invoice_id}/payments": {
+    "/api/v1/documents/{document_id}/payments": {
       "get": {
         "tags": [
           "payments"
         ],
-        "summary": "List Invoice Payments",
-        "operationId": "list_invoice_payments_api_v1_documents__invoice_id__payments_get",
+        "summary": "List Document Payments",
+        "operationId": "list_document_payments",
         "security": [
           {
             "HTTPBearer": []
@@ -3672,12 +3672,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           },
           {
@@ -3737,8 +3737,8 @@
         "tags": [
           "payments"
         ],
-        "summary": "Create Payment",
-        "operationId": "create_payment_api_v1_documents__invoice_id__payments_post",
+        "summary": "Create Document Payment",
+        "operationId": "create_document_payment",
         "security": [
           {
             "HTTPBearer": []
@@ -3746,12 +3746,12 @@
         ],
         "parameters": [
           {
-            "name": "invoice_id",
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Invoice Id"
+              "title": "Document Id"
             }
           }
         ],
@@ -3796,7 +3796,7 @@
           "payments"
         ],
         "summary": "Get Payment",
-        "operationId": "get_payment_api_v1_payments__payment_id__get",
+        "operationId": "get_payment",
         "security": [
           {
             "HTTPBearer": []
@@ -3842,7 +3842,7 @@
           "payments"
         ],
         "summary": "Update Payment",
-        "operationId": "update_payment_api_v1_payments__payment_id__patch",
+        "operationId": "update_payment",
         "security": [
           {
             "HTTPBearer": []
@@ -3898,7 +3898,7 @@
           "payments"
         ],
         "summary": "Delete Payment",
-        "operationId": "delete_payment_api_v1_payments__payment_id__delete",
+        "operationId": "delete_payment",
         "security": [
           {
             "HTTPBearer": []
@@ -3946,7 +3946,7 @@
           "batches"
         ],
         "summary": "List Batches",
-        "operationId": "list_batches_api_v1_batches_get",
+        "operationId": "list_batches",
         "security": [
           {
             "HTTPBearer": []
@@ -4011,7 +4011,7 @@
           "batches"
         ],
         "summary": "Create Batch",
-        "operationId": "create_batch_api_v1_batches_post",
+        "operationId": "create_batch",
         "security": [
           {
             "HTTPBearer": []
@@ -4058,7 +4058,7 @@
           "batches"
         ],
         "summary": "Get Batch",
-        "operationId": "get_batch_api_v1_batches__batch_id__get",
+        "operationId": "get_batch",
         "security": [
           {
             "HTTPBearer": []
@@ -4106,7 +4106,7 @@
           "batches"
         ],
         "summary": "List Batch Items",
-        "operationId": "list_batch_items_api_v1_batches__batch_id__items_get",
+        "operationId": "list_batch_items",
         "security": [
           {
             "HTTPBearer": []
@@ -4182,7 +4182,7 @@
           "batches"
         ],
         "summary": "Cancel Batch",
-        "operationId": "cancel_batch_api_v1_batches__batch_id__cancel_post",
+        "operationId": "cancel_batch",
         "security": [
           {
             "HTTPBearer": []
@@ -4230,7 +4230,7 @@
           "batches"
         ],
         "summary": "Download Batch",
-        "operationId": "download_batch_api_v1_batches__batch_id__download_get",
+        "operationId": "download_batch",
         "security": [
           {
             "HTTPBearer": []
@@ -4276,7 +4276,7 @@
           "deliveries"
         ],
         "summary": "Get Delivery",
-        "operationId": "get_delivery_api_v1_deliveries__delivery_id__get",
+        "operationId": "get_delivery",
         "security": [
           {
             "HTTPBearer": []
@@ -4324,7 +4324,7 @@
           "deliveries"
         ],
         "summary": "Retry Delivery",
-        "operationId": "retry_delivery_api_v1_deliveries__delivery_id__retry_post",
+        "operationId": "retry_delivery",
         "security": [
           {
             "HTTPBearer": []
@@ -4372,7 +4372,7 @@
           "recurring-invoices"
         ],
         "summary": "Create Recurring Invoice",
-        "operationId": "create_recurring_invoice_api_v1_recurring_invoices_post",
+        "operationId": "create_recurring_invoice",
         "security": [
           {
             "HTTPBearer": []
@@ -4417,7 +4417,7 @@
           "recurring-invoices"
         ],
         "summary": "List Recurring Invoices",
-        "operationId": "list_recurring_invoices_api_v1_recurring_invoices_get",
+        "operationId": "list_recurring_invoices",
         "security": [
           {
             "HTTPBearer": []
@@ -4500,7 +4500,7 @@
           "recurring-invoices"
         ],
         "summary": "Get Recurring Invoice",
-        "operationId": "get_recurring_invoice_api_v1_recurring_invoices__recurring_id__get",
+        "operationId": "get_recurring_invoice",
         "security": [
           {
             "HTTPBearer": []
@@ -4545,8 +4545,8 @@
         "tags": [
           "recurring-invoices"
         ],
-        "summary": "Patch Recurring Invoice",
-        "operationId": "patch_recurring_invoice_api_v1_recurring_invoices__recurring_id__patch",
+        "summary": "Update Recurring Invoice",
+        "operationId": "update_recurring_invoice",
         "security": [
           {
             "HTTPBearer": []
@@ -4602,7 +4602,7 @@
           "recurring-invoices"
         ],
         "summary": "Cancel Recurring Invoice",
-        "operationId": "cancel_recurring_invoice_api_v1_recurring_invoices__recurring_id__delete",
+        "operationId": "cancel_recurring_invoice",
         "security": [
           {
             "HTTPBearer": []
@@ -4650,7 +4650,7 @@
           "recurring-invoices"
         ],
         "summary": "Pause Recurring Invoice",
-        "operationId": "pause_recurring_invoice_api_v1_recurring_invoices__recurring_id__pause_post",
+        "operationId": "pause_recurring_invoice",
         "security": [
           {
             "HTTPBearer": []
@@ -4698,7 +4698,7 @@
           "recurring-invoices"
         ],
         "summary": "Resume Recurring Invoice",
-        "operationId": "resume_recurring_invoice_api_v1_recurring_invoices__recurring_id__resume_post",
+        "operationId": "resume_recurring_invoice",
         "security": [
           {
             "HTTPBearer": []
@@ -4746,7 +4746,7 @@
           "recurring-invoices"
         ],
         "summary": "List Generated Invoices",
-        "operationId": "list_generated_invoices_api_v1_recurring_invoices__recurring_id__invoices_get",
+        "operationId": "list_generated_invoices",
         "security": [
           {
             "HTTPBearer": []
@@ -4822,7 +4822,7 @@
           "files"
         ],
         "summary": "Upload File",
-        "operationId": "upload_file_api_v1_files_post",
+        "operationId": "upload_file",
         "security": [
           {
             "HTTPBearer": []
@@ -4851,7 +4851,7 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Body_upload_file_api_v1_files_post"
+                "$ref": "#/components/schemas/Body_upload_file"
               }
             }
           }
@@ -4887,7 +4887,7 @@
           "files"
         ],
         "summary": "Get File",
-        "operationId": "get_file_api_v1_files__file_id__get",
+        "operationId": "get_file",
         "security": [
           {
             "HTTPBearer": []
@@ -4933,7 +4933,7 @@
           "files"
         ],
         "summary": "Delete File",
-        "operationId": "delete_file_api_v1_files__file_id__delete",
+        "operationId": "delete_file",
         "security": [
           {
             "HTTPBearer": []
@@ -4980,8 +4980,8 @@
         "tags": [
           "usage"
         ],
-        "summary": "Usage",
-        "operationId": "usage_api_v1_usage_get",
+        "summary": "Get Usage",
+        "operationId": "get_usage",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -5008,7 +5008,7 @@
           "usage"
         ],
         "summary": "List Usage Events",
-        "operationId": "list_usage_events_api_v1_usage_events_get",
+        "operationId": "list_usage_events",
         "security": [
           {
             "HTTPBearer": []
@@ -5052,7 +5052,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
-                  "title": "Response List Usage Events Api V1 Usage Events Get"
+                  "title": "Response List Usage Events"
                 }
               }
             }
@@ -5076,8 +5076,8 @@
         "tags": [
           "usage"
         ],
-        "summary": "Get Limits",
-        "operationId": "get_limits_api_v1_usage_limits_get",
+        "summary": "Get Usage Limits",
+        "operationId": "get_usage_limits",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -5086,7 +5086,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response Get Limits Api V1 Usage Limits Get"
+                  "title": "Response Get Usage Limits"
                 }
               }
             }
@@ -5106,7 +5106,7 @@
           "stats"
         ],
         "summary": "Get Stats",
-        "operationId": "get_stats_api_v1_stats_get",
+        "operationId": "get_stats",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -5133,7 +5133,7 @@
           "logs"
         ],
         "summary": "List Logs",
-        "operationId": "list_logs_api_v1_logs_get",
+        "operationId": "list_logs",
         "security": [
           {
             "HTTPBearer": []
@@ -5195,7 +5195,7 @@
           "numbering-sequences"
         ],
         "summary": "List Sequences",
-        "operationId": "list_sequences_api_v1_numbering_sequences_get",
+        "operationId": "list_sequences",
         "security": [
           {
             "HTTPBearer": []
@@ -5260,7 +5260,7 @@
           "numbering-sequences"
         ],
         "summary": "Create Sequence",
-        "operationId": "create_sequence_api_v1_numbering_sequences_post",
+        "operationId": "create_sequence",
         "security": [
           {
             "HTTPBearer": []
@@ -5307,7 +5307,7 @@
           "numbering-sequences"
         ],
         "summary": "Get Sequence",
-        "operationId": "get_sequence_api_v1_numbering_sequences__sequence_id__get",
+        "operationId": "get_sequence",
         "security": [
           {
             "HTTPBearer": []
@@ -5353,7 +5353,7 @@
           "numbering-sequences"
         ],
         "summary": "Update Sequence",
-        "operationId": "update_sequence_api_v1_numbering_sequences__sequence_id__patch",
+        "operationId": "update_sequence",
         "security": [
           {
             "HTTPBearer": []
@@ -5409,7 +5409,7 @@
           "numbering-sequences"
         ],
         "summary": "Delete Sequence",
-        "operationId": "delete_sequence_api_v1_numbering_sequences__sequence_id__delete",
+        "operationId": "delete_sequence",
         "security": [
           {
             "HTTPBearer": []
@@ -5457,7 +5457,7 @@
           "numbering-sequences"
         ],
         "summary": "Preview Sequence",
-        "operationId": "preview_sequence_api_v1_numbering_sequences__sequence_id__preview_post",
+        "operationId": "preview_sequence",
         "security": [
           {
             "HTTPBearer": []
@@ -5504,9 +5504,9 @@
         "tags": [
           "numbering-sequences"
         ],
-        "summary": "Consume Next",
+        "summary": "Consume Sequence Number",
         "description": "Consume and return the next number, incrementing the counter.",
-        "operationId": "consume_next_api_v1_numbering_sequences__sequence_id__next_post",
+        "operationId": "consume_sequence_number",
         "security": [
           {
             "HTTPBearer": []
@@ -5554,7 +5554,7 @@
           "tax-rates"
         ],
         "summary": "List Tax Rates",
-        "operationId": "list_tax_rates_api_v1_tax_rates_get",
+        "operationId": "list_tax_rates",
         "security": [
           {
             "HTTPBearer": []
@@ -5619,7 +5619,7 @@
           "tax-rates"
         ],
         "summary": "Create Tax Rate",
-        "operationId": "create_tax_rate_api_v1_tax_rates_post",
+        "operationId": "create_tax_rate",
         "security": [
           {
             "HTTPBearer": []
@@ -5666,7 +5666,7 @@
           "tax-rates"
         ],
         "summary": "Get Tax Rate",
-        "operationId": "get_tax_rate_api_v1_tax_rates__tax_rate_id__get",
+        "operationId": "get_tax_rate",
         "security": [
           {
             "HTTPBearer": []
@@ -5712,7 +5712,7 @@
           "tax-rates"
         ],
         "summary": "Update Tax Rate",
-        "operationId": "update_tax_rate_api_v1_tax_rates__tax_rate_id__patch",
+        "operationId": "update_tax_rate",
         "security": [
           {
             "HTTPBearer": []
@@ -5768,7 +5768,7 @@
           "tax-rates"
         ],
         "summary": "Delete Tax Rate",
-        "operationId": "delete_tax_rate_api_v1_tax_rates__tax_rate_id__delete",
+        "operationId": "delete_tax_rate",
         "security": [
           {
             "HTTPBearer": []
@@ -5816,7 +5816,7 @@
           "jobs"
         ],
         "summary": "Get Job",
-        "operationId": "get_job_api_v1_jobs__job_id__get",
+        "operationId": "get_job",
         "security": [
           {
             "HTTPBearer": []
@@ -5864,7 +5864,7 @@
           "jobs"
         ],
         "summary": "Cancel Job",
-        "operationId": "cancel_job_api_v1_jobs__job_id__cancel_post",
+        "operationId": "cancel_job",
         "security": [
           {
             "HTTPBearer": []
@@ -5912,7 +5912,7 @@
           "jobs"
         ],
         "summary": "Retry Job",
-        "operationId": "retry_job_api_v1_jobs__job_id__retry_post",
+        "operationId": "retry_job",
         "security": [
           {
             "HTTPBearer": []
@@ -5960,7 +5960,7 @@
           "imports"
         ],
         "summary": "Create Import",
-        "operationId": "create_import_api_v1_imports_post",
+        "operationId": "create_import",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6007,7 +6007,7 @@
           "imports"
         ],
         "summary": "Get Import",
-        "operationId": "get_import_api_v1_imports__import_id__get",
+        "operationId": "get_import",
         "security": [
           {
             "HTTPBearer": []
@@ -6055,7 +6055,7 @@
           "imports"
         ],
         "summary": "Confirm Import",
-        "operationId": "confirm_import_api_v1_imports__import_id__confirm_post",
+        "operationId": "confirm_import",
         "security": [
           {
             "HTTPBearer": []
@@ -6103,7 +6103,7 @@
           "imports"
         ],
         "summary": "Cancel Import",
-        "operationId": "cancel_import_api_v1_imports__import_id__cancel_post",
+        "operationId": "cancel_import",
         "security": [
           {
             "HTTPBearer": []
@@ -6151,7 +6151,7 @@
           "reference"
         ],
         "summary": "List Currencies",
-        "operationId": "list_currencies_api_v1_reference_currencies_get",
+        "operationId": "list_currencies",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6160,7 +6160,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response List Currencies Api V1 Reference Currencies Get"
+                  "title": "Response List Currencies"
                 }
               }
             }
@@ -6175,7 +6175,7 @@
           "reference"
         ],
         "summary": "List Countries",
-        "operationId": "list_countries_api_v1_reference_countries_get",
+        "operationId": "list_countries",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6184,7 +6184,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response List Countries Api V1 Reference Countries Get"
+                  "title": "Response List Countries"
                 }
               }
             }
@@ -6199,7 +6199,7 @@
           "reference"
         ],
         "summary": "List Locales",
-        "operationId": "list_locales_api_v1_reference_locales_get",
+        "operationId": "list_locales",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6208,7 +6208,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response List Locales Api V1 Reference Locales Get"
+                  "title": "Response List Locales"
                 }
               }
             }
@@ -6223,7 +6223,7 @@
           "reference"
         ],
         "summary": "List Timezones",
-        "operationId": "list_timezones_api_v1_reference_timezones_get",
+        "operationId": "list_timezones",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6232,7 +6232,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response List Timezones Api V1 Reference Timezones Get"
+                  "title": "Response List Timezones"
                 }
               }
             }
@@ -6247,7 +6247,7 @@
           "reference"
         ],
         "summary": "List Page Sizes",
-        "operationId": "list_page_sizes_api_v1_reference_page_sizes_get",
+        "operationId": "list_page_sizes",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6256,7 +6256,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response List Page Sizes Api V1 Reference Page Sizes Get"
+                  "title": "Response List Page Sizes"
                 }
               }
             }
@@ -6272,7 +6272,7 @@
         ],
         "summary": "List Document Types",
         "description": "List every supported document type with the metadata a client needs to\nbuild a type-aware create form: the number prefix, whether it is payable /\ntakes a source document / supports a reason, which line-item shape it uses\n(``standard`` = priced, ``shipped`` = quantities only), and the lifecycle\nactions available to it.",
-        "operationId": "list_document_types_api_v1_reference_document_types_get",
+        "operationId": "list_document_types",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6281,7 +6281,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response List Document Types Api V1 Reference Document Types Get"
+                  "title": "Response List Document Types"
                 }
               }
             }
@@ -6296,7 +6296,7 @@
           "workspaces"
         ],
         "summary": "List Workspaces",
-        "operationId": "list_workspaces_api_v1_workspaces_get",
+        "operationId": "list_workspaces",
         "security": [
           {
             "HTTPBearer": []
@@ -6361,7 +6361,7 @@
           "workspaces"
         ],
         "summary": "Create Workspace",
-        "operationId": "create_workspace_api_v1_workspaces_post",
+        "operationId": "create_workspace",
         "security": [
           {
             "HTTPBearer": []
@@ -6426,7 +6426,7 @@
           "workspaces"
         ],
         "summary": "Get Workspace",
-        "operationId": "get_workspace_api_v1_workspaces__workspace_id__get",
+        "operationId": "get_workspace",
         "security": [
           {
             "HTTPBearer": []
@@ -6471,8 +6471,8 @@
         "tags": [
           "workspaces"
         ],
-        "summary": "Patch Workspace",
-        "operationId": "patch_workspace_api_v1_workspaces__workspace_id__patch",
+        "summary": "Update Workspace",
+        "operationId": "update_workspace",
         "security": [
           {
             "HTTPBearer": []
@@ -6544,7 +6544,7 @@
           "workspaces"
         ],
         "summary": "Delete Workspace",
-        "operationId": "delete_workspace_api_v1_workspaces__workspace_id__delete",
+        "operationId": "delete_workspace",
         "security": [
           {
             "HTTPBearer": []
@@ -6591,8 +6591,8 @@
         "tags": [
           "workspaces"
         ],
-        "summary": "List Members",
-        "operationId": "list_members_api_v1_workspaces__workspace_id__members_get",
+        "summary": "List Workspace Members",
+        "operationId": "list_workspace_members",
         "security": [
           {
             "HTTPBearer": []
@@ -6637,8 +6637,8 @@
         "tags": [
           "workspaces"
         ],
-        "summary": "Create Member",
-        "operationId": "create_member_api_v1_workspaces__workspace_id__members_post",
+        "summary": "Add Workspace Member",
+        "operationId": "add_workspace_member",
         "security": [
           {
             "HTTPBearer": []
@@ -6711,8 +6711,8 @@
         "tags": [
           "workspaces"
         ],
-        "summary": "Patch Member",
-        "operationId": "patch_member_api_v1_workspaces__workspace_id__members__member_id__patch",
+        "summary": "Update Workspace Member",
+        "operationId": "update_workspace_member",
         "security": [
           {
             "HTTPBearer": []
@@ -6776,8 +6776,8 @@
         "tags": [
           "workspaces"
         ],
-        "summary": "Delete Member",
-        "operationId": "delete_member_api_v1_workspaces__workspace_id__members__member_id__delete",
+        "summary": "Remove Workspace Member",
+        "operationId": "remove_workspace_member",
         "security": [
           {
             "HTTPBearer": []
@@ -6834,7 +6834,7 @@
           "webhooks"
         ],
         "summary": "List Webhook Endpoints",
-        "operationId": "list_webhook_endpoints_api_v1_webhook_endpoints_get",
+        "operationId": "list_webhook_endpoints",
         "security": [
           {
             "HTTPBearer": []
@@ -6899,7 +6899,7 @@
           "webhooks"
         ],
         "summary": "Create Webhook Endpoint",
-        "operationId": "create_webhook_endpoint_api_v1_webhook_endpoints_post",
+        "operationId": "create_webhook_endpoint",
         "security": [
           {
             "HTTPBearer": []
@@ -6946,7 +6946,7 @@
           "webhooks"
         ],
         "summary": "Get Webhook Endpoint",
-        "operationId": "get_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__get",
+        "operationId": "get_webhook_endpoint",
         "security": [
           {
             "HTTPBearer": []
@@ -6992,7 +6992,7 @@
           "webhooks"
         ],
         "summary": "Update Webhook Endpoint",
-        "operationId": "update_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__patch",
+        "operationId": "update_webhook_endpoint",
         "security": [
           {
             "HTTPBearer": []
@@ -7048,7 +7048,7 @@
           "webhooks"
         ],
         "summary": "Delete Webhook Endpoint",
-        "operationId": "delete_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__delete",
+        "operationId": "delete_webhook_endpoint",
         "security": [
           {
             "HTTPBearer": []
@@ -7096,7 +7096,7 @@
           "webhooks"
         ],
         "summary": "Rotate Webhook Secret",
-        "operationId": "rotate_webhook_secret_api_v1_webhook_endpoints__endpoint_id__rotate_secret_post",
+        "operationId": "rotate_webhook_secret",
         "security": [
           {
             "HTTPBearer": []
@@ -7144,7 +7144,7 @@
           "webhooks"
         ],
         "summary": "Test Webhook Endpoint",
-        "operationId": "test_webhook_endpoint_api_v1_webhook_endpoints__endpoint_id__test_post",
+        "operationId": "test_webhook_endpoint",
         "security": [
           {
             "HTTPBearer": []
@@ -7192,7 +7192,7 @@
           "webhooks"
         ],
         "summary": "List Webhook Deliveries",
-        "operationId": "list_webhook_deliveries_api_v1_webhook_deliveries_get",
+        "operationId": "list_webhook_deliveries",
         "security": [
           {
             "HTTPBearer": []
@@ -7259,7 +7259,7 @@
           "webhooks"
         ],
         "summary": "Get Webhook Delivery",
-        "operationId": "get_webhook_delivery_api_v1_webhook_deliveries__delivery_id__get",
+        "operationId": "get_webhook_delivery",
         "security": [
           {
             "HTTPBearer": []
@@ -7307,7 +7307,7 @@
           "webhooks"
         ],
         "summary": "Retry Webhook Delivery",
-        "operationId": "retry_webhook_delivery_api_v1_webhook_deliveries__delivery_id__retry_post",
+        "operationId": "retry_webhook_delivery",
         "security": [
           {
             "HTTPBearer": []
@@ -7356,7 +7356,7 @@
         ],
         "summary": "Get Subscription",
         "description": "Get current subscription status (from DB, no Stripe API call).",
-        "operationId": "get_subscription_api_v1_billing_subscription_get",
+        "operationId": "get_subscription",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -7384,7 +7384,7 @@
         ],
         "summary": "List Plans",
         "description": "Purchasable plans \u2014 the ones wired to a Stripe price.",
-        "operationId": "list_plans_api_v1_billing_plans_get",
+        "operationId": "list_plans",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -7410,9 +7410,9 @@
         "tags": [
           "billing"
         ],
-        "summary": "Create Checkout",
+        "summary": "Create Checkout Session",
         "description": "Create a Stripe Checkout session for a subscription.",
-        "operationId": "create_checkout_api_v1_billing_checkout_session_post",
+        "operationId": "create_checkout_session",
         "requestBody": {
           "content": {
             "application/json": {
@@ -7458,9 +7458,9 @@
         "tags": [
           "billing"
         ],
-        "summary": "Create Portal",
+        "summary": "Create Portal Session",
         "description": "Create a Stripe Customer Portal session for self-service management.",
-        "operationId": "create_portal_api_v1_billing_portal_session_post",
+        "operationId": "create_portal_session",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -7487,7 +7487,7 @@
           "audit-log"
         ],
         "summary": "List Audit Events",
-        "operationId": "list_audit_events_api_v1_audit_events_get",
+        "operationId": "list_audit_events",
         "security": [
           {
             "HTTPBearer": []
@@ -7602,7 +7602,7 @@
           "audit-log"
         ],
         "summary": "Get Audit Event",
-        "operationId": "get_audit_event_api_v1_audit_events__audit_event_id__get",
+        "operationId": "get_audit_event",
         "security": [
           {
             "HTTPBearer": []
@@ -8770,7 +8770,7 @@
         ],
         "title": "BillingSubscriptionResponse"
       },
-      "Body_upload_file_api_v1_files_post": {
+      "Body_upload_branding_logo": {
         "properties": {
           "file": {
             "type": "string",
@@ -8782,9 +8782,9 @@
         "required": [
           "file"
         ],
-        "title": "Body_upload_file_api_v1_files_post"
+        "title": "Body_upload_branding_logo"
       },
-      "Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post": {
+      "Body_upload_file": {
         "properties": {
           "file": {
             "type": "string",
@@ -8796,7 +8796,7 @@
         "required": [
           "file"
         ],
-        "title": "Body_upload_logo_api_v1_branding_profiles__profile_id__logo_post"
+        "title": "Body_upload_file"
       },
       "BrandingProfileCreateRequest": {
         "properties": {
@@ -11379,6 +11379,53 @@
         },
         "type": "object",
         "title": "DocumentPaymentInput"
+      },
+      "DocumentRenderOptions": {
+        "properties": {
+          "template_id": {
+            "type": "string",
+            "title": "Template Id",
+            "default": "tpl_modern"
+          },
+          "page_size": {
+            "type": "string",
+            "title": "Page Size",
+            "default": "LETTER"
+          },
+          "expires_in": {
+            "type": "integer",
+            "title": "Expires In",
+            "default": 3600
+          }
+        },
+        "type": "object",
+        "title": "DocumentRenderOptions",
+        "description": "Render options for an already-stored document (``POST /documents/{id}/renders``).\n\nDistinct from ``app.schemas.v1.DocumentRenderRequest``, which carries a full inline\ndocument for the stateless ``POST /documents/render``. Two classes sharing one name\nmade FastAPI fall back to module-qualified schema names in the spec\n(``app__documents__schemas__DocumentRenderRequest``), which the SDK generators turned\ninto ``AppDocumentsSchemasDocumentRenderRequest``."
+      },
+      "DocumentRenderRequest": {
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "const": "invoice",
+            "title": "Document Type",
+            "default": "invoice"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DocumentInvoiceDataInput"
+          },
+          "template": {
+            "$ref": "#/components/schemas/DocumentTemplateRef"
+          },
+          "output": {
+            "$ref": "#/components/schemas/DocumentOutputOptions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "template"
+        ],
+        "title": "DocumentRenderRequest"
       },
       "DocumentResponse": {
         "properties": {
@@ -15001,52 +15048,6 @@
           "data"
         ],
         "title": "WorkspacesListResponse"
-      },
-      "app__documents__schemas__DocumentRenderRequest": {
-        "properties": {
-          "template_id": {
-            "type": "string",
-            "title": "Template Id",
-            "default": "tpl_modern"
-          },
-          "page_size": {
-            "type": "string",
-            "title": "Page Size",
-            "default": "LETTER"
-          },
-          "expires_in": {
-            "type": "integer",
-            "title": "Expires In",
-            "default": 3600
-          }
-        },
-        "type": "object",
-        "title": "DocumentRenderRequest"
-      },
-      "app__schemas__v1__DocumentRenderRequest": {
-        "properties": {
-          "document_type": {
-            "type": "string",
-            "const": "invoice",
-            "title": "Document Type",
-            "default": "invoice"
-          },
-          "data": {
-            "$ref": "#/components/schemas/DocumentInvoiceDataInput"
-          },
-          "template": {
-            "$ref": "#/components/schemas/DocumentTemplateRef"
-          },
-          "output": {
-            "$ref": "#/components/schemas/DocumentOutputOptions"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data",
-          "template"
-        ],
-        "title": "DocumentRenderRequest"
       },
       "ApiErrorResponse": {
         "type": "object",
