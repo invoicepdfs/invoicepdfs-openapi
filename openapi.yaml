@@ -17,7 +17,7 @@ info:
     url: https://invoicepdfs.com/
   license:
     name: MIT
-  version: 0.1.3
+  version: 0.2.0
 paths:
   /health:
     get:
