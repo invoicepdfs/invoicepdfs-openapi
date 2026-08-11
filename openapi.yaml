@@ -101,7 +101,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: internal
@@ -135,7 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/auth/token:
     post:
@@ -169,7 +169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/auth/logout:
     post:
@@ -213,7 +213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/auth/forgot-password:
     post:
@@ -240,7 +240,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/auth/reset-password:
     post:
@@ -267,7 +267,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/api-keys:
     get:
@@ -308,7 +308,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -339,7 +339,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     get:
       tags:
@@ -367,7 +367,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -401,7 +401,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/api-keys/{api_key_id}/rotate:
     post:
@@ -431,7 +431,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/business-profiles:
     get:
@@ -471,7 +471,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -507,7 +507,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/business-profiles/{business_profile_id}:
     get:
@@ -536,7 +536,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -578,7 +578,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -606,7 +606,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/branding-profiles:
     get:
@@ -647,7 +647,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -678,7 +678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -712,7 +712,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -740,7 +740,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/branding-profiles/{profile_id}/default:
     post:
@@ -769,7 +769,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/branding-profiles/{profile_id}/logo:
     post:
@@ -804,7 +804,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -832,7 +832,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/customers:
     get:
@@ -872,7 +872,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -908,7 +908,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/customers/{customer_id}:
     get:
@@ -937,7 +937,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -979,7 +979,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -1007,7 +1007,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents:
     get:
@@ -1063,7 +1063,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -1099,7 +1099,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}:
     get:
@@ -1128,7 +1128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -1162,7 +1162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -1190,7 +1190,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/duplicate:
     post:
@@ -1219,7 +1219,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/finalize:
     post:
@@ -1248,7 +1248,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/void:
     post:
@@ -1277,7 +1277,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/mark-sent:
     post:
@@ -1306,7 +1306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/mark-paid:
     post:
@@ -1335,7 +1335,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/mark-unpaid:
     post:
@@ -1364,7 +1364,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/archive:
     post:
@@ -1393,7 +1393,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/restore:
     post:
@@ -1422,7 +1422,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/renders:
     post:
@@ -1464,7 +1464,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/send:
     post:
@@ -1499,7 +1499,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{document_id}/deliveries:
     get:
@@ -1545,7 +1545,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/validate:
     post:
@@ -1571,7 +1571,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -1599,7 +1599,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -1637,7 +1637,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{invoice_id}/attachments:
     get:
@@ -1666,7 +1666,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -1700,7 +1700,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{invoice_id}/attachments/{attachment_id}:
     delete:
@@ -1735,7 +1735,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates:
     get:
@@ -1780,7 +1780,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/custom:
     post:
@@ -1808,7 +1808,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     get:
       tags:
@@ -1847,7 +1847,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/custom/{template_id}:
     get:
@@ -1876,7 +1876,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -1910,7 +1910,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -1934,7 +1934,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/custom/{template_id}/duplicate:
     post:
@@ -1963,7 +1963,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/custom/{template_id}/publish:
     post:
@@ -1992,7 +1992,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/{template_id}:
     get:
@@ -2021,7 +2021,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/{template_id}/preview:
     post:
@@ -2063,7 +2063,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/{template_id}/versions:
     get:
@@ -2092,7 +2092,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -2126,7 +2126,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/templates/{template_id}/versions/{version}:
     get:
@@ -2161,7 +2161,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/renders/{render_id}:
     get:
@@ -2192,7 +2192,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/renders/{render_id}/download:
     get:
@@ -2222,7 +2222,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/documents/{invoice_id}/payments:
     get:
@@ -2268,7 +2268,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -2302,7 +2302,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/payments/{payment_id}:
     get:
@@ -2331,7 +2331,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -2365,7 +2365,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -2393,7 +2393,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/batches:
     get:
@@ -2433,7 +2433,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -2460,7 +2460,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/batches/{batch_id}:
     get:
@@ -2489,7 +2489,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/batches/{batch_id}/items:
     get:
@@ -2535,7 +2535,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/batches/{batch_id}/cancel:
     post:
@@ -2564,7 +2564,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/batches/{batch_id}/download:
     get:
@@ -2592,7 +2592,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/deliveries/{delivery_id}:
     get:
@@ -2621,7 +2621,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/deliveries/{delivery_id}/retry:
     post:
@@ -2650,7 +2650,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/recurring-invoices:
     post:
@@ -2678,7 +2678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     get:
       tags:
@@ -2725,7 +2725,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/recurring-invoices/{recurring_id}:
     get:
@@ -2754,7 +2754,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -2788,7 +2788,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -2816,7 +2816,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/recurring-invoices/{recurring_id}/pause:
     post:
@@ -2845,7 +2845,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/recurring-invoices/{recurring_id}/resume:
     post:
@@ -2874,7 +2874,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/recurring-invoices/{recurring_id}/invoices:
     get:
@@ -2920,7 +2920,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/files:
     post:
@@ -2957,7 +2957,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/files/{file_id}:
     get:
@@ -2986,7 +2986,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -3014,7 +3014,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/usage:
     get:
@@ -3072,7 +3072,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/usage/limits:
     get:
@@ -3146,7 +3146,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/numbering-sequences:
     get:
@@ -3186,7 +3186,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -3213,7 +3213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/numbering-sequences/{sequence_id}:
     get:
@@ -3242,7 +3242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -3276,7 +3276,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -3304,7 +3304,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/numbering-sequences/{sequence_id}/preview:
     post:
@@ -3333,7 +3333,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/numbering-sequences/{sequence_id}/next:
     post:
@@ -3363,7 +3363,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/tax-rates:
     get:
@@ -3403,7 +3403,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -3430,7 +3430,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/tax-rates/{tax_rate_id}:
     get:
@@ -3459,7 +3459,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -3493,7 +3493,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -3521,7 +3521,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/jobs/{job_id}:
     get:
@@ -3550,7 +3550,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/jobs/{job_id}/cancel:
     post:
@@ -3579,7 +3579,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/jobs/{job_id}/retry:
     post:
@@ -3608,7 +3608,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: internal
   /api/v1/imports:
     post:
@@ -3634,7 +3634,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -3665,7 +3665,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/imports/{import_id}/confirm:
     post:
@@ -3694,7 +3694,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/imports/{import_id}/cancel:
     post:
@@ -3723,7 +3723,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/reference/currencies:
     get:
@@ -3870,7 +3870,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -3906,7 +3906,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/workspaces/{workspace_id}:
     get:
@@ -3935,7 +3935,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -3977,7 +3977,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -4005,7 +4005,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/workspaces/{workspace_id}/members:
     get:
@@ -4034,7 +4034,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -4076,7 +4076,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/workspaces/{workspace_id}/members/{member_id}:
     patch:
@@ -4117,7 +4117,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -4151,7 +4151,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-endpoints:
     get:
@@ -4191,7 +4191,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     post:
       tags:
@@ -4218,7 +4218,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-endpoints/{endpoint_id}:
     get:
@@ -4247,7 +4247,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     patch:
       tags:
@@ -4281,7 +4281,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
     delete:
       tags:
@@ -4309,7 +4309,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-endpoints/{endpoint_id}/rotate-secret:
     post:
@@ -4338,7 +4338,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-endpoints/{endpoint_id}/test:
     post:
@@ -4367,7 +4367,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-deliveries:
     get:
@@ -4407,7 +4407,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-deliveries/{delivery_id}:
     get:
@@ -4436,7 +4436,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/webhook-deliveries/{delivery_id}/retry:
     post:
@@ -4465,7 +4465,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/billing/subscription:
     get:
@@ -4526,7 +4526,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
       - HTTPBearer: []
       x-visibility: public
@@ -4609,7 +4609,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
   /api/v1/audit-events/{audit_event_id}:
     get:
@@ -4638,7 +4638,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
 components:
   schemas:
@@ -7006,15 +7006,6 @@ components:
       required:
       - data
       title: FileResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     HealthResponse:
       properties:
         status:
@@ -8901,32 +8892,6 @@ components:
       required:
       - data
       title: UsageResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     VersionResponse:
       properties:
         version:
@@ -9295,6 +9260,32 @@ components:
       - data
       - template
       title: DocumentRenderRequest
+    ApiErrorResponse:
+      type: object
+      title: ApiErrorResponse
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: unprocessable_entity
+            message:
+              type: string
+              example: Request validation failed
+            request_id:
+              type: string
+              nullable: true
+              description: Trace id for this request; also returned as X-Trace-Id.
+            details:
+              type: object
+              nullable: true
+              description: Error-specific context. Validation failures carry `fields`.
+          required:
+          - code
+          - message
+      required:
+      - error
   securitySchemes:
     HTTPBearer:
       type: http
