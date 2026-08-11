@@ -14777,6 +14777,11 @@
           "error": {
             "type": "object",
             "properties": {
+              "status": {
+                "type": "integer",
+                "example": 422,
+                "description": "HTTP status, mirroring the response status line."
+              },
               "code": {
                 "type": "string",
                 "example": "unprocessable_entity"
@@ -14797,6 +14802,7 @@
               }
             },
             "required": [
+              "status",
               "code",
               "message"
             ]
