@@ -2382,7 +2382,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RenderResponse"
+                }
               }
             }
           },
@@ -2670,10 +2672,18 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "The rendered document. Returns the PDF itself instead when `output.delivery` is `binary` or the request sends `Accept: application/pdf`.",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RenderResponse"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -3377,10 +3387,18 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "The rendered preview. Returns the PDF itself instead when `output.delivery` is `binary` or the request sends `Accept: application/pdf`.",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RenderResponse"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -3588,9 +3606,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Get Render"
+                  "$ref": "#/components/schemas/RenderResponse"
                 }
               }
             }
@@ -4249,10 +4265,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "ZIP archive of every completed render in the batch",
             "content": {
-              "application/json": {
-                "schema": {}
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -5050,9 +5069,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response List Usage Events"
+                  "$ref": "#/components/schemas/UsageEventsListResponse"
                 }
               }
             }
@@ -5084,9 +5101,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response Get Usage Limits"
+                  "$ref": "#/components/schemas/UsageLimitsResponse"
                 }
               }
             }
@@ -6158,9 +6173,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response List Currencies"
+                  "$ref": "#/components/schemas/CurrenciesListResponse"
                 }
               }
             }
@@ -6182,9 +6195,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response List Countries"
+                  "$ref": "#/components/schemas/CountriesListResponse"
                 }
               }
             }
@@ -6206,9 +6217,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response List Locales"
+                  "$ref": "#/components/schemas/LocalesListResponse"
                 }
               }
             }
@@ -6230,9 +6239,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response List Timezones"
+                  "$ref": "#/components/schemas/TimezonesListResponse"
                 }
               }
             }
@@ -6254,9 +6261,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response List Page Sizes"
+                  "$ref": "#/components/schemas/PageSizesListResponse"
                 }
               }
             }
@@ -6279,9 +6284,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
-                  "title": "Response List Document Types"
+                  "$ref": "#/components/schemas/DocumentTypesListResponse"
                 }
               }
             }
@@ -9585,6 +9588,84 @@
         ],
         "title": "CalculationBreakdown"
       },
+      "CountriesListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CountryOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "CountriesListResponse"
+      },
+      "CountryOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "name"
+        ],
+        "title": "CountryOut"
+      },
+      "CurrenciesListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CurrencyOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "CurrenciesListResponse"
+      },
+      "CurrencyOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "Symbol"
+          },
+          "decimals": {
+            "type": "integer",
+            "title": "Decimals"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "symbol",
+          "decimals"
+        ],
+        "title": "CurrencyOut"
+      },
       "CursorPagination": {
         "properties": {
           "has_more": {
@@ -11473,6 +11554,77 @@
         ],
         "title": "DocumentTemplateRef"
       },
+      "DocumentTypeOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "number_prefix": {
+            "type": "string",
+            "title": "Number Prefix"
+          },
+          "payable": {
+            "type": "boolean",
+            "title": "Payable"
+          },
+          "requires_source_document": {
+            "type": "boolean",
+            "title": "Requires Source Document"
+          },
+          "supports_reason": {
+            "type": "boolean",
+            "title": "Supports Reason"
+          },
+          "line_item_type": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "shipped"
+            ],
+            "title": "Line Item Type"
+          },
+          "actions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "number_prefix",
+          "payable",
+          "requires_source_document",
+          "supports_reason",
+          "line_item_type",
+          "actions"
+        ],
+        "title": "DocumentTypeOut"
+      },
+      "DocumentTypesListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentTypeOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "DocumentTypesListResponse"
+      },
       "DocumentValidateRequest": {
         "properties": {
           "document_type": {
@@ -12841,6 +12993,40 @@
         "type": "object",
         "title": "LineItemTaxInput"
       },
+      "LocaleOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "name"
+        ],
+        "title": "LocaleOut"
+      },
+      "LocalesListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/LocaleOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "LocalesListResponse"
+      },
       "Money": {
         "properties": {
           "amount": {
@@ -13129,6 +13315,50 @@
           "data"
         ],
         "title": "NumberingSequencesListResponse"
+      },
+      "PageSizeOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "width_mm": {
+            "type": "number",
+            "title": "Width Mm"
+          },
+          "height_mm": {
+            "type": "number",
+            "title": "Height Mm"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "width_mm",
+          "height_mm"
+        ],
+        "title": "PageSizeOut"
+      },
+      "PageSizesListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/PageSizeOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "PageSizesListResponse"
       },
       "PaymentCreateRequest": {
         "properties": {
@@ -13783,6 +14013,76 @@
           "pagination"
         ],
         "title": "RecurringInvoicesListResponse"
+      },
+      "RenderOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "status": {
+            "type": "string",
+            "const": "completed",
+            "title": "Status"
+          },
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type"
+          },
+          "format": {
+            "type": "string",
+            "const": "pdf",
+            "title": "Format"
+          },
+          "download_url": {
+            "type": "string",
+            "title": "Download Url"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "calculation": {
+            "$ref": "#/components/schemas/CalculationBreakdown"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "document_type",
+          "format",
+          "download_url",
+          "expires_at",
+          "calculation",
+          "created_at"
+        ],
+        "title": "RenderOut"
+      },
+      "RenderResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RenderOut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "RenderResponse"
       },
       "SimpleBoolResponse": {
         "properties": {
@@ -14475,6 +14775,40 @@
         ],
         "title": "TemplatesListResponse"
       },
+      "TimezoneOut": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "offset": {
+            "type": "string",
+            "title": "Offset"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "offset"
+        ],
+        "title": "TimezoneOut"
+      },
+      "TimezonesListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/TimezoneOut"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "TimezonesListResponse"
+      },
       "UsageData": {
         "properties": {
           "period": {
@@ -14490,6 +14824,76 @@
           "renders"
         ],
         "title": "UsageData"
+      },
+      "UsageEventOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "render_id": {
+            "type": "string",
+            "title": "Render Id"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "render_id",
+          "created_at"
+        ],
+        "title": "UsageEventOut"
+      },
+      "UsageEventsListResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/UsageEventOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/CursorPagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "UsageEventsListResponse"
+      },
+      "UsageLimitsData": {
+        "properties": {
+          "renders": {
+            "$ref": "#/components/schemas/UsageRenderLimits"
+          },
+          "rate_limit": {
+            "$ref": "#/components/schemas/UsageRateLimit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "renders",
+          "rate_limit"
+        ],
+        "title": "UsageLimitsData"
+      },
+      "UsageLimitsResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UsageLimitsData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "UsageLimitsResponse"
       },
       "UsagePeriod": {
         "properties": {
@@ -14508,6 +14912,42 @@
           "end"
         ],
         "title": "UsagePeriod"
+      },
+      "UsageRateLimit": {
+        "properties": {
+          "requests_per_second": {
+            "type": "integer",
+            "title": "Requests Per Second"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requests_per_second"
+        ],
+        "title": "UsageRateLimit"
+      },
+      "UsageRenderLimits": {
+        "properties": {
+          "used": {
+            "type": "integer",
+            "title": "Used"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "remaining": {
+            "type": "integer",
+            "title": "Remaining"
+          }
+        },
+        "type": "object",
+        "required": [
+          "used",
+          "limit",
+          "remaining"
+        ],
+        "title": "UsageRenderLimits"
       },
       "UsageRenders": {
         "properties": {
