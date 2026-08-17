@@ -6304,7 +6304,14 @@ components:
       properties:
         document_type:
           type: string
-          const: invoice
+          enum:
+          - invoice
+          - credit_note
+          - quote
+          - receipt
+          - proforma
+          - purchase_order
+          - delivery_note
           title: Document Type
           default: invoice
         data:
@@ -6991,7 +6998,14 @@ components:
       properties:
         document_type:
           type: string
-          const: invoice
+          enum:
+          - invoice
+          - credit_note
+          - quote
+          - receipt
+          - proforma
+          - purchase_order
+          - delivery_note
           title: Document Type
           default: invoice
         data:
@@ -7094,7 +7108,14 @@ components:
       properties:
         document_type:
           type: string
-          const: invoice
+          enum:
+          - invoice
+          - credit_note
+          - quote
+          - receipt
+          - proforma
+          - purchase_order
+          - delivery_note
           title: Document Type
           default: invoice
         data:

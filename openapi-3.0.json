@@ -10268,11 +10268,17 @@
         "properties": {
           "document_type": {
             "type": "string",
-            "title": "Document Type",
-            "default": "invoice",
             "enum": [
-              "invoice"
-            ]
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type",
+            "default": "invoice"
           },
           "data": {
             "$ref": "#/components/schemas/DocumentInvoiceDataInput"
@@ -11347,11 +11353,17 @@
         "properties": {
           "document_type": {
             "type": "string",
-            "title": "Document Type",
-            "default": "invoice",
             "enum": [
-              "invoice"
-            ]
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type",
+            "default": "invoice"
           },
           "data": {
             "$ref": "#/components/schemas/DocumentInvoiceDataInput"
@@ -11489,11 +11501,17 @@
         "properties": {
           "document_type": {
             "type": "string",
-            "title": "Document Type",
-            "default": "invoice",
             "enum": [
-              "invoice"
-            ]
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type",
+            "default": "invoice"
           },
           "data": {
             "$ref": "#/components/schemas/DocumentInvoiceDataInput"
