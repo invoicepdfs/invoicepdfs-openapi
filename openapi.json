@@ -12768,11 +12768,25 @@
       },
       "InvoiceTotalsOut": {
         "properties": {
+          "gross_subtotal": {
+            "$ref": "#/components/schemas/MoneyOut",
+            "default": {
+              "amount": "0.00",
+              "currency": "USD"
+            }
+          },
           "subtotal": {
             "$ref": "#/components/schemas/MoneyOut"
           },
           "discount_total": {
             "$ref": "#/components/schemas/MoneyOut"
+          },
+          "document_discount_total": {
+            "$ref": "#/components/schemas/MoneyOut",
+            "default": {
+              "amount": "0.00",
+              "currency": "USD"
+            }
           },
           "tax_total": {
             "$ref": "#/components/schemas/MoneyOut"
