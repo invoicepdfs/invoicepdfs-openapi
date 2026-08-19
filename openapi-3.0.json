@@ -5544,7 +5544,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NumberingSequenceResponse"
+                  "$ref": "#/components/schemas/NumberingNextResponse"
                 }
               }
             }
@@ -9522,6 +9522,13 @@
           "discount_total": {
             "$ref": "#/components/schemas/Money"
           },
+          "document_discount_total": {
+            "$ref": "#/components/schemas/Money",
+            "default": {
+              "amount": "0.00",
+              "currency": "USD"
+            }
+          },
           "tax_total": {
             "$ref": "#/components/schemas/Money"
           },
@@ -12860,6 +12867,44 @@
           "currency"
         ],
         "title": "MoneyOut"
+      },
+      "NumberingNextOut": {
+        "properties": {
+          "number": {
+            "type": "string",
+            "title": "Number",
+            "example": "AMI-INV-2026-0013"
+          },
+          "sequence_id": {
+            "type": "string",
+            "title": "Sequence Id"
+          },
+          "next_number": {
+            "type": "integer",
+            "title": "Next Number",
+            "description": "The counter after this allocation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "number",
+          "sequence_id",
+          "next_number"
+        ],
+        "title": "NumberingNextOut",
+        "description": "What POST /numbering-sequences/{id}/next allocated.\n\nThe number is the point of the call. It used to answer with the sequence\nrow instead, so a caller burned a number and had to reconstruct the string\nitself from prefix, date pattern and padding — the one thing the endpoint\nexists to do for them."
+      },
+      "NumberingNextResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/NumberingNextOut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "NumberingNextResponse"
       },
       "NumberingSequenceCreateRequest": {
         "properties": {
