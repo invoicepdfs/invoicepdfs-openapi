@@ -12580,6 +12580,26 @@
           },
           "total": {
             "$ref": "#/components/schemas/MoneyOut"
+          },
+          "recomputed_total": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MoneyOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "totals_drift": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MoneyOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
