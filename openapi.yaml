@@ -7043,6 +7043,10 @@ components:
           title: Amount
           examples:
           - '9.99'
+        taxable:
+          type: boolean
+          title: Taxable
+          default: false
       type: object
       required:
       - amount
@@ -7805,6 +7809,10 @@ components:
           title: Amount
           examples:
           - '9.99'
+        taxable:
+          type: boolean
+          title: Taxable
+          default: false
       type: object
       required:
       - amount

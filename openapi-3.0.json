@@ -11412,6 +11412,11 @@
             "type": "string",
             "title": "Amount",
             "example": "9.99"
+          },
+          "taxable": {
+            "type": "boolean",
+            "title": "Taxable",
+            "default": false
           }
         },
         "type": "object",
@@ -12522,6 +12527,11 @@
             "type": "string",
             "title": "Amount",
             "example": "9.99"
+          },
+          "taxable": {
+            "type": "boolean",
+            "title": "Taxable",
+            "default": false
           }
         },
         "type": "object",

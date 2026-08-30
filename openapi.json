@@ -11556,6 +11556,11 @@
             "examples": [
               "9.99"
             ]
+          },
+          "taxable": {
+            "type": "boolean",
+            "title": "Taxable",
+            "default": false
           }
         },
         "type": "object",
@@ -12734,6 +12739,11 @@
             "examples": [
               "9.99"
             ]
+          },
+          "taxable": {
+            "type": "boolean",
+            "title": "Taxable",
+            "default": false
           }
         },
         "type": "object",
