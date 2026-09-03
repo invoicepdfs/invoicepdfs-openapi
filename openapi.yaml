@@ -5092,6 +5092,7 @@ components:
           items:
             $ref: '#/components/schemas/BatchItemInput'
           type: array
+          maxItems: 500
           minItems: 1
           title: Items
         template_id:
