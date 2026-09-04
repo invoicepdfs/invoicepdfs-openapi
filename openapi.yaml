@@ -4957,10 +4957,8 @@ components:
     AuthMePatchRequest:
       properties:
         name:
-          anyOf:
-          - type: string
-            maxLength: 256
-          - type: 'null'
+          type: string
+          maxLength: 256
           title: Name
         email:
           anyOf:
@@ -5519,19 +5517,13 @@ components:
     BrandingProfilePatchRequest:
       properties:
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
         primary_color:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Primary Color
         accent_color:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Accent Color
         font_family:
           anyOf:
@@ -5544,19 +5536,13 @@ components:
           - type: 'null'
           title: Header Text
         footer_text:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Footer Text
         hide_invoicepdfs_branding:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Hide Invoicepdfs Branding
         is_default:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Is Default
       type: object
       title: BrandingProfilePatchRequest
@@ -5750,9 +5736,7 @@ components:
     BusinessProfilePatch:
       properties:
         legal_name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Legal Name
         display_name:
           anyOf:
@@ -6095,9 +6079,7 @@ components:
     CustomerPatch:
       properties:
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
         email:
           anyOf:
@@ -8205,41 +8187,29 @@ components:
     NumberingSequencePatchRequest:
       properties:
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
         prefix:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Prefix
         date_pattern:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Date Pattern
         padding:
-          anyOf:
-          - type: integer
-            maximum: 10.0
-            minimum: 1.0
-          - type: 'null'
+          type: integer
+          maximum: 10.0
+          minimum: 1.0
           title: Padding
         next_number:
-          anyOf:
-          - type: integer
-            minimum: 1.0
-          - type: 'null'
+          type: integer
+          minimum: 1.0
           title: Next Number
         reset:
-          anyOf:
-          - type: string
-            enum:
-            - never
-            - yearly
-            - monthly
-          - type: 'null'
+          type: string
+          enum:
+          - never
+          - yearly
+          - monthly
           title: Reset
       type: object
       title: NumberingSequencePatchRequest
@@ -8389,15 +8359,11 @@ components:
     PaymentPatchRequest:
       properties:
         amount:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Amount
         paid_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
+          type: string
+          format: date-time
           title: Paid At
         method:
           anyOf:
@@ -8637,15 +8603,11 @@ components:
     RecurringInvoicePatchRequest:
       properties:
         frequency:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Frequency
         interval:
-          anyOf:
-          - type: integer
-            minimum: 1.0
-          - type: 'null'
+          type: integer
+          minimum: 1.0
           title: Interval
         end_date:
           anyOf:
@@ -8665,14 +8627,10 @@ components:
           - type: 'null'
           title: Numbering Sequence Id
         auto_finalize:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Auto Finalize
         invoice_template:
-          anyOf:
-          - $ref: '#/components/schemas/InvoiceDraftRequest'
-          - type: 'null'
+          $ref: '#/components/schemas/InvoiceDraftRequest'
       type: object
       title: RecurringInvoicePatchRequest
     RecurringInvoiceResponse:
@@ -8971,19 +8929,13 @@ components:
     TaxRatePatchRequest:
       properties:
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
         rate:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Rate
         inclusive:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Inclusive
         jurisdiction:
           anyOf:
@@ -8991,9 +8943,7 @@ components:
           - type: 'null'
           title: Jurisdiction
         is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Is Active
       type: object
       title: TaxRatePatchRequest
@@ -9075,11 +9025,9 @@ components:
     TemplatePatchRequest:
       properties:
         name:
-          anyOf:
-          - type: string
-            maxLength: 256
-            minLength: 1
-          - type: 'null'
+          type: string
+          maxLength: 256
+          minLength: 1
           title: Name
         description:
           anyOf:
@@ -9087,10 +9035,8 @@ components:
           - type: 'null'
           title: Description
         config:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
+          additionalProperties: true
+          type: object
           title: Config
       type: object
       title: TemplatePatchRequest
@@ -9494,9 +9440,7 @@ components:
     WebhookEndpointPatchRequest:
       properties:
         url:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Url
         description:
           anyOf:
@@ -9504,16 +9448,12 @@ components:
           - type: 'null'
           title: Description
         events:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
+          items:
+            type: string
+          type: array
           title: Events
         is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Is Active
       type: object
       title: WebhookEndpointPatchRequest
@@ -9607,13 +9547,11 @@ components:
     WorkspaceMemberPatchRequest:
       properties:
         role:
-          anyOf:
-          - type: string
-            enum:
-            - owner
-            - admin
-            - member
-          - type: 'null'
+          type: string
+          enum:
+          - owner
+          - admin
+          - member
           title: Role
       type: object
       title: WorkspaceMemberPatchRequest
@@ -9652,10 +9590,8 @@ components:
     WorkspacePatchRequest:
       properties:
         name:
-          anyOf:
-          - type: string
-            maxLength: 256
-          - type: 'null'
+          type: string
+          maxLength: 256
           title: Name
       type: object
       title: WorkspacePatchRequest
