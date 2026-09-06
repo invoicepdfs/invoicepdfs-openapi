@@ -8768,6 +8768,28 @@
             ],
             "title": "Price Id Annual"
           },
+          "price_cents": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Cents"
+          },
+          "price_cents_annual": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Cents Annual"
+          },
           "monthly_render_quota": {
             "type": "integer",
             "title": "Monthly Render Quota"
