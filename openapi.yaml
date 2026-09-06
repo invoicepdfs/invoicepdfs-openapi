@@ -5475,6 +5475,10 @@ components:
           - type: integer
           - type: 'null'
           title: Overage Price Millicents
+        allow_branding_removal:
+          type: boolean
+          title: Allow Branding Removal
+          default: false
       type: object
       required:
       - plan_id
@@ -9326,6 +9330,10 @@ components:
           $ref: '#/components/schemas/UsageRenderLimits'
         rate_limit:
           $ref: '#/components/schemas/UsageRateLimit'
+        api_log_retention:
+          type: integer
+          title: Api Log Retention
+          default: 0
         overage:
           $ref: '#/components/schemas/UsageOverage'
       type: object

@@ -8901,6 +8901,11 @@
               }
             ],
             "title": "Overage Price Millicents"
+          },
+          "allow_branding_removal": {
+            "type": "boolean",
+            "title": "Allow Branding Removal",
+            "default": false
           }
         },
         "type": "object",
@@ -14690,6 +14695,11 @@
           },
           "rate_limit": {
             "$ref": "#/components/schemas/UsageRateLimit"
+          },
+          "api_log_retention": {
+            "type": "integer",
+            "title": "Api Log Retention",
+            "default": 0
           },
           "overage": {
             "$ref": "#/components/schemas/UsageOverage"
