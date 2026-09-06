@@ -7408,6 +7408,54 @@
         "x-visibility": "public"
       }
     },
+    "/api/v1/billing/overage": {
+      "patch": {
+        "tags": [
+          "billing"
+        ],
+        "summary": "Update Overage Settings",
+        "description": "Turn overage billing on or off for this account.\n\nOff by default and stays off until asked: past the quota the API returns\n429, which is a limit the customer can see coming. Overage replaces that\nlimit with a charge, and nobody should meet that decision on an invoice.",
+        "operationId": "update_overage_settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillingOverageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingOverageResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-visibility": "public"
+      }
+    },
     "/api/v1/billing/checkout-session": {
       "post": {
         "tags": [
@@ -8640,6 +8688,61 @@
         ],
         "title": "BillingCheckoutResponse"
       },
+      "BillingOverageData": {
+        "properties": {
+          "overage_enabled": {
+            "type": "boolean",
+            "title": "Overage Enabled"
+          },
+          "overage_available": {
+            "type": "boolean",
+            "title": "Overage Available"
+          },
+          "overage_price_millicents": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overage Price Millicents"
+          }
+        },
+        "type": "object",
+        "required": [
+          "overage_enabled",
+          "overage_available"
+        ],
+        "title": "BillingOverageData"
+      },
+      "BillingOverageRequest": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "description": "Whether renders past the monthly quota should be billed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "title": "BillingOverageRequest"
+      },
+      "BillingOverageResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BillingOverageData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "BillingOverageResponse"
+      },
       "BillingPlan": {
         "properties": {
           "id": {
@@ -8654,9 +8757,36 @@
             "type": "string",
             "title": "Price Id"
           },
+          "price_id_annual": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Id Annual"
+          },
           "monthly_render_quota": {
             "type": "integer",
             "title": "Monthly Render Quota"
+          },
+          "allow_branding_removal": {
+            "type": "boolean",
+            "title": "Allow Branding Removal",
+            "default": false
+          },
+          "overage_price_millicents": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overage Price Millicents"
           }
         },
         "type": "object",
@@ -8750,6 +8880,27 @@
             "type": "boolean",
             "title": "Has Billing Account",
             "default": false
+          },
+          "overage_enabled": {
+            "type": "boolean",
+            "title": "Overage Enabled",
+            "default": false
+          },
+          "overage_available": {
+            "type": "boolean",
+            "title": "Overage Available",
+            "default": false
+          },
+          "overage_price_millicents": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overage Price Millicents"
           }
         },
         "type": "object",
@@ -10204,6 +10355,11 @@
             "type": "string",
             "title": "Footer Text",
             "default": "Generated by InvoicePDFs"
+          },
+          "hide_invoicepdfs_branding": {
+            "type": "boolean",
+            "title": "Hide Invoicepdfs Branding",
+            "default": false
           }
         },
         "type": "object",
@@ -11920,6 +12076,11 @@
             "type": "string",
             "title": "Footer Text",
             "default": "Generated by InvoicePDFs"
+          },
+          "hide_invoicepdfs_branding": {
+            "type": "boolean",
+            "title": "Hide Invoicepdfs Branding",
+            "default": false
           }
         },
         "type": "object",
@@ -14529,6 +14690,9 @@
           },
           "rate_limit": {
             "$ref": "#/components/schemas/UsageRateLimit"
+          },
+          "overage": {
+            "$ref": "#/components/schemas/UsageOverage"
           }
         },
         "type": "object",
@@ -14549,6 +14713,44 @@
           "data"
         ],
         "title": "UsageLimitsResponse"
+      },
+      "UsageOverage": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "default": false
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available",
+            "default": false
+          },
+          "renders": {
+            "type": "integer",
+            "title": "Renders",
+            "default": 0
+          },
+          "price_millicents": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Millicents"
+          },
+          "estimated_cost_cents": {
+            "type": "integer",
+            "title": "Estimated Cost Cents",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "UsageOverage",
+        "description": "Renders past the quota this period, and what they cost."
       },
       "UsagePeriod": {
         "properties": {
