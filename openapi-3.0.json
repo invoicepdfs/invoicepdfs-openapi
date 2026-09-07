@@ -14295,6 +14295,17 @@
             ],
             "title": "Jurisdiction",
             "example": "US-CA"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategory"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Default treatment for this rate. A line item may override it."
           }
         },
         "type": "object",
@@ -14332,6 +14343,16 @@
               }
             ],
             "title": "Jurisdiction"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategory"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "is_active": {
             "type": "boolean",
@@ -14386,6 +14407,16 @@
           "is_active": {
             "type": "boolean",
             "title": "Is Active"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategory"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",

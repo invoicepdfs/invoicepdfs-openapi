@@ -9061,6 +9061,11 @@ components:
           title: Jurisdiction
           examples:
           - US-CA
+        category:
+          anyOf:
+          - $ref: '#/components/schemas/TaxCategory'
+          - type: 'null'
+          description: Default treatment for this rate. A line item may override it.
       type: object
       required:
       - name
@@ -9085,6 +9090,10 @@ components:
           - type: string
           - type: 'null'
           title: Jurisdiction
+        category:
+          anyOf:
+          - $ref: '#/components/schemas/TaxCategory'
+          - type: 'null'
         is_active:
           type: boolean
           title: Is Active
@@ -9123,6 +9132,10 @@ components:
         is_active:
           type: boolean
           title: Is Active
+        category:
+          anyOf:
+          - $ref: '#/components/schemas/TaxCategory'
+          - type: 'null'
       type: object
       title: TaxRatePatchRequest
     TaxRateResponse:
