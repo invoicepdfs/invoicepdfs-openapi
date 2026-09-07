@@ -6747,6 +6747,12 @@ components:
           type: boolean
           title: Inclusive
           default: false
+        category:
+          anyOf:
+          - $ref: '#/components/schemas/TaxCategory'
+          - type: 'null'
+          description: How this tax is treated — required for e-invoicing formats,
+            which keep zero-rated, exempt and reverse-charge in separate VAT groups.
       type: object
       required:
       - name
@@ -7768,6 +7774,12 @@ components:
           type: boolean
           title: Inclusive
           default: false
+        category:
+          anyOf:
+          - $ref: '#/components/schemas/TaxCategory'
+          - type: 'null'
+          description: How this tax is treated — required for e-invoicing formats,
+            which keep zero-rated, exempt and reverse-charge in separate VAT groups.
       type: object
       title: InvoiceLineItemTaxInput
     InvoiceNoteInput:
@@ -8117,6 +8129,12 @@ components:
           type: boolean
           title: Inclusive
           default: false
+        category:
+          anyOf:
+          - $ref: '#/components/schemas/TaxCategory'
+          - type: 'null'
+          description: How this tax is treated — required for e-invoicing formats,
+            which keep zero-rated, exempt and reverse-charge in separate VAT groups.
       type: object
       title: LineItemTaxInput
     LocaleOut:
@@ -8981,6 +8999,45 @@ components:
       required:
       - data
       title: StatsResponse
+    TaxCategory:
+      properties:
+        code:
+          type: string
+          minLength: 1
+          title: Code
+          description: UNCL5305 tax category code — S standard, Z zero-rated, E exempt,
+            AE reverse charge, K intra-community, G export, O outside scope
+          examples:
+          - S
+        exemption_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exemption Reason
+          description: Required by EN 16931 whenever the category is not standard.
+          examples:
+          - Reverse charge
+        exemption_reason_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exemption Reason Code
+          examples:
+          - VATEX-EU-AE
+      type: object
+      required:
+      - code
+      title: TaxCategory
+      description: 'How a tax is treated, as opposed to what it is called.
+
+
+        `name` and `rate` do not say this: two taxes at 0% may be zero-rated,
+
+        exempt, reverse-charge or outside scope, and EN 16931 keeps them in
+
+        separate VAT breakdown groups with different mandatory fields. Optional,
+
+        so an invoice that never mentions a category calculates exactly as before.'
     TaxRateCreateRequest:
       properties:
         name:

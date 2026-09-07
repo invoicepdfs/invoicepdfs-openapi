@@ -11012,6 +11012,17 @@
             "type": "boolean",
             "title": "Inclusive",
             "default": false
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategory"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How this tax is treated \u2014 required for e-invoicing formats, which keep zero-rated, exempt and reverse-charge in separate VAT groups."
           }
         },
         "type": "object",
@@ -12646,6 +12657,17 @@
             "type": "boolean",
             "title": "Inclusive",
             "default": false
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategory"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How this tax is treated \u2014 required for e-invoicing formats, which keep zero-rated, exempt and reverse-charge in separate VAT groups."
           }
         },
         "type": "object",
@@ -13189,6 +13211,17 @@
             "type": "boolean",
             "title": "Inclusive",
             "default": false
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxCategory"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How this tax is treated \u2014 required for e-invoicing formats, which keep zero-rated, exempt and reverse-charge in separate VAT groups."
           }
         },
         "type": "object",
@@ -14457,6 +14490,54 @@
           "data"
         ],
         "title": "StatsResponse"
+      },
+      "TaxCategory": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Code",
+            "description": "UNCL5305 tax category code \u2014 S standard, Z zero-rated, E exempt, AE reverse charge, K intra-community, G export, O outside scope",
+            "examples": [
+              "S"
+            ]
+          },
+          "exemption_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemption Reason",
+            "description": "Required by EN 16931 whenever the category is not standard.",
+            "examples": [
+              "Reverse charge"
+            ]
+          },
+          "exemption_reason_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemption Reason Code",
+            "examples": [
+              "VATEX-EU-AE"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "title": "TaxCategory",
+        "description": "How a tax is treated, as opposed to what it is called.\n\n`name` and `rate` do not say this: two taxes at 0% may be zero-rated,\nexempt, reverse-charge or outside scope, and EN 16931 keeps them in\nseparate VAT breakdown groups with different mandatory fields. Optional,\nso an invoice that never mentions a category calculates exactly as before."
       },
       "TaxRateCreateRequest": {
         "properties": {
