@@ -12613,6 +12613,34 @@
               }
             ]
           },
+          "buyer_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Reference",
+            "examples": [
+              "PO-4711"
+            ]
+          },
+          "preceding_invoice_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preceding Invoice Number",
+            "examples": [
+              "INV-2026-001"
+            ]
+          },
           "line_items": {
             "items": {
               "$ref": "#/components/schemas/InvoiceLineItemInput"
@@ -12741,6 +12769,21 @@
             "title": "Unit",
             "examples": [
               "hours"
+            ]
+          },
+          "unit_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Code",
+            "description": "BT-130. UN/ECE Rec 20 code \u2014 HUR, C62. Not the printed label.",
+            "examples": [
+              "HUR"
             ]
           },
           "sku": {
