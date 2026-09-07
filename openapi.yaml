@@ -6759,6 +6759,15 @@ components:
           title: Unit
           examples:
           - hours
+        unit_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit Code
+          description: BT-130. UN/ECE Rec 20 code for the unit — HUR for hours, C62
+            for each. Separate from `unit`, which is the label printed on the PDF.
+          examples:
+          - HUR
         sku:
           anyOf:
           - type: string
@@ -8990,6 +8999,15 @@ components:
           title: Unit
           examples:
           - hours
+        unit_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit Code
+          description: BT-130. UN/ECE Rec 20 code for the unit — HUR for hours, C62
+            for each. Separate from `unit`, which is the label printed on the PDF.
+          examples:
+          - HUR
         sku:
           anyOf:
           - type: string
