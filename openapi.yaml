@@ -6691,6 +6691,15 @@ components:
             present — often the buyer's own PO or cost-centre string.
           examples:
           - PO-4711
+        preceding_invoice_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preceding Invoice Number
+          description: BT-25. The number of the invoice a credit note corrects. Supplied
+            directly here because this path stores nothing to look it up in.
+          examples:
+          - INV-2026-001
         line_items:
           items:
             $ref: '#/components/schemas/DocumentLineItemInput'
