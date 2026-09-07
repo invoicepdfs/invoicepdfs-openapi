@@ -2583,6 +2583,54 @@
         "x-visibility": "public"
       }
     },
+    "/api/v1/documents/validate-compliance": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Validate Compliance",
+        "description": "Check a document against an e-invoicing ruleset without rendering it.\n\nCosts no renders: nothing is stored and no PDF is produced, so a caller can\ncheck every invoice they are about to send rather than discovering the\nproblem from a rejection weeks later.\n\nThis is the semantic half \u2014 mandatory fields and conditional requirements.\nSchematron is the authoritative check and is not wired up yet, so a document\nthat passes here is not thereby proven conformant. It says what it can prove\nis wrong, which is the useful half early.",
+        "operationId": "validate_compliance",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentComplianceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentComplianceResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-visibility": "public"
+      }
+    },
     "/api/v1/documents/calculate": {
       "post": {
         "tags": [
@@ -9750,6 +9798,78 @@
         ],
         "title": "CalculationBreakdown"
       },
+      "ComplianceCheckOut": {
+        "properties": {
+          "profile": {
+            "type": "string",
+            "title": "Profile",
+            "examples": [
+              "peppol_bis_billing_3"
+            ]
+          },
+          "ruleset_version": {
+            "type": "string",
+            "title": "Ruleset Version",
+            "description": "The version these rules came from. Worth recording alongside any document you file \u2014 rulesets revise, and 'which rules did this pass?' is what an audit asks years later.",
+            "examples": [
+              "PEPPOL-UBL-3.15.0"
+            ]
+          },
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "violations": {
+            "items": {
+              "$ref": "#/components/schemas/ComplianceViolationOut"
+            },
+            "type": "array",
+            "title": "Violations",
+            "description": "Every violation found, not the first \u2014 fixing one field per round trip is the experience this avoids."
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile",
+          "ruleset_version",
+          "valid"
+        ],
+        "title": "ComplianceCheckOut"
+      },
+      "ComplianceViolationOut": {
+        "properties": {
+          "rule": {
+            "type": "string",
+            "title": "Rule",
+            "description": "The EN 16931 term or group.",
+            "examples": [
+              "BT-130"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "Where in the document.",
+            "examples": [
+              "lines[1].unit_code"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "examples": [
+              "A coded unit is required."
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "rule",
+          "path",
+          "message"
+        ],
+        "title": "ComplianceViolationOut"
+      },
       "CountriesListResponse": {
         "properties": {
           "data": {
@@ -10569,6 +10689,53 @@
           "data"
         ],
         "title": "DocumentCalculateResponse"
+      },
+      "DocumentComplianceRequest": {
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "invoice",
+              "credit_note",
+              "quote",
+              "receipt",
+              "proforma",
+              "purchase_order",
+              "delivery_note"
+            ],
+            "title": "Document Type",
+            "default": "invoice"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DocumentInvoiceDataInput"
+          },
+          "profile": {
+            "type": "string",
+            "title": "Profile",
+            "description": "Which ruleset to hold the document to. Rulesets differ: a document valid under one can be rejected by another, so there is no default.",
+            "examples": [
+              "peppol_bis_billing_3"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "profile"
+        ],
+        "title": "DocumentComplianceRequest"
+      },
+      "DocumentComplianceResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ComplianceCheckOut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "DocumentComplianceResponse"
       },
       "DocumentCreateRequest": {
         "properties": {
