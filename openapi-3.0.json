@@ -10602,6 +10602,19 @@
               }
             ]
           },
+          "buyer_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Reference",
+            "description": "BT-10. Mandatory in Peppol BIS unless an order reference is present — often the buyer's own PO or cost-centre string.",
+            "example": "PO-4711"
+          },
           "line_items": {
             "items": {
               "$ref": "#/components/schemas/StandardLineItemInput"
@@ -10792,6 +10805,19 @@
                 "type": "null"
               }
             ]
+          },
+          "buyer_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Reference",
+            "description": "BT-10. Mandatory in Peppol BIS unless an order reference is present — often the buyer's own PO or cost-centre string.",
+            "example": "PO-4711"
           },
           "line_items": {
             "items": {
@@ -11385,6 +11411,17 @@
                 "type": "null"
               }
             ]
+          },
+          "buyer_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Reference"
           },
           "line_items": {
             "anyOf": [

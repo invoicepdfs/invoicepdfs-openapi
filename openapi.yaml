@@ -6544,6 +6544,15 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        buyer_reference:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Buyer Reference
+          description: BT-10. Mandatory in Peppol BIS unless an order reference is
+            present — often the buyer's own PO or cost-centre string.
+          examples:
+          - PO-4711
         line_items:
           items:
             $ref: '#/components/schemas/StandardLineItemInput'
@@ -6673,6 +6682,15 @@ components:
           anyOf:
           - $ref: '#/components/schemas/DocumentPartyInput'
           - type: 'null'
+        buyer_reference:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Buyer Reference
+          description: BT-10. Mandatory in Peppol BIS unless an order reference is
+            present — often the buyer's own PO or cost-centre string.
+          examples:
+          - PO-4711
         line_items:
           items:
             $ref: '#/components/schemas/DocumentLineItemInput'
@@ -7033,6 +7051,11 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        buyer_reference:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Buyer Reference
         line_items:
           anyOf:
           - items:
