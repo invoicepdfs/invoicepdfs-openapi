@@ -5724,6 +5724,12 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        electronic_address:
+          anyOf:
+          - $ref: '#/components/schemas/ElectronicAddress'
+          - type: 'null'
+          description: Network address for e-invoicing. Required by Peppol; not the
+            tax id.
         default_currency:
           anyOf:
           - type: string
@@ -5802,6 +5808,12 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        electronic_address:
+          anyOf:
+          - $ref: '#/components/schemas/ElectronicAddress'
+          - type: 'null'
+          description: Network address for e-invoicing. Required by Peppol; not the
+            tax id.
         default_currency:
           anyOf:
           - type: string
@@ -5879,6 +5891,10 @@ components:
         address:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
+          - type: 'null'
+        electronic_address:
+          anyOf:
+          - $ref: '#/components/schemas/ElectronicAddress'
           - type: 'null'
         default_currency:
           anyOf:
@@ -6121,6 +6137,12 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        electronic_address:
+          anyOf:
+          - $ref: '#/components/schemas/ElectronicAddress'
+          - type: 'null'
+          description: Network address for e-invoicing. Required by Peppol; not the
+            tax id.
         metadata:
           anyOf:
           - additionalProperties: true
@@ -6167,6 +6189,12 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        electronic_address:
+          anyOf:
+          - $ref: '#/components/schemas/ElectronicAddress'
+          - type: 'null'
+          description: Network address for e-invoicing. Required by Peppol; not the
+            tax id.
         metadata:
           anyOf:
           - additionalProperties: true
@@ -6216,6 +6244,10 @@ components:
         shipping_address:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
+          - type: 'null'
+        electronic_address:
+          anyOf:
+          - $ref: '#/components/schemas/ElectronicAddress'
           - type: 'null'
         metadata:
           anyOf:

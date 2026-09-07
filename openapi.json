@@ -9303,6 +9303,17 @@
               }
             ]
           },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Network address for e-invoicing. Required by Peppol; not the tax id."
+          },
           "default_currency": {
             "anyOf": [
               {
@@ -9455,6 +9466,17 @@
               }
             ]
           },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Network address for e-invoicing. Required by Peppol; not the tax id."
+          },
           "default_currency": {
             "anyOf": [
               {
@@ -9598,6 +9620,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/PostalAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
               },
               {
                 "type": "null"
@@ -9990,6 +10022,17 @@
               }
             ]
           },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Network address for e-invoicing. Required by Peppol; not the tax id."
+          },
           "metadata": {
             "anyOf": [
               {
@@ -10080,6 +10123,17 @@
               }
             ]
           },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Network address for e-invoicing. Required by Peppol; not the tax id."
+          },
           "metadata": {
             "anyOf": [
               {
@@ -10167,6 +10221,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/PostalAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
               },
               {
                 "type": "null"
