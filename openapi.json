@@ -11304,6 +11304,17 @@
                 "type": "null"
               }
             ]
+          },
+          "electronic_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ElectronicAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Network address for e-invoicing. Required by Peppol; not the tax id."
           }
         },
         "type": "object",
@@ -11845,6 +11856,34 @@
           "data"
         ],
         "title": "DocumentsListResponse"
+      },
+      "ElectronicAddress": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Value",
+            "examples": [
+              "9482348239"
+            ]
+          },
+          "scheme_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Scheme Id",
+            "description": "EAS code list identifier \u2014 0088 is GLN, 9930 a German VAT number.",
+            "examples": [
+              "0088"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "scheme_id"
+        ],
+        "title": "ElectronicAddress",
+        "description": "BT-34 / BT-49 \u2014 where a document is routed on Peppol or DBNA.\n\nBoth halves are required: an identifier without its scheme cannot be\nresolved, because the same string means different things in different code\nlists. This is not the tax id, which identifies a company to a tax\nauthority rather than a mailbox on a network."
       },
       "FileOut": {
         "properties": {
