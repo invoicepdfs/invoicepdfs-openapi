@@ -10573,6 +10573,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -10615,6 +10616,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -10660,6 +10662,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -11190,6 +11193,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -11478,6 +11482,7 @@
                 "enum": [
                   "invoice",
                   "credit_note",
+                  "debit_note",
                   "quote",
                   "receipt",
                   "proforma",
@@ -11788,6 +11793,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -11941,6 +11947,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -12508,6 +12515,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -12874,6 +12882,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
@@ -14318,6 +14327,7 @@
             "enum": [
               "invoice",
               "credit_note",
+              "debit_note",
               "quote",
               "receipt",
               "proforma",
