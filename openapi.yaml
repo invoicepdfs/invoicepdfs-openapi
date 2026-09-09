@@ -1646,13 +1646,20 @@ paths:
         problem from a rejection weeks later.
 
 
-        This is the semantic half — mandatory fields and conditional requirements.
+        Two tiers run, and both are reported. The mandatory-field check names a
 
-        Schematron is the authoritative check and is not wired up yet, so a document
+        field of the request you can go and change. Schematron then serializes the
 
-        that passes here is not thereby proven conformant. It says what it can prove
+        document and runs the **published rules at a pinned version** over the
 
-        is wrong, which is the useful half early.'
+        result — the same artefacts an access point runs — so a finding here quotes
+
+        the rule id a rejection notice would quote.
+
+
+        Read `valid` together with `fully_checked`: `valid` says nothing fatal was
+
+        found, and `rulesets` says what actually ran to find it.'
       operationId: validate_compliance
       requestBody:
         content:
@@ -6124,44 +6131,123 @@ components:
           title: Ruleset Version
           description: The version these rules came from. Worth recording alongside
             any document you file — rulesets revise, and 'which rules did this pass?'
-            is what an audit asks years later.
+            is what an audit asks years later. `rulesets` breaks the same answer down
+            per ruleset.
           examples:
-          - PEPPOL-UBL-3.15.0
+          - EN16931-UBL 1.3.16 + Peppol BIS Billing 3.0.20
         valid:
           type: boolean
           title: Valid
+          description: Nothing fatal was found. Read it with `fully_checked` — on
+            its own it says what was checked came back clean, not that everything
+            was checked.
+        fully_checked:
+          type: boolean
+          title: Fully Checked
+          description: Every ruleset that applies to this profile ran. False means
+            at least one could not, and `rulesets` says which and why.
+          default: true
+        rulesets:
+          items:
+            $ref: '#/components/schemas/ComplianceRulesetOut'
+          type: array
+          title: Rulesets
+          description: Every ruleset the document was held to, including the mandatory-field
+            check, at the version that ran.
         violations:
           items:
             $ref: '#/components/schemas/ComplianceViolationOut'
           type: array
           title: Violations
           description: Every violation found, not the first — fixing one field per
-            round trip is the experience this avoids.
+            round trip is the experience this avoids. Ordered mandatory-field findings
+            first, since those name a field you can go and change.
       type: object
       required:
       - profile
       - ruleset_version
       - valid
       title: ComplianceCheckOut
+    ComplianceRulesetOut:
+      properties:
+        id:
+          type: string
+          title: Id
+          examples:
+          - peppol-en16931-ubl
+        label:
+          type: string
+          title: Label
+          examples:
+          - Peppol BIS Billing 3.0
+        version:
+          type: string
+          title: Version
+          description: The upstream release of the rules. Empty for checks with no
+            version of their own.
+          default: ''
+          examples:
+          - 3.0.20
+        ran:
+          type: boolean
+          title: Ran
+          description: False when this ruleset could not be run at all. A ruleset
+            that did not run is not a pass — `valid` only reports what was checked.
+        reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason
+          description: Why it did not run, when it did not.
+      type: object
+      required:
+      - id
+      - label
+      - ran
+      title: ComplianceRulesetOut
+      description: One ruleset the document was held to, and whether it actually ran.
     ComplianceViolationOut:
       properties:
         rule:
           type: string
           title: Rule
-          description: The EN 16931 term or group.
+          description: The identifier the standard uses — a business term from the
+            mandatory-field check, a rule id from Schematron. A rule id is what a
+            rejection notice from an access point quotes.
           examples:
           - BT-130
+          - PEPPOL-EN16931-R003
         path:
           type: string
           title: Path
-          description: Where in the document.
+          description: Where the problem is. The mandatory-field check names a field
+            of the request; Schematron names the node in the generated XML.
           examples:
           - lines[1].unit_code
+          - /Invoice[1]/TaxTotal[1]
         message:
           type: string
           title: Message
           examples:
           - A coded unit is required.
+        severity:
+          type: string
+          title: Severity
+          description: '`fatal` would get the document rejected. `warning` is a recommendation
+            — both EN 16931 and Peppol grade a large share of their rules as advisory,
+            and `valid` ignores those.'
+          default: fatal
+          examples:
+          - fatal
+          - warning
+        ruleset:
+          type: string
+          title: Ruleset
+          description: Which ruleset found it — matches an `id` in `rulesets`.
+          default: semantic
+          examples:
+          - semantic
+          - peppol-en16931-ubl
       type: object
       required:
       - rule
