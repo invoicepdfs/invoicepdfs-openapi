@@ -5847,6 +5847,16 @@ components:
           title: Display Name
           examples:
           - Acme Corp
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
+          description: Who to ask about an invoice — a person or a department, not
+            the company. EN 16931 calls it the contact point (BT-41 for the seller,
+            BT-56 for the buyer); some national rulesets require it.
+          examples:
+          - Accounts Receivable
         email:
           anyOf:
           - type: string
@@ -5879,6 +5889,13 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        bank_account:
+          anyOf:
+          - $ref: '#/components/schemas/InvoiceBankAccountInput'
+          - type: 'null'
+          description: Where to send the money. Becomes the invoice's payment instructions
+            (BG-16) unless a document states an account of its own; some national
+            rulesets require them.
         electronic_address:
           anyOf:
           - $ref: '#/components/schemas/ElectronicAddress'
@@ -5931,6 +5948,16 @@ components:
           title: Display Name
           examples:
           - Acme Corp
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
+          description: Who to ask about an invoice — a person or a department, not
+            the company. EN 16931 calls it the contact point (BT-41 for the seller,
+            BT-56 for the buyer); some national rulesets require it.
+          examples:
+          - Accounts Receivable
         email:
           anyOf:
           - type: string
@@ -5963,6 +5990,13 @@ components:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
           - type: 'null'
+        bank_account:
+          anyOf:
+          - $ref: '#/components/schemas/InvoiceBankAccountInput'
+          - type: 'null'
+          description: Where to send the money. Becomes the invoice's payment instructions
+            (BG-16) unless a document states an account of its own; some national
+            rulesets require them.
         electronic_address:
           anyOf:
           - $ref: '#/components/schemas/ElectronicAddress'
@@ -6023,6 +6057,11 @@ components:
           - type: string
           - type: 'null'
           title: Display Name
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
         email:
           anyOf:
           - type: string
@@ -6046,6 +6085,10 @@ components:
         address:
           anyOf:
           - $ref: '#/components/schemas/PostalAddress'
+          - type: 'null'
+        bank_account:
+          anyOf:
+          - $ref: '#/components/schemas/InvoiceBankAccountInput'
           - type: 'null'
         electronic_address:
           anyOf:
@@ -6398,6 +6441,16 @@ components:
           title: Name
           examples:
           - Jane Smith
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
+          description: Who to ask about an invoice — a person or a department, not
+            the company. EN 16931 calls it the contact point (BT-41 for the seller,
+            BT-56 for the buyer); some national rulesets require it.
+          examples:
+          - Accounts Receivable
         email:
           anyOf:
           - type: string
@@ -6450,6 +6503,16 @@ components:
           title: Name
           examples:
           - Jane Smith
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
+          description: Who to ask about an invoice — a person or a department, not
+            the company. EN 16931 calls it the contact point (BT-41 for the seller,
+            BT-56 for the buyer); some national rulesets require it.
+          examples:
+          - Accounts Receivable
         email:
           anyOf:
           - type: string
@@ -6512,6 +6575,11 @@ components:
         name:
           type: string
           title: Name
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
         email:
           anyOf:
           - type: string
@@ -6882,6 +6950,17 @@ components:
             present — often the buyer's own PO or cost-centre string.
           examples:
           - PO-4711
+        delivery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Delivery Date
+          description: BT-72. When the goods or services were actually supplied —
+            not the issue date, and what decides the VAT period. XRechnung requires
+            this, an invoicing period, or a period on every line.
+          examples:
+          - '2026-09-30'
         line_items:
           items:
             $ref: '#/components/schemas/StandardLineItemInput'
@@ -7011,6 +7090,17 @@ components:
           anyOf:
           - $ref: '#/components/schemas/DocumentPartyInput'
           - type: 'null'
+        delivery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Delivery Date
+          description: When the goods or services were actually supplied (BT-72).
+            Not the issue date, and it is what decides the VAT period. XRechnung requires
+            this, an invoicing period, or a period on every line.
+          examples:
+          - '2026-09-30'
         buyer_reference:
           anyOf:
           - type: string
@@ -7280,6 +7370,16 @@ components:
           title: Legal Name
           examples:
           - Acme Corp Inc.
+        contact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Name
+          description: Who to ask about an invoice — a person or a department, not
+            the company. EN 16931 calls it the contact point (BT-41 for the seller,
+            BT-56 for the buyer); some national rulesets require it.
+          examples:
+          - Accounts Receivable
         email:
           anyOf:
           - type: string
@@ -7407,6 +7507,12 @@ components:
           - type: string
           - type: 'null'
           title: Buyer Reference
+        delivery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Delivery Date
         line_items:
           anyOf:
           - items:
@@ -8109,6 +8215,17 @@ components:
           title: Buyer Reference
           examples:
           - PO-4711
+        delivery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Delivery Date
+          description: When the goods or services were actually supplied (BT-72).
+            Not the issue date, and it is what decides the VAT period. XRechnung requires
+            this, an invoicing period, or a period on every line.
+          examples:
+          - '2026-09-30'
         preceding_invoice_number:
           anyOf:
           - type: string
