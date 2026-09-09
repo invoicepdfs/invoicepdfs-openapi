@@ -1794,6 +1794,69 @@
         "x-visibility": "public"
       }
     },
+    "/api/v1/documents/{document_id}/xml": {
+      "get": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Download Document Xml",
+        "description": "The e-invoicing XML for a document already stored here.\n\nReads `data_json` directly rather than going through the render path's\nreconstruction: the status, the logo and the source document's number are\nall attached there for the *PDF*, and none of them belong in the XML. The\ncredit note's BG-3 reference is already in the stored payload, resolved when\nthe document was written.",
+        "operationId": "download_document_xml",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Which ruleset to write this against. No default: a document valid under one can be rejected by another, so the choice is the request.",
+              "examples": [
+                "peppol_bis_billing_3"
+              ],
+              "title": "Profile"
+            },
+            "description": "Which ruleset to write this against. No default: a document valid under one can be rejected by another, so the choice is the request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The stored document as XML, in the syntax the chosen profile is expressed in \u2014 UBL for Peppol BIS, CII for Factur-X.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-visibility": "public"
+      }
+    },
     "/api/v1/documents/{document_id}": {
       "get": {
         "tags": [
@@ -2608,6 +2671,54 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DocumentComplianceResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-visibility": "public"
+      }
+    },
+    "/api/v1/documents/xml": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Render Document Xml",
+        "description": "The e-invoicing XML for a document, without storing anything.\n\nTakes the same body as `/validate-compliance`, and the pairing is the point:\ncheck first, then take the XML once it passes. Nothing here validates\nagainst the ruleset \u2014 a document missing mandatory fields serialises to XML\nmissing those elements, which is a more useful artefact to look at than a\nrefusal, and `/validate-compliance` is where the refusal belongs.\n\nThe syntax is not a parameter. It follows from the profile, because a\nprofile already is a syntax plus a ruleset, and asking a caller for both is\nasking them to know that Peppol means UBL.",
+        "operationId": "render_document_xml",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentComplianceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The document as XML, in the syntax the chosen profile is expressed in \u2014 UBL for Peppol BIS, CII for Factur-X.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -11465,7 +11576,10 @@
         "properties": {
           "format": {
             "type": "string",
-            "const": "pdf",
+            "enum": [
+              "pdf",
+              "facturx_pdf"
+            ],
             "title": "Format",
             "default": "pdf"
           },
@@ -11942,6 +12056,19 @@
             "type": "integer",
             "title": "Expires In",
             "default": 3600
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "pdf",
+              "facturx_pdf"
+            ],
+            "title": "Format",
+            "description": "`facturx_pdf` embeds the EN 16931 CII XML in a PDF/A-3, which is what a French or German counterparty means by Factur-X or ZUGFeRD.",
+            "default": "pdf",
+            "examples": [
+              "pdf"
+            ]
           }
         },
         "type": "object",
