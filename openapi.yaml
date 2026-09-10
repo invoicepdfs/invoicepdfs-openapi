@@ -2200,6 +2200,19 @@ paths:
         schema:
           type: string
           title: Template Id
+      - name: version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          description: Preview the config this version recorded rather than the template's
+            current config. Only a custom (`ctpl_`) template has versions.
+          title: Version
+        description: Preview the config this version recorded rather than the template's
+          current config. Only a custom (`ctpl_`) template has versions.
       - name: Idempotency-Key
         in: header
         required: false
@@ -2302,6 +2315,51 @@ paths:
       - template-versions
       summary: Get Template Version
       operationId: get_template_version
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Template Id
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateVersionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      x-visibility: public
+  /api/v1/templates/{template_id}/versions/{version}/restore:
+    post:
+      tags:
+      - template-versions
+      summary: Restore Template Version
+      description: 'Put a template back to the config a version recorded.
+
+
+        The template moves; the version does not. Restoring v1 over v3''s config does
+
+        not delete v3 or renumber anything — the next snapshot is v4, and the history
+
+        stays a record of what happened rather than a record of the last decision.
+
+        Take a version first if the config being replaced is worth keeping.'
+      operationId: restore_template_version
       security:
       - HTTPBearer: []
       parameters:
@@ -5288,6 +5346,16 @@ components:
           type: string
           title: Template Id
           default: tpl_modern
+        template_version:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Template Version
+          description: Render the config this version of the template recorded, instead
+            of the config it holds now. Only a custom (`ctpl_`) template has versions.
+          examples:
+          - 2
         output:
           $ref: '#/components/schemas/BatchOutputOptions'
       type: object
@@ -5390,6 +5458,11 @@ components:
         template_id:
           type: string
           title: Template Id
+        template_version:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Template Version
         total_items:
           type: integer
           title: Total Items
@@ -6393,9 +6466,7 @@ components:
           type: string
           title: Base Template Id
         config:
-          additionalProperties: true
-          type: object
-          title: Config
+          $ref: '#/components/schemas/TemplateConfig'
         status:
           type: string
           title: Status
@@ -7643,6 +7714,16 @@ components:
           type: string
           title: Template Id
           default: tpl_modern
+        template_version:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Template Version
+          description: Render the config this version of the template recorded, instead
+            of the config it holds now. Only a custom (`ctpl_`) template has versions.
+          examples:
+          - 2
         page_size:
           type: string
           title: Page Size
@@ -7737,6 +7818,16 @@ components:
         id:
           type: string
           title: Id
+        version:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Version
+          description: Render the config this version of the template recorded, instead
+            of the config it holds now. Only a custom (`ctpl_`) template has versions.
+          examples:
+          - 2
       type: object
       required:
       - id
@@ -9471,6 +9562,14 @@ components:
           - purchase_order
           - delivery_note
           title: Document Type
+        template_id:
+          type: string
+          title: Template Id
+        template_version:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Template Version
         format:
           type: string
           const: pdf
@@ -9491,6 +9590,7 @@ components:
       - id
       - status
       - document_type
+      - template_id
       - format
       - download_url
       - expires_at
@@ -9825,6 +9925,73 @@ components:
       required:
       - data
       title: TaxRatesListResponse
+    TemplateConfig:
+      properties:
+        primary_color:
+          anyOf:
+          - type: string
+            pattern: ^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+          - type: 'null'
+          title: Primary Color
+          examples:
+          - '#0F172A'
+        accent_color:
+          anyOf:
+          - type: string
+            pattern: ^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+          - type: 'null'
+          title: Accent Color
+          examples:
+          - '#06B6D4'
+        font_family:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Font Family
+          examples:
+          - Inter
+        header_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Header Text
+          examples:
+          - Acme Ltd
+        footer_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Footer Text
+          examples:
+          - Thank you for your business
+      additionalProperties: false
+      type: object
+      title: TemplateConfig
+      description: 'What a custom template is: a built-in design plus the brand to
+        render it in.
+
+
+        A custom template is not a design of its own — it names one of the built-ins
+
+        in ``base_template_id`` and carries the values below, which are the same ones
+
+        ``data.branding`` carries. They are applied *underneath* a request''s own
+
+        branding, so a document that states a colour still wins and one template can
+
+        serve several brands.
+
+
+        Typed rather than the free-form object it used to be: nothing read that
+
+        object, so every key in it was equally correct and a caller could keep
+
+        sending ``primary_colour`` forever without a word back. Unset here means
+
+        "the template has no opinion" — unlike ``Branding``, whose every field has
+        a
+
+        non-empty default and so cannot say that.'
     TemplateCreateRequest:
       properties:
         name:
@@ -9842,9 +10009,7 @@ components:
           title: Base Template Id
           default: tpl_modern
         config:
-          additionalProperties: true
-          type: object
-          title: Config
+          $ref: '#/components/schemas/TemplateConfig'
       type: object
       required:
       - name
@@ -9892,9 +10057,7 @@ components:
           - type: 'null'
           title: Description
         config:
-          additionalProperties: true
-          type: object
-          title: Config
+          $ref: '#/components/schemas/TemplateConfig'
       type: object
       title: TemplatePatchRequest
     TemplateSummary:
@@ -9931,10 +10094,6 @@ components:
           title: Changelog
           examples:
           - Added header logo support
-        config:
-          additionalProperties: true
-          type: object
-          title: Config
       type: object
       title: TemplateVersionCreateRequest
     TemplateVersionOut:
@@ -9959,9 +10118,7 @@ components:
           - type: 'null'
           title: Changelog
         config:
-          additionalProperties: true
-          type: object
-          title: Config
+          $ref: '#/components/schemas/TemplateConfig'
         created_at:
           type: string
           title: Created At

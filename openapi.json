@@ -3518,6 +3518,25 @@
             }
           },
           {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Preview the config this version recorded rather than the template's current config. Only a custom (`ctpl_`) template has versions.",
+              "title": "Version"
+            },
+            "description": "Preview the config this version recorded rather than the template's current config. Only a custom (`ctpl_`) template has versions."
+          },
+          {
             "name": "Idempotency-Key",
             "in": "header",
             "required": false,
@@ -3686,6 +3705,64 @@
         ],
         "summary": "Get Template Version",
         "operationId": "get_template_version",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "template_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Template Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateVersionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-visibility": "public"
+      }
+    },
+    "/api/v1/templates/{template_id}/versions/{version}/restore": {
+      "post": {
+        "tags": [
+          "template-versions"
+        ],
+        "summary": "Restore Template Version",
+        "description": "Put a template back to the config a version recorded.\n\nThe template moves; the version does not. Restoring v1 over v3's config does\nnot delete v3 or renumber anything \u2014 the next snapshot is v4, and the history\nstays a record of what happened rather than a record of the last decision.\nTake a version first if the config being replaced is worth keeping.",
+        "operationId": "restore_template_version",
         "security": [
           {
             "HTTPBearer": []
@@ -8544,6 +8621,22 @@
             "title": "Template Id",
             "default": "tpl_modern"
           },
+          "template_version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Template Version",
+            "description": "Render the config this version of the template recorded, instead of the config it holds now. Only a custom (`ctpl_`) template has versions.",
+            "examples": [
+              2
+            ]
+          },
           "output": {
             "$ref": "#/components/schemas/BatchOutputOptions"
           }
@@ -8698,6 +8791,17 @@
           "template_id": {
             "type": "string",
             "title": "Template Id"
+          },
+          "template_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Template Version"
           },
           "total_items": {
             "type": "integer",
@@ -10275,9 +10379,7 @@
             "title": "Base Template Id"
           },
           "config": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Config"
+            "$ref": "#/components/schemas/TemplateConfig"
           },
           "status": {
             "type": "string",
@@ -12356,6 +12458,22 @@
             "title": "Template Id",
             "default": "tpl_modern"
           },
+          "template_version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Template Version",
+            "description": "Render the config this version of the template recorded, instead of the config it holds now. Only a custom (`ctpl_`) template has versions.",
+            "examples": [
+              2
+            ]
+          },
           "page_size": {
             "type": "string",
             "title": "Page Size",
@@ -12461,6 +12579,22 @@
           "id": {
             "type": "string",
             "title": "Id"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version",
+            "description": "Render the config this version of the template recorded, instead of the config it holds now. Only a custom (`ctpl_`) template has versions.",
+            "examples": [
+              2
+            ]
           }
         },
         "type": "object",
@@ -15089,6 +15223,21 @@
             ],
             "title": "Document Type"
           },
+          "template_id": {
+            "type": "string",
+            "title": "Template Id"
+          },
+          "template_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Template Version"
+          },
           "format": {
             "type": "string",
             "const": "pdf",
@@ -15115,6 +15264,7 @@
           "id",
           "status",
           "document_type",
+          "template_id",
           "format",
           "download_url",
           "expires_at",
@@ -15607,6 +15757,86 @@
         ],
         "title": "TaxRatesListResponse"
       },
+      "TemplateConfig": {
+        "properties": {
+          "primary_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Primary Color",
+            "examples": [
+              "#0F172A"
+            ]
+          },
+          "accent_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accent Color",
+            "examples": [
+              "#06B6D4"
+            ]
+          },
+          "font_family": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Font Family",
+            "examples": [
+              "Inter"
+            ]
+          },
+          "header_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Header Text",
+            "examples": [
+              "Acme Ltd"
+            ]
+          },
+          "footer_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Footer Text",
+            "examples": [
+              "Thank you for your business"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TemplateConfig",
+        "description": "What a custom template is: a built-in design plus the brand to render it in.\n\nA custom template is not a design of its own \u2014 it names one of the built-ins\nin ``base_template_id`` and carries the values below, which are the same ones\n``data.branding`` carries. They are applied *underneath* a request's own\nbranding, so a document that states a colour still wins and one template can\nserve several brands.\n\nTyped rather than the free-form object it used to be: nothing read that\nobject, so every key in it was equally correct and a caller could keep\nsending ``primary_colour`` forever without a word back. Unset here means\n\"the template has no opinion\" \u2014 unlike ``Branding``, whose every field has a\nnon-empty default and so cannot say that."
+      },
       "TemplateCreateRequest": {
         "properties": {
           "name": {
@@ -15632,9 +15862,7 @@
             "default": "tpl_modern"
           },
           "config": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Config"
+            "$ref": "#/components/schemas/TemplateConfig"
           }
         },
         "type": "object",
@@ -15704,9 +15932,7 @@
             "title": "Description"
           },
           "config": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Config"
+            "$ref": "#/components/schemas/TemplateConfig"
           }
         },
         "type": "object",
@@ -15765,11 +15991,6 @@
             "examples": [
               "Added header logo support"
             ]
-          },
-          "config": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Config"
           }
         },
         "type": "object",
@@ -15812,9 +16033,7 @@
             "title": "Changelog"
           },
           "config": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Config"
+            "$ref": "#/components/schemas/TemplateConfig"
           },
           "created_at": {
             "type": "string",
