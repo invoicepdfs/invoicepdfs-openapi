@@ -10004,6 +10004,12 @@
             "title": "Valid",
             "description": "Nothing fatal was found. Read it with `fully_checked` \u2014 on its own it says what was checked came back clean, not that everything was checked."
           },
+          "in_scope": {
+            "type": "boolean",
+            "title": "In Scope",
+            "description": "Whether any of these rulesets is likely to apply to this document at all. False when neither party is in a country that uses one \u2014 these are European e-invoicing rulesets, and for a wholly domestic US invoice, say, `valid` is answering a question nobody asked. Advisory: it never changes the verdict or withholds the check, because an open network means a US seller invoicing a Dutch buyer genuinely needs it.",
+            "default": true
+          },
           "fully_checked": {
             "type": "boolean",
             "title": "Fully Checked",
@@ -11191,6 +11197,21 @@
               "PO-4711"
             ]
           },
+          "tax_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Scheme",
+            "description": "UNCL5153 \u2014 what kind of tax this invoice states. One document, one answer: an invoice is issued under a tax regime, not a different one per line. Optional, and deliberately not defaulted, because a PDF does not need it and assuming `VAT` would put a claim in a tax document that you did not make. Required to produce or check an e-invoice, where it must be `VAT` \u2014 every ruleset built on EN 16931 describes VAT and tests for that string literally, so a document stating anything else is refused rather than relabelled.",
+            "examples": [
+              "VAT"
+            ]
+          },
           "delivery_date": {
             "anyOf": [
               {
@@ -11414,6 +11435,21 @@
               {
                 "type": "null"
               }
+            ]
+          },
+          "tax_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Scheme",
+            "description": "UNCL5153 \u2014 what kind of tax this invoice states. One document, one answer: an invoice is issued under a tax regime, not a different one per line. Optional, and deliberately not defaulted, because a PDF does not need it and assuming `VAT` would put a claim in a tax document that you did not make. Required to produce or check an e-invoice, where it must be `VAT` \u2014 every ruleset built on EN 16931 describes VAT and tests for that string literally, so a document stating anything else is refused rather than relabelled.",
+            "examples": [
+              "VAT"
             ]
           },
           "delivery_date": {
@@ -12128,6 +12164,17 @@
               }
             ],
             "title": "Buyer Reference"
+          },
+          "tax_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Scheme"
           },
           "delivery_date": {
             "anyOf": [
@@ -13189,6 +13236,21 @@
             "title": "Buyer Reference",
             "examples": [
               "PO-4711"
+            ]
+          },
+          "tax_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Scheme",
+            "description": "UNCL5153 \u2014 what kind of tax this invoice states. One document, one answer: an invoice is issued under a tax regime, not a different one per line. Optional, and deliberately not defaulted, because a PDF does not need it and assuming `VAT` would put a claim in a tax document that you did not make. Required to produce or check an e-invoice, where it must be `VAT` \u2014 every ruleset built on EN 16931 describes VAT and tests for that string literally, so a document stating anything else is refused rather than relabelled.",
+            "examples": [
+              "VAT"
             ]
           },
           "delivery_date": {
