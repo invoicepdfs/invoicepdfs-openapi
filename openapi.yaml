@@ -601,6 +601,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleBoolResponse'
+        '409':
+          description: The profile is named on documents or recurring invoices. `details.referenced_by`
+            counts each one.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         '422':
           description: Validation Error
           content:
@@ -1002,6 +1009,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleBoolResponse'
+        '409':
+          description: The customer is named on documents or recurring invoices. `details.referenced_by`
+            counts each one.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         '422':
           description: Validation Error
           content:
@@ -1239,6 +1253,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleBoolResponse'
+        '409':
+          description: The document is not a draft. Only drafts can be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         '422':
           description: Validation Error
           content:
