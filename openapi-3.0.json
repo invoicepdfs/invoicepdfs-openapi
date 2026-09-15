@@ -15036,6 +15036,43 @@
         ],
         "title": "RecurringInvoicesListResponse"
       },
+      "RenderComplianceOut": {
+        "properties": {
+          "profile": {
+            "type": "string",
+            "title": "Profile",
+            "description": "The ruleset this document was built and validated against.",
+            "example": "factur_x_en16931"
+          },
+          "ruleset_version": {
+            "type": "string",
+            "title": "Ruleset Version",
+            "description": "The artefact versions the check actually ran. A profile is held to more than one ruleset, and they are regenerated over time, so this is what makes 'which rules did this pass?' answerable later.",
+            "example": "en16931-1.3.16"
+          },
+          "fully_checked": {
+            "type": "boolean",
+            "title": "Fully Checked",
+            "description": "False when a ruleset could not run. The document still satisfied everything that did, but the authoritative Schematron tier being absent is a materially weaker statement than it passing."
+          },
+          "advisories": {
+            "items": {
+              "$ref": "#/components/schemas/ComplianceViolationOut"
+            },
+            "type": "array",
+            "title": "Advisories",
+            "description": "Non-fatal findings the render proceeded past. Both rulesets grade a large share of their rules as advisory, so these are worth reading and are not a rejection."
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile",
+          "ruleset_version",
+          "fully_checked"
+        ],
+        "title": "RenderComplianceOut",
+        "description": "What this PDF was held to, for a render that carries embedded XML.\n\nAbsent on a plain `pdf`: no ruleset was applied, so there is no claim to\nreport. A render that was produced at all satisfied every fatal rule that\nran — the render is refused otherwise — so the useful questions are which\nrules those were, and whether all of them ran."
+      },
       "RenderOut": {
         "properties": {
           "id": {
@@ -15099,6 +15136,16 @@
           "created_at": {
             "type": "string",
             "title": "Created At"
+          },
+          "compliance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RenderComplianceOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
