@@ -2717,7 +2717,7 @@ paths:
             schema:
               $ref: '#/components/schemas/BatchCreateRequest'
       responses:
-        '200':
+        '202':
           description: Successful Response
           content:
             application/json:
@@ -3789,6 +3789,52 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-visibility: public
+  /api/v1/jobs:
+    get:
+      tags:
+      - jobs
+      summary: List Jobs
+      description: 'This account''s jobs, newest first.
+
+
+        Without it the other three routes here were unreachable: a job id was never
+
+        returned by anything, so there was no way to arrive at one.'
+      operationId: list_jobs
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cursor
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobsListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      x-visibility: internal
   /api/v1/jobs/{job_id}:
     get:
       tags:
@@ -9013,6 +9059,19 @@ components:
       required:
       - data
       title: JobResponse
+    JobsListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/JobOut'
+          type: array
+          title: Data
+        pagination:
+          $ref: '#/components/schemas/CursorPagination'
+      type: object
+      required:
+      - data
+      title: JobsListResponse
     LineItemDiscountInput:
       properties:
         type:
