@@ -1492,6 +1492,14 @@ paths:
       tags:
       - documents
       summary: Send Document
+      description: 'Queue the document to be emailed.
+
+
+        Returns 202 with the delivery in `queued`. The mail is sent in the
+
+        background and retried on transient failure; poll `GET /deliveries/{id}`
+
+        for the outcome.'
       operationId: send_document
       security:
       - HTTPBearer: []
@@ -1509,7 +1517,7 @@ paths:
             schema:
               $ref: '#/components/schemas/DeliverySendRequest'
       responses:
-        '200':
+        '202':
           description: Successful Response
           content:
             application/json:
@@ -2898,6 +2906,12 @@ paths:
       tags:
       - deliveries
       summary: Retry Delivery
+      description: 'Queue a fresh delivery copying a failed one.
+
+
+        Returns 202 with the new delivery in `queued`. Transient failures are
+
+        already retried automatically; this is for after those are exhausted.'
       operationId: retry_delivery
       security:
       - HTTPBearer: []
@@ -2909,7 +2923,7 @@ paths:
           type: string
           title: Delivery Id
       responses:
-        '200':
+        '202':
           description: Successful Response
           content:
             application/json:
