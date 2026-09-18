@@ -2718,6 +2718,16 @@
               }
             }
           },
+          "202": {
+            "description": "Returned when `output.mode` is `async`: the render is queued and a worker will produce it. Follow it with `GET /renders/{render_id}`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenderResponse"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Validation Error",
             "content": {
@@ -12025,6 +12035,16 @@
             "title": "Delivery",
             "default": "url"
           },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "sync",
+              "async"
+            ],
+            "title": "Mode",
+            "description": "`sync` renders inside the request and answers with the finished document. `async` returns `202` with a `queued` render a worker picks up; follow it with `GET /renders/{id}`. Use it for bursts — rendering is CPU-bound, so a hundred at once queue behind each other whichever mode you ask for, and only one of the two holds a connection open while they do.",
+            "default": "sync"
+          },
           "expires_in": {
             "type": "integer",
             "maximum": 604800,
@@ -15162,6 +15182,40 @@
         "title": "RenderComplianceOut",
         "description": "What this PDF was held to, for a render that carries embedded XML.\n\nAbsent on a plain `pdf`: no ruleset was applied, so there is no claim to\nreport. A render that was produced at all satisfied every fatal rule that\nran — the render is refused otherwise — so the useful questions are which\nrules those were, and whether all of them ran."
       },
+      "RenderFailureOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "`compliance_failed` for a document that is well-formed and would be rejected by the ruleset it asked for; `unprocessable_entity` for one the renderer could not make sense of. The same codes the synchronous path returns.",
+            "example": "compliance_failed"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details",
+            "description": "For `compliance_failed`: the profile, the ruleset version, and every violation with its rule, path, message and severity."
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "RenderFailureOut",
+        "description": "Why a render failed, in the same shape the synchronous path returns.\n\nA synchronous render of a document EN 16931 would reject answers `422\ncompliance_failed` with every violation at once — a list of fields to go and\nfill in. A queued render has to be able to say the same thing: the caller\nwho chose `async` did not choose a worse answer."
+      },
       "RenderOut": {
         "properties": {
           "id": {
@@ -15170,10 +15224,13 @@
           },
           "status": {
             "type": "string",
-            "title": "Status",
             "enum": [
-              "completed"
-            ]
+              "queued",
+              "processing",
+              "completed",
+              "failed"
+            ],
+            "title": "Status"
           },
           "document_type": {
             "type": "string",
@@ -15212,11 +15269,25 @@
             ]
           },
           "download_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Download Url"
           },
           "expires_at": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Expires At"
           },
           "calculation": {
@@ -15235,6 +15306,16 @@
                 "type": "null"
               }
             ]
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RenderFailureOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -15244,8 +15325,6 @@
           "document_type",
           "template_id",
           "format",
-          "download_url",
-          "expires_at",
           "calculation",
           "created_at"
         ],
