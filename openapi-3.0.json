@@ -11050,8 +11050,6 @@
             "enum": [
               "queued",
               "sent",
-              "delivered",
-              "bounced",
               "failed"
             ],
             "title": "Status"
@@ -16422,6 +16420,7 @@
             "type": "string",
             "enum": [
               "pending",
+              "retrying",
               "delivered",
               "failed"
             ],
