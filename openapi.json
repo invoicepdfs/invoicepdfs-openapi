@@ -85,6 +85,7 @@
           "auth"
         ],
         "summary": "Get Current User",
+        "description": "The account behind the current credential, and the plan it is on.\n\nWorks with either an API key or a Firebase token, so it is the cheapest\nway to confirm a credential is live and see what it can reach.",
         "operationId": "get_current_user",
         "responses": {
           "200": {
@@ -1658,6 +1659,7 @@
           "documents"
         ],
         "summary": "List Documents",
+        "description": "Every document on the account, newest first.\n\nCursor-paginated: pass the `next_cursor` from a response to fetch the page\nafter it. Filter by `document_type` or `status` to narrow the list.",
         "operationId": "list_documents",
         "security": [
           {
@@ -1755,6 +1757,7 @@
           "documents"
         ],
         "summary": "Create Document",
+        "description": "Create a document in `draft`.\n\nTotals are computed and stored at creation, so the figures you read back are\nthe ones that were issued rather than a recalculation. Nothing is rendered \u2014\nuse `create_document_render` once the document is final.",
         "operationId": "create_document",
         "security": [
           {
@@ -1820,6 +1823,7 @@
           "documents"
         ],
         "summary": "Get Document",
+        "description": "One document, with the totals stored when it was created.",
         "operationId": "get_document",
         "security": [
           {
@@ -1866,6 +1870,7 @@
           "documents"
         ],
         "summary": "Update Document",
+        "description": "Change a document that is still a `draft`.\n\nA finalized document is a record of what was issued and cannot be edited;\n`409` if it has moved past `draft`. Only the fields you send are changed \u2014\nomit one to leave it alone, and send `null` to clear it.",
         "operationId": "update_document",
         "security": [
           {
@@ -1922,6 +1927,7 @@
           "documents"
         ],
         "summary": "Delete Document",
+        "description": "Permanently remove a `draft`.\n\n`409` if anything still points at it \u2014 a render, a delivery or a payment \u2014\nnaming what does. Finalized documents are voided or archived, not deleted.",
         "operationId": "delete_document",
         "security": [
           {
@@ -1980,6 +1986,7 @@
           "documents"
         ],
         "summary": "Duplicate Document",
+        "description": "Copy a document into a new `draft`.\n\nThe copy gets the next available number rather than the original's, so it can\nbe finalized without colliding with the document it came from.",
         "operationId": "duplicate_document",
         "security": [
           {
@@ -2028,6 +2035,7 @@
           "documents"
         ],
         "summary": "Finalize Document",
+        "description": "Issue a `draft`: fix its number and totals.\n\nFrom here the document is a record. It can be sent, marked paid, voided or\narchived, but not edited \u2014 `update_document` returns `409` afterwards.",
         "operationId": "finalize_document",
         "security": [
           {
@@ -2076,6 +2084,7 @@
           "documents"
         ],
         "summary": "Void Document",
+        "description": "Cancel a document that was issued.\n\nVoiding is how a finalized document is withdrawn, since it cannot be deleted.\nThe PDF renders with a `VOID` mark from then on, so a copy already sent is\ndistinguishable from the live one.",
         "operationId": "void_document",
         "security": [
           {
@@ -2124,6 +2133,7 @@
           "documents"
         ],
         "summary": "Mark Sent",
+        "description": "Record that the document reached the customer.\n\n**This does not send anything** \u2014 it only moves the status, for when the\ndocument was delivered by some means of your own. Use `send_document` to\nhave us email it.",
         "operationId": "mark_sent",
         "security": [
           {
@@ -2172,6 +2182,7 @@
           "documents"
         ],
         "summary": "Mark Paid",
+        "description": "Record that the document was paid in full.",
         "operationId": "mark_paid",
         "security": [
           {
@@ -2220,6 +2231,7 @@
           "documents"
         ],
         "summary": "Mark Unpaid",
+        "description": "Undo `mark_paid`, returning the document to `sent`.\n\nFor a payment that was recorded in error or later reversed.",
         "operationId": "mark_unpaid",
         "security": [
           {
@@ -2268,6 +2280,7 @@
           "documents"
         ],
         "summary": "Archive Document",
+        "description": "Move a document out of the active list.\n\nArchiving hides a document from the default listing without destroying it;\n`restore_document` brings it back. Drafts are deleted rather than archived.",
         "operationId": "archive_document",
         "security": [
           {
@@ -2316,6 +2329,7 @@
           "documents"
         ],
         "summary": "Restore Document",
+        "description": "Bring an archived document back to `finalized`.",
         "operationId": "restore_document",
         "security": [
           {
@@ -2364,6 +2378,7 @@
           "documents"
         ],
         "summary": "Create Document Render",
+        "description": "Render a stored document to a PDF.\n\nUse this when the document lives here. To render one you hold yourself,\nwithout storing it, use `render_document`.\n\nThe response carries a signed `download_url` that needs no API key, valid\nuntil `expires_at`.",
         "operationId": "create_document_render",
         "security": [
           {
@@ -2497,6 +2512,7 @@
           "documents"
         ],
         "summary": "List Document Deliveries",
+        "description": "Every email delivery attempted for this document.\n\nOne row per attempt, newest first, including the ones that failed \u2014 which is\nwhere to look when a customer says the invoice never arrived.",
         "operationId": "list_document_deliveries",
         "security": [
           {
@@ -2573,6 +2589,7 @@
           "documents"
         ],
         "summary": "Validate Document",
+        "description": "Check that a document body is well-formed, without pricing it.\n\nThe cheapest of the three stateless operations: no totals are computed and no\nPDF is produced. Use `calculate_document` for the money and `render_document`\nfor the document.",
         "operationId": "validate_document",
         "requestBody": {
           "content": {
@@ -2620,6 +2637,7 @@
           "documents"
         ],
         "summary": "Calculate Document",
+        "description": "Compute the totals for a document without storing or rendering it.\n\nReturns the same breakdown \u2014 subtotal, discounts, tax, shipping, total \u2014 that\na render would print, so a checkout page can show a figure before committing\nto one.",
         "operationId": "calculate_document",
         "requestBody": {
           "content": {
@@ -2667,6 +2685,7 @@
           "documents"
         ],
         "summary": "Render Document",
+        "description": "Render a document supplied inline, storing nothing but the PDF.\n\nThe stateless path: pass the whole document in the body and get a PDF back,\nwith no customer, business profile or stored document required. To render a\ndocument that already lives here, use `create_document_render`.\n\nReturns JSON with a signed `download_url` by default. Ask for the bytes\ndirectly with `output.delivery: \"binary\"` or `Accept: application/pdf`.",
         "operationId": "render_document",
         "security": [
           {
@@ -3860,6 +3879,7 @@
           "renders"
         ],
         "summary": "Get Render",
+        "description": "One render: its status, its totals, and how to download it.\n\n`download_url` and `expires_at` are `null` until the render is `completed`,\nand a `failed` render carries a `failure` explaining why. Poll this after an\nasynchronous render.",
         "operationId": "get_render",
         "security": [
           {
