@@ -8902,13 +8902,7 @@
             "title": "Document Type"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "pending",
-              "completed",
-              "failed"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/BatchItemStatus"
           },
           "render_id": {
             "anyOf": [
@@ -8946,6 +8940,15 @@
         ],
         "title": "BatchItemOut"
       },
+      "BatchItemStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "completed",
+          "failed"
+        ],
+        "title": "BatchItemStatus"
+      },
       "BatchItemsListResponse": {
         "properties": {
           "data": {
@@ -8972,15 +8975,7 @@
             "title": "Id"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "queued",
-              "processing",
-              "completed",
-              "failed",
-              "cancelled"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/BatchStatus"
           },
           "operation": {
             "type": "string",
@@ -9081,6 +9076,17 @@
           "data"
         ],
         "title": "BatchResponse"
+      },
+      "BatchStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "processing",
+          "completed",
+          "failed",
+          "cancelled"
+        ],
+        "title": "BatchStatus"
       },
       "BatchesListResponse": {
         "properties": {
@@ -11150,13 +11156,7 @@
             "title": "Attach Pdf"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "queued",
-              "sent",
-              "failed"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/DeliveryStatus"
           },
           "created_at": {
             "type": "string",
@@ -11273,6 +11273,16 @@
           "to"
         ],
         "title": "DeliverySendRequest"
+      },
+      "DeliveryStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "sent",
+          "failed"
+        ],
+        "title": "DeliveryStatus",
+        "description": "Email delivery. `sent` is terminal success \u2014 nothing reports back what\nthe provider did with the message after we handed it over."
       },
       "DocumentBrandingInput": {
         "properties": {
@@ -12087,8 +12097,7 @@
             "title": "Number"
           },
           "status": {
-            "type": "string",
-            "title": "Status"
+            "$ref": "#/components/schemas/DocumentStatus"
           },
           "issue_date": {
             "type": "string",
@@ -12842,6 +12851,19 @@
         ],
         "title": "DocumentShippingInput"
       },
+      "DocumentStatus": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "finalized",
+          "sent",
+          "paid",
+          "void",
+          "archived"
+        ],
+        "title": "DocumentStatus",
+        "description": "The document lifecycle. The transitions between these live in\napp/documents/base.py, which is the only thing that moves a document."
+      },
       "DocumentTemplateRef": {
         "properties": {
           "id": {
@@ -13142,15 +13164,7 @@
             "title": "Source Format"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "pending",
-              "processing",
-              "completed",
-              "failed",
-              "cancelled"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/ImportStatus"
           },
           "total_rows": {
             "type": "integer",
@@ -13223,6 +13237,16 @@
           "data"
         ],
         "title": "ImportResponse"
+      },
+      "ImportStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "completed",
+          "cancelled"
+        ],
+        "title": "ImportStatus",
+        "description": "Three, not the five that were published. `confirm_import` does the work\ninside the request \u2014 \"For MVP, mark as completed immediately; future:\nbackground processing\" (app/api/v1/imports.py) \u2014 so nothing is ever\n`processing`, and nothing sets `failed`. They described a background path\nthat was never built, the same way `render.*` events and `bounced` did."
       },
       "InvoiceAttachmentCreateRequest": {
         "properties": {
@@ -13965,16 +13989,7 @@
             "title": "Id"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "draft",
-              "finalized",
-              "sent",
-              "paid",
-              "void",
-              "archived"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/DocumentStatus"
           },
           "invoice_number": {
             "type": "string",
@@ -14278,15 +14293,7 @@
             "title": "Type"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "queued",
-              "processing",
-              "completed",
-              "failed",
-              "cancelled"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/JobStatus"
           },
           "progress": {
             "$ref": "#/components/schemas/JobProgressOut"
@@ -14385,6 +14392,17 @@
           "data"
         ],
         "title": "JobResponse"
+      },
+      "JobStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "processing",
+          "completed",
+          "failed",
+          "cancelled"
+        ],
+        "title": "JobStatus"
       },
       "JobsListResponse": {
         "properties": {
@@ -15295,8 +15313,7 @@
             "title": "Id"
           },
           "status": {
-            "type": "string",
-            "title": "Status"
+            "$ref": "#/components/schemas/RecurringInvoiceStatus"
           },
           "business_profile_id": {
             "type": "string",
@@ -15465,6 +15482,17 @@
         ],
         "title": "RecurringInvoiceResponse"
       },
+      "RecurringInvoiceStatus": {
+        "type": "string",
+        "enum": [
+          "active",
+          "paused",
+          "cancelled",
+          "completed"
+        ],
+        "title": "RecurringInvoiceStatus",
+        "description": "`completed` is the schedule running out, not a failure \u2014 set by\napp/recurring/processor.py when the end date or occurrence count is\nreached. `RecurringInvoiceOut.status` was an unconstrained `str`, so this\nis the first time the set has been written down anywhere."
+      },
       "RecurringInvoicesListResponse": {
         "properties": {
           "data": {
@@ -15569,14 +15597,7 @@
             "title": "Id"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "queued",
-              "processing",
-              "completed",
-              "failed"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/RenderStatus"
           },
           "document_type": {
             "type": "string",
@@ -15685,6 +15706,16 @@
           "data"
         ],
         "title": "RenderResponse"
+      },
+      "RenderStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "processing",
+          "completed",
+          "failed"
+        ],
+        "title": "RenderStatus"
       },
       "SimpleBoolResponse": {
         "properties": {
@@ -16799,14 +16830,7 @@
             "title": "Event Type"
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "pending",
-              "retrying",
-              "delivered",
-              "failed"
-            ],
-            "title": "Status"
+            "$ref": "#/components/schemas/WebhookDeliveryStatus"
           },
           "http_status": {
             "anyOf": [
@@ -16873,6 +16897,16 @@
           "data"
         ],
         "title": "WebhookDeliveryResponse"
+      },
+      "WebhookDeliveryStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "retrying",
+          "delivered",
+          "failed"
+        ],
+        "title": "WebhookDeliveryStatus"
       },
       "WebhookEndpointCreateRequest": {
         "properties": {

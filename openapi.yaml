@@ -5588,12 +5588,7 @@ components:
           type: string
           title: Document Type
         status:
-          type: string
-          enum:
-          - pending
-          - completed
-          - failed
-          title: Status
+          $ref: '#/components/schemas/BatchItemStatus'
         render_id:
           anyOf:
           - type: string
@@ -5614,6 +5609,13 @@ components:
       - status
       - created_at
       title: BatchItemOut
+    BatchItemStatus:
+      type: string
+      enum:
+      - pending
+      - completed
+      - failed
+      title: BatchItemStatus
     BatchItemsListResponse:
       properties:
         data:
@@ -5633,14 +5635,7 @@ components:
           type: string
           title: Id
         status:
-          type: string
-          enum:
-          - queued
-          - processing
-          - completed
-          - failed
-          - cancelled
-          title: Status
+          $ref: '#/components/schemas/BatchStatus'
         operation:
           type: string
           title: Operation
@@ -5710,6 +5705,15 @@ components:
       required:
       - data
       title: BatchResponse
+    BatchStatus:
+      type: string
+      enum:
+      - queued
+      - processing
+      - completed
+      - failed
+      - cancelled
+      title: BatchStatus
     BatchesListResponse:
       properties:
         data:
@@ -7007,12 +7011,7 @@ components:
           type: boolean
           title: Attach Pdf
         status:
-          type: string
-          enum:
-          - queued
-          - sent
-          - failed
-          title: Status
+          $ref: '#/components/schemas/DeliveryStatus'
         created_at:
           type: string
           title: Created At
@@ -7086,6 +7085,17 @@ components:
       required:
       - to
       title: DeliverySendRequest
+    DeliveryStatus:
+      type: string
+      enum:
+      - queued
+      - sent
+      - failed
+      title: DeliveryStatus
+      description: 'Email delivery. `sent` is terminal success — nothing reports back
+        what
+
+        the provider did with the message after we handed it over.'
     DocumentBrandingInput:
       properties:
         logo_file_id:
@@ -7617,8 +7627,7 @@ components:
           type: string
           title: Number
         status:
-          type: string
-          title: Status
+          $ref: '#/components/schemas/DocumentStatus'
         issue_date:
           type: string
           format: date
@@ -8080,6 +8089,19 @@ components:
       required:
       - amount
       title: DocumentShippingInput
+    DocumentStatus:
+      type: string
+      enum:
+      - draft
+      - finalized
+      - sent
+      - paid
+      - void
+      - archived
+      title: DocumentStatus
+      description: 'The document lifecycle. The transitions between these live in
+
+        app/documents/base.py, which is the only thing that moves a document.'
     DocumentTemplateRef:
       properties:
         id:
@@ -8309,14 +8331,7 @@ components:
           type: string
           title: Source Format
         status:
-          type: string
-          enum:
-          - pending
-          - processing
-          - completed
-          - failed
-          - cancelled
-          title: Status
+          $ref: '#/components/schemas/ImportStatus'
         total_rows:
           type: integer
           title: Total Rows
@@ -8364,6 +8379,23 @@ components:
       required:
       - data
       title: ImportResponse
+    ImportStatus:
+      type: string
+      enum:
+      - pending
+      - completed
+      - cancelled
+      title: ImportStatus
+      description: 'Three, not the five that were published. `confirm_import` does
+        the work
+
+        inside the request — "For MVP, mark as completed immediately; future:
+
+        background processing" (app/api/v1/imports.py) — so nothing is ever
+
+        `processing`, and nothing sets `failed`. They described a background path
+
+        that was never built, the same way `render.*` events and `bounced` did.'
     InvoiceAttachmentCreateRequest:
       properties:
         file_id:
@@ -8818,15 +8850,7 @@ components:
           type: string
           title: Id
         status:
-          type: string
-          enum:
-          - draft
-          - finalized
-          - sent
-          - paid
-          - void
-          - archived
-          title: Status
+          $ref: '#/components/schemas/DocumentStatus'
         invoice_number:
           type: string
           title: Invoice Number
@@ -9024,14 +9048,7 @@ components:
           type: string
           title: Type
         status:
-          type: string
-          enum:
-          - queued
-          - processing
-          - completed
-          - failed
-          - cancelled
-          title: Status
+          $ref: '#/components/schemas/JobStatus'
         progress:
           $ref: '#/components/schemas/JobProgressOut'
         result:
@@ -9091,6 +9108,15 @@ components:
       required:
       - data
       title: JobResponse
+    JobStatus:
+      type: string
+      enum:
+      - queued
+      - processing
+      - completed
+      - failed
+      - cancelled
+      title: JobStatus
     JobsListResponse:
       properties:
         data:
@@ -9701,8 +9727,7 @@ components:
           type: string
           title: Id
         status:
-          type: string
-          title: Status
+          $ref: '#/components/schemas/RecurringInvoiceStatus'
         business_profile_id:
           type: string
           title: Business Profile Id
@@ -9807,6 +9832,21 @@ components:
       required:
       - data
       title: RecurringInvoiceResponse
+    RecurringInvoiceStatus:
+      type: string
+      enum:
+      - active
+      - paused
+      - cancelled
+      - completed
+      title: RecurringInvoiceStatus
+      description: '`completed` is the schedule running out, not a failure — set by
+
+        app/recurring/processor.py when the end date or occurrence count is
+
+        reached. `RecurringInvoiceOut.status` was an unconstrained `str`, so this
+
+        is the first time the set has been written down anywhere.'
     RecurringInvoicesListResponse:
       properties:
         data:
@@ -9911,13 +9951,7 @@ components:
           type: string
           title: Id
         status:
-          type: string
-          enum:
-          - queued
-          - processing
-          - completed
-          - failed
-          title: Status
+          $ref: '#/components/schemas/RenderStatus'
         document_type:
           type: string
           enum:
@@ -9983,6 +10017,14 @@ components:
       required:
       - data
       title: RenderResponse
+    RenderStatus:
+      type: string
+      enum:
+      - queued
+      - processing
+      - completed
+      - failed
+      title: RenderStatus
     SimpleBoolResponse:
       properties:
         data:
@@ -10753,13 +10795,7 @@ components:
           type: string
           title: Event Type
         status:
-          type: string
-          enum:
-          - pending
-          - retrying
-          - delivered
-          - failed
-          title: Status
+          $ref: '#/components/schemas/WebhookDeliveryStatus'
         http_status:
           anyOf:
           - type: integer
@@ -10799,6 +10835,14 @@ components:
       required:
       - data
       title: WebhookDeliveryResponse
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - pending
+      - retrying
+      - delivered
+      - failed
+      title: WebhookDeliveryStatus
     WebhookEndpointCreateRequest:
       properties:
         url:
