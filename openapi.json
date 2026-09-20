@@ -4031,6 +4031,7 @@
           "payments"
         ],
         "summary": "List Document Payments",
+        "description": "Payments recorded against one document, newest first.",
         "operationId": "list_document_payments",
         "security": [
           {
@@ -4105,6 +4106,7 @@
           "payments"
         ],
         "summary": "Create Document Payment",
+        "description": "Record a payment received against an invoice.\n\nThe currency is taken from the invoice rather than from the request, so a\npayment can never disagree with what was billed.\n\nRefused with 409 while the invoice is still a draft. Recording a payment\ndoes not move the invoice to `paid` \u2014 use `mark_paid` for that.",
         "operationId": "create_document_payment",
         "security": [
           {
@@ -4163,6 +4165,7 @@
           "payments"
         ],
         "summary": "Get Payment",
+        "description": "One recorded payment by id.",
         "operationId": "get_payment",
         "security": [
           {
@@ -4209,6 +4212,7 @@
           "payments"
         ],
         "summary": "Update Payment",
+        "description": "Correct a payment that was already recorded.\n\nOnly the fields you send are changed. The invoice's status and totals are\nleft alone.",
         "operationId": "update_payment",
         "security": [
           {
@@ -4265,6 +4269,7 @@
           "payments"
         ],
         "summary": "Delete Payment",
+        "description": "Remove a recorded payment.\n\nThe payment is deleted outright rather than reversed, and the invoice's\nstatus is left alone. The deletion is kept in the audit log.",
         "operationId": "delete_payment",
         "security": [
           {
@@ -4652,6 +4657,7 @@
           "deliveries"
         ],
         "summary": "Get Delivery",
+        "description": "One email delivery by id \u2014 an email sent to a customer.\n\nNot to be confused with `get_webhook_delivery`, which is an HTTP POST to\none of your webhook endpoints.",
         "operationId": "get_delivery",
         "security": [
           {
@@ -5361,6 +5367,7 @@
           "usage"
         ],
         "summary": "Get Usage",
+        "description": "Renders used this calendar month, against the plan's quota.\n\nThe period starts at midnight UTC on the first of the month.\n\nFor rate limits, log retention and overage, use `get_usage_limits`; for\nthe individual renders behind the count, `list_usage_events`.",
         "operationId": "get_usage",
         "responses": {
           "200": {
@@ -5388,6 +5395,7 @@
           "usage"
         ],
         "summary": "List Usage Events",
+        "description": "One row per metered render, newest first.\n\nThe detail behind the count `get_usage` returns, each row naming the\nrender that produced it.",
         "operationId": "list_usage_events",
         "security": [
           {
@@ -5455,6 +5463,7 @@
           "usage"
         ],
         "summary": "Get Usage Limits",
+        "description": "Every ceiling on the account, and how close you are to each.\n\nA superset of `get_usage`: the render quota and what is left of it, plus\nrequests per second, how long API logs are kept, and overage \u2014 whether it\nis enabled and available on the plan, how many renders have gone over,\nand what they have cost so far.\n\nThe cost estimate is rounded up, so it is never lower than the invoice.",
         "operationId": "get_usage_limits",
         "responses": {
           "200": {
@@ -5482,6 +5491,7 @@
           "stats"
         ],
         "summary": "Get Stats",
+        "description": "Counts and recent activity for the account, in one call.\n\nTotals for documents, customers and business profiles, a breakdown of\ndocuments by status, and the ten most recent documents \u2014 cheaper than\npaging each collection to build a dashboard.\n\nThe `invoice`-prefixed fields cover every document type, not only\ninvoices.",
         "operationId": "get_stats",
         "responses": {
           "200": {
@@ -7353,6 +7363,7 @@
           "webhooks"
         ],
         "summary": "List Webhook Endpoints",
+        "description": "Every webhook endpoint registered on the account, newest first.",
         "operationId": "list_webhook_endpoints",
         "security": [
           {
@@ -7418,6 +7429,7 @@
           "webhooks"
         ],
         "summary": "Create Webhook Endpoint",
+        "description": "Register a URL to receive events.\n\nThe endpoint starts active and begins receiving the events you list.\n\nA signing secret is generated but is **not** returned here. Call\n`rotate_webhook_secret` to obtain one before you can verify signatures.",
         "operationId": "create_webhook_endpoint",
         "security": [
           {
@@ -7465,6 +7477,7 @@
           "webhooks"
         ],
         "summary": "Get Webhook Endpoint",
+        "description": "One webhook endpoint by id.",
         "operationId": "get_webhook_endpoint",
         "security": [
           {
@@ -7511,6 +7524,7 @@
           "webhooks"
         ],
         "summary": "Update Webhook Endpoint",
+        "description": "Change an endpoint's URL, description, event list or active flag.\n\nOnly the fields you send are changed. Setting `is_active` to false stops\nnew deliveries while keeping the endpoint and its history, which is the\nreversible alternative to deleting it.",
         "operationId": "update_webhook_endpoint",
         "security": [
           {
@@ -7567,6 +7581,7 @@
           "webhooks"
         ],
         "summary": "Delete Webhook Endpoint",
+        "description": "Remove an endpoint and its delivery history.\n\nThe endpoint's delivery records are deleted with it, including any still\nwaiting to be retried. To stop deliveries without losing the history, set\n`is_active` to false instead.",
         "operationId": "delete_webhook_endpoint",
         "security": [
           {
@@ -7615,6 +7630,7 @@
           "webhooks"
         ],
         "summary": "Rotate Webhook Secret",
+        "description": "Issue a new signing secret and return it.\n\nThis is the only response that contains the secret, so it is also how you\nobtain the first one after creating an endpoint. The previous secret stops\nbeing accepted immediately: signatures computed with it will not verify.",
         "operationId": "rotate_webhook_secret",
         "security": [
           {
@@ -7663,6 +7679,7 @@
           "webhooks"
         ],
         "summary": "Test Webhook Endpoint",
+        "description": "Record a test event against this endpoint.\n\nCreates a `test` event and a delivery in `pending`, which you can inspect\nwith `get_webhook_delivery`.\n\nThis call does not send the delivery. Pass the returned delivery id to\n`retry_webhook_delivery` to have it dispatched.",
         "operationId": "test_webhook_endpoint",
         "security": [
           {
@@ -7711,6 +7728,7 @@
           "webhooks"
         ],
         "summary": "List Webhook Deliveries",
+        "description": "Every webhook delivery attempt on the account, newest first.\n\nOne row per attempt to POST an event to one of your endpoints, with the\nHTTP status and attempt count. For emails sent to your customers, see\n`get_delivery`.",
         "operationId": "list_webhook_deliveries",
         "security": [
           {
@@ -7778,6 +7796,7 @@
           "webhooks"
         ],
         "summary": "Get Webhook Delivery",
+        "description": "One webhook delivery by id \u2014 an HTTP POST to one of your endpoints.\n\nNot to be confused with `get_delivery`, which is an email sent to a\ncustomer.",
         "operationId": "get_webhook_delivery",
         "security": [
           {
@@ -7826,6 +7845,7 @@
           "webhooks"
         ],
         "summary": "Retry Webhook Delivery",
+        "description": "Send a failed or pending webhook delivery again, immediately.\n\nResets the attempt counter on the same delivery and dispatches it without\nwaiting for the retry schedule. Failed deliveries are already retried\nautomatically with backoff, so this is for after those are exhausted \u2014 or\nto send a delivery created by `test_webhook_endpoint`.\n\nRefused with 409 in any other status. To re-send an email, use\n`retry_delivery`.",
         "operationId": "retry_webhook_delivery",
         "security": [
           {
@@ -8054,6 +8074,7 @@
           "audit-log"
         ],
         "summary": "List Audit Events",
+        "description": "Who changed what on this account, newest first.\n\nFilter by `action`, `resource_type` and `resource_id` to follow a single\nobject's history.",
         "operationId": "list_audit_events",
         "security": [
           {
@@ -8169,6 +8190,7 @@
           "audit-log"
         ],
         "summary": "Get Audit Event",
+        "description": "One audit event by id.",
         "operationId": "get_audit_event",
         "security": [
           {

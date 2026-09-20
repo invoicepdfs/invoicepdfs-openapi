@@ -2803,6 +2803,7 @@ paths:
       tags:
       - payments
       summary: List Document Payments
+      description: Payments recorded against one document, newest first.
       operationId: list_document_payments
       security:
       - HTTPBearer: []
@@ -2848,6 +2849,17 @@ paths:
       tags:
       - payments
       summary: Create Document Payment
+      description: 'Record a payment received against an invoice.
+
+
+        The currency is taken from the invoice rather than from the request, so a
+
+        payment can never disagree with what was billed.
+
+
+        Refused with 409 while the invoice is still a draft. Recording a payment
+
+        does not move the invoice to `paid` — use `mark_paid` for that.'
       operationId: create_document_payment
       security:
       - HTTPBearer: []
@@ -2883,6 +2895,7 @@ paths:
       tags:
       - payments
       summary: Get Payment
+      description: One recorded payment by id.
       operationId: get_payment
       security:
       - HTTPBearer: []
@@ -2911,6 +2924,12 @@ paths:
       tags:
       - payments
       summary: Update Payment
+      description: 'Correct a payment that was already recorded.
+
+
+        Only the fields you send are changed. The invoice''s status and totals are
+
+        left alone.'
       operationId: update_payment
       security:
       - HTTPBearer: []
@@ -2945,6 +2964,12 @@ paths:
       tags:
       - payments
       summary: Delete Payment
+      description: 'Remove a recorded payment.
+
+
+        The payment is deleted outright rather than reversed, and the invoice''s
+
+        status is left alone. The deletion is kept in the audit log.'
       operationId: delete_payment
       security:
       - HTTPBearer: []
@@ -3216,6 +3241,12 @@ paths:
       tags:
       - deliveries
       summary: Get Delivery
+      description: 'One email delivery by id — an email sent to a customer.
+
+
+        Not to be confused with `get_webhook_delivery`, which is an HTTP POST to
+
+        one of your webhook endpoints.'
       operationId: get_delivery
       security:
       - HTTPBearer: []
@@ -3655,6 +3686,15 @@ paths:
       tags:
       - usage
       summary: Get Usage
+      description: 'Renders used this calendar month, against the plan''s quota.
+
+
+        The period starts at midnight UTC on the first of the month.
+
+
+        For rate limits, log retention and overage, use `get_usage_limits`; for
+
+        the individual renders behind the count, `list_usage_events`.'
       operationId: get_usage
       responses:
         '200':
@@ -3671,6 +3711,12 @@ paths:
       tags:
       - usage
       summary: List Usage Events
+      description: 'One row per metered render, newest first.
+
+
+        The detail behind the count `get_usage` returns, each row naming the
+
+        render that produced it.'
       operationId: list_usage_events
       security:
       - HTTPBearer: []
@@ -3711,6 +3757,19 @@ paths:
       tags:
       - usage
       summary: Get Usage Limits
+      description: 'Every ceiling on the account, and how close you are to each.
+
+
+        A superset of `get_usage`: the render quota and what is left of it, plus
+
+        requests per second, how long API logs are kept, and overage — whether it
+
+        is enabled and available on the plan, how many renders have gone over,
+
+        and what they have cost so far.
+
+
+        The cost estimate is rounded up, so it is never lower than the invoice.'
       operationId: get_usage_limits
       responses:
         '200':
@@ -3727,6 +3786,19 @@ paths:
       tags:
       - stats
       summary: Get Stats
+      description: 'Counts and recent activity for the account, in one call.
+
+
+        Totals for documents, customers and business profiles, a breakdown of
+
+        documents by status, and the ten most recent documents — cheaper than
+
+        paging each collection to build a dashboard.
+
+
+        The `invoice`-prefixed fields cover every document type, not only
+
+        invoices.'
       operationId: get_stats
       responses:
         '200':
@@ -4972,6 +5044,7 @@ paths:
       tags:
       - webhooks
       summary: List Webhook Endpoints
+      description: Every webhook endpoint registered on the account, newest first.
       operationId: list_webhook_endpoints
       security:
       - HTTPBearer: []
@@ -5011,6 +5084,15 @@ paths:
       tags:
       - webhooks
       summary: Create Webhook Endpoint
+      description: 'Register a URL to receive events.
+
+
+        The endpoint starts active and begins receiving the events you list.
+
+
+        A signing secret is generated but is **not** returned here. Call
+
+        `rotate_webhook_secret` to obtain one before you can verify signatures.'
       operationId: create_webhook_endpoint
       security:
       - HTTPBearer: []
@@ -5039,6 +5121,7 @@ paths:
       tags:
       - webhooks
       summary: Get Webhook Endpoint
+      description: One webhook endpoint by id.
       operationId: get_webhook_endpoint
       security:
       - HTTPBearer: []
@@ -5067,6 +5150,14 @@ paths:
       tags:
       - webhooks
       summary: Update Webhook Endpoint
+      description: 'Change an endpoint''s URL, description, event list or active flag.
+
+
+        Only the fields you send are changed. Setting `is_active` to false stops
+
+        new deliveries while keeping the endpoint and its history, which is the
+
+        reversible alternative to deleting it.'
       operationId: update_webhook_endpoint
       security:
       - HTTPBearer: []
@@ -5101,6 +5192,14 @@ paths:
       tags:
       - webhooks
       summary: Delete Webhook Endpoint
+      description: 'Remove an endpoint and its delivery history.
+
+
+        The endpoint''s delivery records are deleted with it, including any still
+
+        waiting to be retried. To stop deliveries without losing the history, set
+
+        `is_active` to false instead.'
       operationId: delete_webhook_endpoint
       security:
       - HTTPBearer: []
@@ -5130,6 +5229,14 @@ paths:
       tags:
       - webhooks
       summary: Rotate Webhook Secret
+      description: 'Issue a new signing secret and return it.
+
+
+        This is the only response that contains the secret, so it is also how you
+
+        obtain the first one after creating an endpoint. The previous secret stops
+
+        being accepted immediately: signatures computed with it will not verify.'
       operationId: rotate_webhook_secret
       security:
       - HTTPBearer: []
@@ -5159,6 +5266,17 @@ paths:
       tags:
       - webhooks
       summary: Test Webhook Endpoint
+      description: 'Record a test event against this endpoint.
+
+
+        Creates a `test` event and a delivery in `pending`, which you can inspect
+
+        with `get_webhook_delivery`.
+
+
+        This call does not send the delivery. Pass the returned delivery id to
+
+        `retry_webhook_delivery` to have it dispatched.'
       operationId: test_webhook_endpoint
       security:
       - HTTPBearer: []
@@ -5188,6 +5306,14 @@ paths:
       tags:
       - webhooks
       summary: List Webhook Deliveries
+      description: 'Every webhook delivery attempt on the account, newest first.
+
+
+        One row per attempt to POST an event to one of your endpoints, with the
+
+        HTTP status and attempt count. For emails sent to your customers, see
+
+        `get_delivery`.'
       operationId: list_webhook_deliveries
       security:
       - HTTPBearer: []
@@ -5228,6 +5354,12 @@ paths:
       tags:
       - webhooks
       summary: Get Webhook Delivery
+      description: 'One webhook delivery by id — an HTTP POST to one of your endpoints.
+
+
+        Not to be confused with `get_delivery`, which is an email sent to a
+
+        customer.'
       operationId: get_webhook_delivery
       security:
       - HTTPBearer: []
@@ -5257,6 +5389,21 @@ paths:
       tags:
       - webhooks
       summary: Retry Webhook Delivery
+      description: 'Send a failed or pending webhook delivery again, immediately.
+
+
+        Resets the attempt counter on the same delivery and dispatches it without
+
+        waiting for the retry schedule. Failed deliveries are already retried
+
+        automatically with backoff, so this is for after those are exhausted — or
+
+        to send a delivery created by `test_webhook_endpoint`.
+
+
+        Refused with 409 in any other status. To re-send an email, use
+
+        `retry_delivery`.'
       operationId: retry_webhook_delivery
       security:
       - HTTPBearer: []
@@ -5402,6 +5549,12 @@ paths:
       tags:
       - audit-log
       summary: List Audit Events
+      description: 'Who changed what on this account, newest first.
+
+
+        Filter by `action`, `resource_type` and `resource_id` to follow a single
+
+        object''s history.'
       operationId: list_audit_events
       security:
       - HTTPBearer: []
@@ -5466,6 +5619,7 @@ paths:
       tags:
       - audit-log
       summary: Get Audit Event
+      description: One audit event by id.
       operationId: get_audit_event
       security:
       - HTTPBearer: []
