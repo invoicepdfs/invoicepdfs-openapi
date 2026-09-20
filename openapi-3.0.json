@@ -12649,7 +12649,7 @@
         },
         "type": "object",
         "title": "DocumentRenderOptions",
-        "description": "Render options for an already-stored document (``POST /documents/{id}/renders``).\n\nDistinct from ``app.schemas.v1.DocumentRenderRequest``, which carries a full inline\ndocument for the stateless ``POST /documents/render``. Two classes sharing one name\nmade FastAPI fall back to module-qualified schema names in the spec\n(``app__documents__schemas__DocumentRenderRequest``), which the SDK generators turned\ninto ``AppDocumentsSchemasDocumentRenderRequest``."
+        "description": "Render options for a document that is already stored.\n\nFor ``POST /documents/{id}/renders``. The stateless\n``POST /documents/render`` takes the whole document inline instead."
       },
       "DocumentRenderRequest": {
         "properties": {
@@ -12732,7 +12732,7 @@
           "archived"
         ],
         "title": "DocumentStatus",
-        "description": "The document lifecycle. The transitions between these live in\napp/documents/base.py, which is the only thing that moves a document."
+        "description": "The document lifecycle."
       },
       "DocumentTemplateRef": {
         "properties": {
@@ -13110,7 +13110,7 @@
           "cancelled"
         ],
         "title": "ImportStatus",
-        "description": "Three, not the five that were published. `confirm_import` does the work\ninside the request — \"For MVP, mark as completed immediately; future:\nbackground processing\" (app/api/v1/imports.py) — so nothing is ever\n`processing`, and nothing sets `failed`. They described a background path\nthat was never built, the same way `render.*` events and `bounced` did."
+        "description": "How far an import has got.\n\n`confirm_import` completes the work before it responds, so an import is\n`pending` until it is confirmed and `completed` immediately afterwards."
       },
       "InvoiceAttachmentCreateRequest": {
         "properties": {
@@ -15231,7 +15231,7 @@
           "completed"
         ],
         "title": "RecurringInvoiceStatus",
-        "description": "`completed` is the schedule running out, not a failure — set by\napp/recurring/processor.py when the end date or occurrence count is\nreached. `RecurringInvoiceOut.status` was an unconstrained `str`, so this\nis the first time the set has been written down anywhere."
+        "description": "Where a recurring schedule is in its life.\n\n`completed` is the schedule running out, not a failure: it is set\nautomatically once the end date or the occurrence count is reached."
       },
       "RecurringInvoicesListResponse": {
         "properties": {
