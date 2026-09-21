@@ -19,6 +19,7 @@
           "health"
         ],
         "summary": "Get Health",
+        "description": "Is the API process alive.\n\nAnswers as long as the process can serve a request; it checks nothing\nbehind it. For whether the service can actually do work, use\n`get_readiness`.",
         "operationId": "get_health",
         "responses": {
           "200": {
@@ -41,6 +42,7 @@
           "health"
         ],
         "summary": "Get Version",
+        "description": "Which build is deployed.",
         "operationId": "get_version",
         "responses": {
           "200": {
@@ -63,6 +65,7 @@
           "health"
         ],
         "summary": "Get Readiness",
+        "description": "Can the API serve real traffic \u2014 dependencies included.\n\nChecks the database, storage, and the separate render service, and reports\neach one. `status` is `ready` only when all three are `ok`, so this is the\ncheck to point a load balancer at. `get_health` answers sooner but proves\nless.",
         "operationId": "get_readiness",
         "responses": {
           "200": {
@@ -402,6 +405,7 @@
           "api-keys"
         ],
         "summary": "List Api Keys",
+        "description": "Every API key on the account, including revoked ones.\n\nShows only the last four characters: the key itself is stored hashed and\ncannot be recovered.",
         "operationId": "list_api_keys",
         "responses": {
           "200": {
@@ -427,6 +431,7 @@
           "api-keys"
         ],
         "summary": "Create Api Key",
+        "description": "Create an API key and return it once.\n\nThe response is the only place the key appears \u2014 it is stored hashed, so a\nlost key cannot be recovered, only replaced.\n\nKeys are not scoped: any key can do anything this account can, including\ncreating further keys and deleting data. Treat one as a full credential.",
         "operationId": "create_api_key",
         "requestBody": {
           "content": {
@@ -474,6 +479,7 @@
           "api-keys"
         ],
         "summary": "Revoke Api Key",
+        "description": "Stop an API key working, permanently.\n\nTakes effect immediately and cannot be undone \u2014 issue a new key with\n`create_api_key` instead. The record is kept, so the key still appears in\n`list_api_keys` with a revoked date and the audit log stays readable.\n\nRevoking an already-revoked key succeeds and changes nothing.",
         "operationId": "revoke_api_key",
         "security": [
           {
@@ -520,6 +526,7 @@
           "api-keys"
         ],
         "summary": "Get Api Key",
+        "description": "One API key's details by id, without the key itself.",
         "operationId": "get_api_key",
         "security": [
           {
@@ -566,6 +573,7 @@
           "api-keys"
         ],
         "summary": "Update Api Key",
+        "description": "Rename an API key.\n\nThe key itself is unchanged and keeps working. To replace the secret while\nkeeping the record, use `rotate_api_key`.",
         "operationId": "update_api_key",
         "security": [
           {
@@ -4755,6 +4763,7 @@
           "recurring-invoices"
         ],
         "summary": "Create Recurring Invoice",
+        "description": "Set up a schedule that issues invoices on its own.\n\nStarts `active`, so the first invoice is issued when the schedule next\nfalls due. The invoices it produces are ordinary documents \u2014 read them with\n`list_generated_invoices`.",
         "operationId": "create_recurring_invoice",
         "security": [
           {
@@ -4800,6 +4809,7 @@
           "recurring-invoices"
         ],
         "summary": "List Recurring Invoices",
+        "description": "The schedules on this account, newest first.\n\nThese are the recurring definitions, not the invoices they produce; for\nthose, use `list_generated_invoices`. Narrow with `status`.",
         "operationId": "list_recurring_invoices",
         "security": [
           {
@@ -4883,6 +4893,7 @@
           "recurring-invoices"
         ],
         "summary": "Get Recurring Invoice",
+        "description": "One recurring schedule by id.",
         "operationId": "get_recurring_invoice",
         "security": [
           {
@@ -4929,6 +4940,7 @@
           "recurring-invoices"
         ],
         "summary": "Update Recurring Invoice",
+        "description": "Change a recurring schedule.\n\nOnly the fields you send are changed. Refused with 409 once the schedule is\ncancelled, which is terminal. Invoices already issued are not revisited.",
         "operationId": "update_recurring_invoice",
         "security": [
           {
@@ -4985,6 +4997,7 @@
           "recurring-invoices"
         ],
         "summary": "Cancel Recurring Invoice",
+        "description": "End a schedule permanently.\n\nTerminal: it cannot be resumed or edited afterwards, and cancelling twice\nis refused with 409. To stop issuing temporarily, use\n`pause_recurring_invoice` instead.\n\nInvoices already issued are left alone.",
         "operationId": "cancel_recurring_invoice",
         "security": [
           {
@@ -5033,6 +5046,7 @@
           "recurring-invoices"
         ],
         "summary": "Pause Recurring Invoice",
+        "description": "Stop a schedule issuing invoices, for now.\n\nOnly an `active` schedule can be paused; anything else is refused with 409.\nNothing already issued changes. Restart it with `resume_recurring_invoice`.",
         "operationId": "pause_recurring_invoice",
         "security": [
           {
@@ -5081,6 +5095,7 @@
           "recurring-invoices"
         ],
         "summary": "Resume Recurring Invoice",
+        "description": "Start a paused schedule issuing again.\n\nOnly a `paused` schedule can be resumed; anything else is refused with 409.\nA cancelled schedule cannot be brought back \u2014 create a new one.",
         "operationId": "resume_recurring_invoice",
         "security": [
           {
@@ -5129,6 +5144,7 @@
           "recurring-invoices"
         ],
         "summary": "List Generated Invoices",
+        "description": "The invoices one schedule has actually issued, newest first.\n\nThe documents produced by this schedule, as opposed to\n`list_recurring_invoices`, which lists the schedules themselves.",
         "operationId": "list_generated_invoices",
         "security": [
           {
@@ -5519,6 +5535,7 @@
           "logs"
         ],
         "summary": "List Logs",
+        "description": "Recent API requests made with your keys, newest first.\n\nMethod, path, status, duration and the request and response bodies, so you\ncan see what an integration actually sent rather than what it meant to.\n\nFilter to `success` or `error` with `status`. How long these are kept\ndepends on the plan \u2014 `get_usage_limits` reports the retention.",
         "operationId": "list_logs",
         "security": [
           {
@@ -6623,6 +6640,7 @@
           "reference"
         ],
         "summary": "List Currencies",
+        "description": "The currency codes a document may be issued in.\n\nISO 4217, with the minor-unit count each one uses \u2014 the amounts in this API\nare integers in the currency's smallest unit, so that figure is what says\nwhere the decimal point goes.",
         "operationId": "list_currencies",
         "responses": {
           "200": {
@@ -6645,6 +6663,7 @@
           "reference"
         ],
         "summary": "List Countries",
+        "description": "The country codes accepted anywhere an address is given.\n\nISO 3166-1 alpha-2.",
         "operationId": "list_countries",
         "responses": {
           "200": {
@@ -6667,6 +6686,7 @@
           "reference"
         ],
         "summary": "List Locales",
+        "description": "The locale codes accepted on a document or business profile.\n\nThe value is stored and returned as given; it is not currently applied to\nanything a render produces.",
         "operationId": "list_locales",
         "responses": {
           "200": {
@@ -6689,6 +6709,7 @@
           "reference"
         ],
         "summary": "List Timezones",
+        "description": "The time zone names accepted on a business profile.\n\nIANA names. Stored and returned as given: recurring schedules are evaluated\nin UTC and do not consult it.",
         "operationId": "list_timezones",
         "responses": {
           "200": {
@@ -6711,6 +6732,7 @@
           "reference"
         ],
         "summary": "List Page Sizes",
+        "description": "The page sizes a render can use.",
         "operationId": "list_page_sizes",
         "responses": {
           "200": {
@@ -6825,6 +6847,7 @@
           "workspaces"
         ],
         "summary": "List Workspaces",
+        "description": "Workspaces this account owns, newest first.",
         "operationId": "list_workspaces",
         "security": [
           {
@@ -6890,6 +6913,7 @@
           "workspaces"
         ],
         "summary": "Create Workspace",
+        "description": "Create a workspace, owned by this account.\n\nThe creating account is added as its first member with the `owner` role.\n\nSend an `Idempotency-Key` header to make retrying safe: a repeat with the\nsame key and body returns the original workspace instead of a second one.",
         "operationId": "create_workspace",
         "security": [
           {
@@ -6955,6 +6979,7 @@
           "workspaces"
         ],
         "summary": "Get Workspace",
+        "description": "One workspace by id.",
         "operationId": "get_workspace",
         "security": [
           {
@@ -7001,6 +7026,7 @@
           "workspaces"
         ],
         "summary": "Update Workspace",
+        "description": "Rename a workspace.\n\nOnly the fields you send are changed.",
         "operationId": "update_workspace",
         "security": [
           {
@@ -7073,6 +7099,7 @@
           "workspaces"
         ],
         "summary": "Delete Workspace",
+        "description": "Delete a workspace and its membership list.\n\nEvery member record goes with it. This cannot be undone, and documents are\nunaffected \u2014 they belong to the account, not the workspace.",
         "operationId": "delete_workspace",
         "security": [
           {
@@ -7121,6 +7148,7 @@
           "workspaces"
         ],
         "summary": "List Workspace Members",
+        "description": "Everyone on a workspace, with their role.",
         "operationId": "list_workspace_members",
         "security": [
           {
@@ -7167,6 +7195,7 @@
           "workspaces"
         ],
         "summary": "Add Workspace Member",
+        "description": "Add someone to a workspace by email address.\n\nRefused with 409 if that email is already a member. The address does not\nhave to belong to an existing account.",
         "operationId": "add_workspace_member",
         "security": [
           {
@@ -7241,6 +7270,7 @@
           "workspaces"
         ],
         "summary": "Update Workspace Member",
+        "description": "Change a member's role.",
         "operationId": "update_workspace_member",
         "security": [
           {
@@ -7306,6 +7336,7 @@
           "workspaces"
         ],
         "summary": "Remove Workspace Member",
+        "description": "Remove someone from a workspace.\n\nRemoves the membership only; nothing they created is affected.",
         "operationId": "remove_workspace_member",
         "security": [
           {
