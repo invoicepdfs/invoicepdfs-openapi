@@ -7427,7 +7427,7 @@
           "webhooks"
         ],
         "summary": "Create Webhook Endpoint",
-        "description": "Register a URL to receive events.\n\nThe endpoint starts active and begins receiving the events you list.\n\nA signing secret is generated but is **not** returned here. Call\n`rotate_webhook_secret` to obtain one before you can verify signatures.",
+        "description": "Register a URL to receive events.\n\nThe endpoint starts active and begins receiving the events you list.\n\nThe response carries the signing secret, and is the only one that ever\nwill — store it now. Reading or listing endpoints never returns it, and\nthe only way to get another is `rotate_webhook_secret`, which stops this\none working.",
         "operationId": "create_webhook_endpoint",
         "security": [
           {
@@ -7450,7 +7450,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebhookEndpointResponse"
+                  "$ref": "#/components/schemas/WebhookEndpointCreatedResponse"
                 }
               }
             }
@@ -7677,7 +7677,7 @@
           "webhooks"
         ],
         "summary": "Test Webhook Endpoint",
-        "description": "Record a test event against this endpoint.\n\nCreates a `test` event and a delivery in `pending`, which you can inspect\nwith `get_webhook_delivery`.\n\nThis call does not send the delivery. Pass the returned delivery id to\n`retry_webhook_delivery` to have it dispatched.",
+        "description": "Send a test event to this endpoint.\n\nDelivers a `test` event immediately, so you can confirm the URL is\nreachable and your signature check works before real events depend on it.\n\nReturns straight away with the delivery in `pending`; follow it with\n`get_webhook_delivery` to see whether it arrived.",
         "operationId": "test_webhook_endpoint",
         "security": [
           {
@@ -16667,6 +16667,76 @@
           "events"
         ],
         "title": "WebhookEndpointCreateRequest"
+      },
+      "WebhookEndpointCreatedOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "events": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Events"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "title": "Updated At"
+          },
+          "secret": {
+            "type": "string",
+            "title": "Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "events",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "secret"
+        ],
+        "title": "WebhookEndpointCreatedOut",
+        "description": "A newly created endpoint, including its signing secret.\n\nThe only time the secret is returned. Store it now: reading or listing\nendpoints never includes it, and the only way to obtain another is to\nrotate, which invalidates this one."
+      },
+      "WebhookEndpointCreatedResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WebhookEndpointCreatedOut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "WebhookEndpointCreatedResponse"
       },
       "WebhookEndpointOut": {
         "properties": {
