@@ -15345,6 +15345,27 @@
             },
             "type": "object",
             "title": "Dependencies"
+          },
+          "workers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Workers"
+          },
+          "degraded": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Degraded"
           }
         },
         "type": "object",
